@@ -1,5 +1,4 @@
 SET(SRC
-        Stopwatch.cpp
-        Stopwatch.h)
+        Stopwatch.cpp)
 
 ADD_LIBRARY(logic STATIC ${SRC})

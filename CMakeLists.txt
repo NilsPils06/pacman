@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.28.3)
 project(pacman)
 
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+
 set(CMAKE_CXX_STANDARD 20)
 
 SET(CMAKE_CXX_FLAGS "-Wall")

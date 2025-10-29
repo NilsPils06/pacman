@@ -1,16 +1,18 @@
-//
-// Created by nils on 10/28/25.
-//
-
 #ifndef PACMAN_STOPWATCH_H
 #define PACMAN_STOPWATCH_H
 
 
 class Stopwatch {
-    int tick;
-    int deltaTime;
+    int tick = 0;
+    int deltaTime = 0;
+
+    static Stopwatch stopwatch;
 
     Stopwatch() = default;
+
+    ~Stopwatch() = default;
+public:
+    static Stopwatch& getInstance();
 };
 
 
