@@ -7,6 +7,10 @@ SET(SRC
         EntityModel.cpp
         EntityModel.h
         Ghost.cpp
-        Ghost.h)
+        Ghost.h
+        Pacman.cpp
+        Pacman.h
+        World.cpp
+        World.h)
 
 ADD_LIBRARY(logic STATIC ${SRC})
