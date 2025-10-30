@@ -4,6 +4,6 @@
 
 #include "Stopwatch.h"
 
-Stopwatch& Stopwatch::getInstance() {
+Stopwatch & Stopwatch::getInstance() {
     return stopwatch;
 }
