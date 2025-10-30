@@ -1,0 +1,31 @@
+name: main.yml
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 1. Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: 2. Install dependencies (GCC/G++ 13, Clang 18, SFML 2.6.1, CMake, Git)
+        run: |
+          sudo apt update
+          sudo DEBIAN_FRONTEND=noninteractive apt install -y \
+            gcc g++ clang libsfml-dev cmake git
+
+      - name: 3. Configure build directory and CMake
+        run: |
+          mkdir -p build
+          cd build && cmake ..
+
+      - name: 4. Compile project
+        run: |
+          cd build && make
+
+      - name: 5. Install built artifacts
+        run: |
+          cd build && sudo make install
