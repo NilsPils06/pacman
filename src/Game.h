@@ -1,10 +1,6 @@
-//
-// Created by nils on 10/28/25.
-//
-
 #ifndef PACMAN_GAME_H
 #define PACMAN_GAME_H
-#include "StateManager.h"
+#include "state/StateManager.h"
 
 #include <memory>
 

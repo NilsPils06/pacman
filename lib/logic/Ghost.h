@@ -1,7 +1,3 @@
-//
-// Created by nils on 30/10/2025.
-//
-
 #ifndef PACMAN_GHOST_H
 #define PACMAN_GHOST_H
 #include "EntityModel.h"

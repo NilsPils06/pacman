@@ -1,10 +1,10 @@
 SET(SRC main.cpp Game.cpp
-        State.cpp
-        State.h
-        StateManager.cpp
-        StateManager.h
-        MenuState.cpp
-        MenuState.h)
+        state/State.cpp
+        state/State.h
+        state/StateManager.cpp
+        state/StateManager.h
+        state/MenuState.cpp
+        state/MenuState.h)
 ADD_EXECUTABLE(game ${SRC})
 
 FIND_PACKAGE(SFML COMPONENTS system window graphics)

@@ -1,6 +1,6 @@
 #include "Game.h"
 
-#include "MenuState.h"
+#include "state/MenuState.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -14,7 +14,7 @@ void Game::renderWindow() {
 
     // Load a sprite to display
     sf::Texture texture;
-    if (!texture.loadFromFile("../../../assets/sprite.png"))
+    if (!texture.loadFromFile("../../assets/sprite.png"))
         return;
     sf::Sprite sprite(texture);
 
