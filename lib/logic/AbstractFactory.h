@@ -11,11 +11,11 @@ public:
     virtual ~AbstractFactory() = default;
 
 protected:
-    virtual Ghost createGhost() = 0;
-    virtual Pacman createPacman() = 0;
-    virtual Fruit createFruit() = 0;
-    virtual Coin createCoin() = 0;
-    virtual Wall createWall() = 0;
+    virtual subjects::Ghost createGhost() = 0;
+    virtual subjects::Pacman createPacman() = 0;
+    virtual subjects::Fruit createFruit() = 0;
+    virtual subjects::Coin createCoin() = 0;
+    virtual subjects::Wall createWall() = 0;
 };
 
 #endif // PACMAN_ABSTRACTFACTORY_H

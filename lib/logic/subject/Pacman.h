@@ -6,6 +6,9 @@ namespace subjects {
 class Pacman : public EntityModel {
     int lives = 3;
     Direction facing = LEFT;
+
+public:
+    void notify() override;
 };
 } // namespace subjects
 

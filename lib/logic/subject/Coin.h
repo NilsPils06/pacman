@@ -3,7 +3,10 @@
 #include "Collectable.h"
 
 namespace subjects {
-class Coin : public Collectable {};
+class Coin : public Collectable {
+public:
+    void notify() override;
+};
 } // namespace subjects
 
 #endif // PACMAN_COIN_H

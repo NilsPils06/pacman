@@ -2,7 +2,10 @@
 #define PACMAN_FRUIT_H
 #include "Collectable.h"
 namespace subjects {
-class Fruit : public Collectable {};
+class Fruit : public Collectable {
+public:
+    void notify() override;
+};
 } // namespace subjects
 
 #endif // PACMAN_FRUIT_H

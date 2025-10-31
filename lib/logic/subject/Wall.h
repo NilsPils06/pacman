@@ -3,7 +3,10 @@
 #include "EntityModel.h"
 
 namespace subjects {
-class Wall : EntityModel {};
+class Wall : EntityModel {
+public:
+    void notify() override;
+};
 } // namespace subjects
 
 #endif // PACMAN_WALL_H
