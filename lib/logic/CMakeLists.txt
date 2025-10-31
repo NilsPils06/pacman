@@ -22,6 +22,10 @@ SET(SRC
         subject/Fruit.cpp
         subject/Fruit.h
         subject/Wall.cpp
-        subject/Wall.h)
+        subject/Wall.h
+        Observer.cpp
+        Observer.h
+        Score.cpp
+        Score.h)
 
 ADD_LIBRARY(logic STATIC ${SRC})
