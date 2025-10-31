@@ -5,6 +5,6 @@ Random & Random::getInstance() {
 }
 
 int Random::generateInt() {
-    std::uniform_int_distribution<> dis(1, 2);
+    std::binomial_distribution<> dis(1, 0.5);
     return dis(gen);
 }

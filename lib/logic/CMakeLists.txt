@@ -11,6 +11,7 @@ SET(SRC
         Pacman.cpp
         Pacman.h
         World.cpp
-        World.h)
+        World.h
+        Direction.h)
 
 ADD_LIBRARY(logic STATIC ${SRC})
