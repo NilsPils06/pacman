@@ -1,19 +1,15 @@
 #ifndef PACMAN_ENTITYMODEL_H
 #define PACMAN_ENTITYMODEL_H
+#include "../EntityUtil.h"
 #include "Subject.h"
 
-struct EntityCoords {
-    int x;
-    int y;
-
-    EntityCoords(const int x, const int y) : x(x), y(y) {};
-};
-
+namespace subjects {
 class EntityModel : public Subject {
     EntityCoords coords;
 
 public:
     EntityModel() : coords(0, 0) {};
 };
+} // namespace subjects
 
 #endif // PACMAN_ENTITYMODEL_H

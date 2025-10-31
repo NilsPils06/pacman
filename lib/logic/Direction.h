@@ -1,6 +1,0 @@
-#ifndef PACMAN_DIRECTION_H
-#define PACMAN_DIRECTION_H
-
-enum Direction { UP, DOWN, LEFT, RIGHT };
-
-#endif // PACMAN_DIRECTION_H

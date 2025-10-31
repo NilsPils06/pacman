@@ -1,14 +1,9 @@
 #ifndef PACMAN_GHOST_H
 #define PACMAN_GHOST_H
-#include "../Direction.h"
 #include "EntityModel.h"
 
-enum Movement {
-    FIXED,
-    CHASING,
-    CUTTING
-};
 
+namespace subjects {
 class Ghost : public EntityModel {
     Movement movement;
     Direction lockedIn = UP;
@@ -17,5 +12,6 @@ class Ghost : public EntityModel {
 public:
     explicit Ghost(const Movement movement) : movement(movement) {};
 };
+}
 
 #endif // PACMAN_GHOST_H

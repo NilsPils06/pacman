@@ -1,8 +1,8 @@
 #ifndef PACMAN_SUBJECT_H
 #define PACMAN_SUBJECT_H
 
-class Subject {
-
-};
+namespace subjects {
+class Subject {};
+} // namespace subjects
 
 #endif // PACMAN_SUBJECT_H
