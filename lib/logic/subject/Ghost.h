@@ -1,6 +1,6 @@
 #ifndef PACMAN_GHOST_H
 #define PACMAN_GHOST_H
-#include "Direction.h"
+#include "../Direction.h"
 #include "EntityModel.h"
 
 enum Movement {

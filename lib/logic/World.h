@@ -1,6 +1,6 @@
 #ifndef PACMAN_WORLD_H
 #define PACMAN_WORLD_H
-#include "EntityModel.h"
+#include "subject/EntityModel.h"
 
 #include <memory>
 #include <vector>

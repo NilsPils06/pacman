@@ -2,16 +2,26 @@ SET(SRC
         Stopwatch.cpp
         Random.cpp
         Random.h
-        Subject.cpp
-        Subject.h
-        EntityModel.cpp
-        EntityModel.h
-        Ghost.cpp
-        Ghost.h
-        Pacman.cpp
-        Pacman.h
+        subject/Subject.cpp
+        subject/Subject.h
+        subject/EntityModel.cpp
+        subject/EntityModel.h
+        subject/Ghost.cpp
+        subject/Ghost.h
+        subject/Pacman.cpp
+        subject/Pacman.h
         World.cpp
         World.h
-        Direction.h)
+        Direction.h
+        AbstractFactory.cpp
+        AbstractFactory.h
+        subject/Coin.cpp
+        subject/Coin.h
+        subject/Collectable.cpp
+        subject/Collectable.h
+        subject/Fruit.cpp
+        subject/Fruit.h
+        subject/Wall.cpp
+        subject/Wall.h)
 
 ADD_LIBRARY(logic STATIC ${SRC})
