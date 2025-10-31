@@ -2,6 +2,8 @@
 #define PACMAN_FRUIT_H
 #include "EntityView.h"
 
+namespace view {
 class Fruit : public EntityView{};
+}
 
 #endif // PACMAN_FRUIT_H

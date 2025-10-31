@@ -12,7 +12,6 @@ SET(SRC
         subject/Pacman.h
         World.cpp
         World.h
-        Direction.h
         AbstractFactory.cpp
         AbstractFactory.h
         subject/Coin.cpp

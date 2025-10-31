@@ -1,1 +1,1 @@
-#include "../Ghost.h"
+#include "Ghost.h"

@@ -1,1 +1,1 @@
-#include "../EntityView.h"
+#include "EntityView.h"

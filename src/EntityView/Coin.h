@@ -1,6 +1,6 @@
 #ifndef PACMAN_COIN_H
 #define PACMAN_COIN_H
-#include "../EntityView.h"
+#include "EntityView.h"
 
 class Coin : public EntityView{};
 
