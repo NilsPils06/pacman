@@ -6,7 +6,7 @@
 #include <vector>
 
 class World {
-    std::vector<std::unique_ptr<EntityModel>> entities;
+    std::vector<std::unique_ptr<subjects::EntityModel>> entities;
 public:
     void checkCollisions();
 };

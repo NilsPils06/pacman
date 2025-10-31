@@ -7,14 +7,14 @@
 
 namespace subjects {
 class Subject {
-    std::list<std::shared_ptr<Observer>> observers;
+    std::list<std::weak_ptr<Observer>> observers;
 
 public:
     virtual ~Subject() = default;
 
-    virtual void attach(const std::shared_ptr<Observer>& observer);
+    virtual void attach(std::shared_ptr<Observer> observer);
 
-    virtual void detach(const std::shared_ptr<Observer>& observer);
+    virtual void detach(std::weak_ptr<Observer> observer);
 
     virtual void notify() = 0;
 };
