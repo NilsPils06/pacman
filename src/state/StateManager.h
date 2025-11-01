@@ -8,7 +8,11 @@
 class StateManager {
     std::stack<std::unique_ptr<State>> states;
 public:
-    explicit StateManager(std::unique_ptr<State> initial);
+    explicit StateManager() = default;
+
+    void update(sf::Event event);
+
+    void render(sf::RenderWindow& window);
 
     void push(std::unique_ptr<State> s);
 

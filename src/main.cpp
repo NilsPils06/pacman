@@ -2,6 +2,6 @@
 int main() {
     Game game{};
 
-    game.renderWindow();
+    game.render();
     return 0;
 }

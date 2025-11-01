@@ -5,12 +5,13 @@
 
 class MenuState : public State {
 public:
-    MenuState() = default;
+    explicit MenuState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
 
     ~MenuState() override;
 
-    void handle1() override;
-    void handle2() override;
+    void onKeyPress(sf::Event::KeyEvent event) override;
+
+    void render(sf::RenderWindow& window) override;
 };
 
 #endif // PACMAN_MENUSTATE_H

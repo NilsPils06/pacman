@@ -5,26 +5,18 @@
 #include <SFML/Graphics.hpp>
 
 Game::Game() {
-    state_manager = std::make_unique<StateManager>(std::make_unique<MenuState>());
+    state_manager = std::make_shared<StateManager>();
+    state_manager->push(std::make_unique<MenuState>(state_manager));
+    window.create(sf::VideoMode(800, 600), "Pacman");
 }
 
-void Game::renderWindow() {
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-
-    // Load a sprite to display
-    sf::Texture texture;
-    if (!texture.loadFromFile("../../assets/sprite.png"))
-        return;
-    sf::Sprite sprite(texture);
-
+void Game::render() {
     // Start the game loop
-    while (window.isOpen())
-    {
+    while (window.isOpen()) {
         // Process events
         sf::Event event;
-        while (window.pollEvent(event))
-        {
+        while (window.pollEvent(event)) {
+            state_manager->update(event);
             // Close window: exit
             if (event.type == sf::Event::Closed)
                 window.close();
@@ -32,9 +24,7 @@ void Game::renderWindow() {
 
         // Clear screen
         window.clear();
-
-        // Draw the sprite
-        window.draw(sprite);
+        state_manager->render(window);
 
         // Update the window
         window.display();

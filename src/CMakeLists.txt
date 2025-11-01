@@ -1,5 +1,4 @@
 SET(SRC main.cpp Game.cpp
-        state/State.cpp
         state/State.h
         state/StateManager.cpp
         state/StateManager.h
@@ -16,7 +15,11 @@ SET(SRC main.cpp Game.cpp
         EntityView/Fruit.cpp
         EntityView/Fruit.h
         EntityView/Wall.cpp
-        EntityView/Wall.h)
+        EntityView/Wall.h
+        state/LevelState.cpp
+        state/LevelState.h
+        state/PausedState.cpp
+        state/PausedState.h)
 ADD_EXECUTABLE(game ${SRC})
 
 FIND_PACKAGE(SFML COMPONENTS system window graphics)

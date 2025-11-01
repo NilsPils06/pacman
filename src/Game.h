@@ -2,14 +2,16 @@
 #define PACMAN_GAME_H
 #include "state/StateManager.h"
 
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <memory>
 
 class Game {
-    std::unique_ptr<StateManager> state_manager;
+    std::shared_ptr<StateManager> state_manager;
+    sf::RenderWindow window;
 public:
     Game();
 
-    void renderWindow();
+    void render();
 };
 
 
