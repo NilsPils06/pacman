@@ -11,12 +11,12 @@ void MenuState::onKeyPress(sf::Event::KeyEvent event) {
         state_manager->push(std::make_unique<LevelState>(state_manager));
     }
 }
-void MenuState::render(sf::RenderWindow& window) {
+void MenuState::render(std::shared_ptr<sf::RenderWindow> window) {
     sf::Texture texture;
     if (!texture.loadFromFile("../../assets/menu.png"))
         return;
     sf::Sprite sprite(texture);
 
     // Draw the sprite
-    window.draw(sprite);
+    window->draw(sprite);
 }

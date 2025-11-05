@@ -10,9 +10,9 @@ class StateManager {
 public:
     explicit StateManager() = default;
 
-    void update(sf::Event event);
+    void update(const sf::Event& event);
 
-    void render(sf::RenderWindow& window);
+    void render(std::shared_ptr<sf::RenderWindow> window);
 
     void push(std::unique_ptr<State> s);
 

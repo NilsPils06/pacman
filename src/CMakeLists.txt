@@ -19,7 +19,9 @@ SET(SRC main.cpp Game.cpp
         state/LevelState.cpp
         state/LevelState.h
         state/PausedState.cpp
-        state/PausedState.h)
+        state/PausedState.h
+        EntityFactory.cpp
+        EntityFactory.h)
 ADD_EXECUTABLE(game ${SRC})
 
 FIND_PACKAGE(SFML COMPONENTS system window graphics)

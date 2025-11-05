@@ -8,7 +8,7 @@ public:
 
     void onKeyPress(sf::Event::KeyEvent event) override;
 
-    void render(sf::RenderWindow& window) override;
+    void render(std::shared_ptr<sf::RenderWindow> window) override;
 };
 
 #endif // PACMAN_LEVELSTATE_H

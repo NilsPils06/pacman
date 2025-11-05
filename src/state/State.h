@@ -16,7 +16,7 @@ public:
 
     virtual void onKeyPress(sf::Event::KeyEvent event) = 0;
 
-    virtual void render(sf::RenderWindow& window) = 0;
+    virtual void render(std::shared_ptr<sf::RenderWindow> window) = 0;
 };
 
 #endif // PACMAN_STATE_H

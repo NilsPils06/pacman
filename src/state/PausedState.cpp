@@ -11,12 +11,12 @@ void PausedState::onKeyPress(sf::Event::KeyEvent event) {
         }
     }
 }
-void PausedState::render(sf::RenderWindow& window) {
+void PausedState::render(std::shared_ptr<sf::RenderWindow> window) {
     sf::Texture texture;
     if (!texture.loadFromFile("../../assets/menu.png"))
         return;
     sf::Sprite sprite(texture);
 
     // Draw the sprite
-    window.draw(sprite);
+    window->draw(sprite);
 }

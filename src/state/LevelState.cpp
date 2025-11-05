@@ -12,12 +12,12 @@ void LevelState::onKeyPress(sf::Event::KeyEvent event) {
         }
     }
 }
-void LevelState::render(sf::RenderWindow& window) {
+void LevelState::render(std::shared_ptr<sf::RenderWindow> window) {
     sf::Texture texture;
     if (!texture.loadFromFile("../../assets/sprite.png"))
         return;
     sf::Sprite sprite(texture);
 
     // Draw the sprite
-    window.draw(sprite);
+    window->draw(sprite);
 }

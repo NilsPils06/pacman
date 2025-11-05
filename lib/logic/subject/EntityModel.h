@@ -5,10 +5,15 @@
 
 namespace subjects {
 class EntityModel : public Subject {
+protected:
     EntityCoords coords;
 
 public:
     EntityModel() : coords(0, 0) {};
+
+    void setCoords(int x, int y);
+
+    void setCoords(EntityCoords coords);
 };
 } // namespace subjects
 
