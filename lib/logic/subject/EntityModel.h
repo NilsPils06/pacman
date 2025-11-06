@@ -11,9 +11,11 @@ protected:
 public:
     EntityModel() : coords(0, 0) {};
 
-    void setCoords(int x, int y);
+    void setCoords(float x, float y);
 
     void setCoords(EntityCoords coords);
+
+    void notify() override;
 };
 } // namespace subjects
 

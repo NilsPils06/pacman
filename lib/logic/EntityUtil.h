@@ -2,10 +2,10 @@
 #define PACMAN_ENTITYUTIL_H
 
 struct EntityCoords {
-    int x;
-    int y;
+    float x;
+    float y;
 
-    EntityCoords(const int x, const int y) : x(x), y(y) {};
+    EntityCoords(const float x, const float y) : x(x), y(y) {};
 };
 
 enum Movement { FIXED, CHASING, CUTTING };

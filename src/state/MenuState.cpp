@@ -3,6 +3,7 @@
 #include "StateManager.h"
 
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 MenuState::~MenuState() = default;
@@ -12,11 +13,24 @@ void MenuState::onKeyPress(sf::Event::KeyEvent event) {
     }
 }
 void MenuState::render(std::shared_ptr<sf::RenderWindow> window) {
-    sf::Texture texture;
-    if (!texture.loadFromFile("../../assets/menu.png"))
-        return;
-    sf::Sprite sprite(texture);
+    sf::Text text;
+
+    sf::Font font;
+    if (!font.loadFromFile("../../assets/PAC-FONT.TTF"))
+    {
+        // error...
+    }
+
+    text.setFont(font); // font is a sf::Font
+
+    // set the string to display
+    text.setString("Pac-man");
+
+    // set the character size
+    text.setCharacterSize(24); // in pixels, not points!
+    sf::Vector2u size = window->getSize();
+    text.setPosition(size.x/2,size.y/2);
 
     // Draw the sprite
-    window->draw(sprite);
+    window->draw(text);
 }

@@ -20,7 +20,7 @@ public:
 
     void setSprite(const std::string& file);
 
-    void render(EntityCoords coords);
+    void update() override;
 };
 } // namespace view
 

@@ -21,7 +21,9 @@ SET(SRC main.cpp Game.cpp
         state/PausedState.cpp
         state/PausedState.h
         EntityFactory.cpp
-        EntityFactory.h)
+        EntityFactory.h
+        Camera.cpp
+        Camera.h)
 ADD_EXECUTABLE(game ${SRC})
 
 FIND_PACKAGE(SFML COMPONENTS system window graphics)

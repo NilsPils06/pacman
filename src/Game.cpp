@@ -5,9 +5,10 @@
 #include <SFML/Graphics.hpp>
 
 Game::Game() {
+    window = std::make_shared<sf::RenderWindow>();
     state_manager = std::make_shared<StateManager>();
     state_manager->push(std::make_unique<MenuState>(state_manager));
-    window->create(sf::VideoMode(800, 600), "Pacman");
+    window->create(sf::VideoMode::getDesktopMode(), "Pacman");
 }
 
 void Game::render() {
