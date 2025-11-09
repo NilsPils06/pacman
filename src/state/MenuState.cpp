@@ -1,10 +1,7 @@
 #include "MenuState.h"
 #include "LevelState.h"
 #include "StateManager.h"
-
-#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Texture.hpp>
 
 MenuState::~MenuState() = default;
 void MenuState::onKeyPress(sf::Event::KeyEvent event) {
@@ -21,16 +18,19 @@ void MenuState::render(std::shared_ptr<sf::RenderWindow> window) {
         // error...
     }
 
-    text.setFont(font); // font is a sf::Font
+    // TODO center text correctly
 
-    // set the string to display
-    text.setString("Pac-man");
+    text.setFont(font);
 
-    // set the character size
-    text.setCharacterSize(24); // in pixels, not points!
+    text.setString("pac-man\n\t1234");
+    text.setFillColor(sf::Color::Yellow);
+    text.setCharacterSize(128);
+
+    sf::FloatRect bounds = text.getLocalBounds();
+    text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+
     sf::Vector2u size = window->getSize();
-    text.setPosition(size.x/2,size.y/2);
+    text.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 2.f);
 
-    // Draw the sprite
     window->draw(text);
 }
