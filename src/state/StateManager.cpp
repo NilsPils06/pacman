@@ -9,9 +9,9 @@ void StateManager::update(const sf::Event& event) {
         states.top()->onKeyPress(event.key);
     }
 }
-void StateManager::render(std::shared_ptr<sf::RenderWindow> window) {
+void StateManager::render() {
     if (states.empty()) return;
-    states.top()->render(std::move(window));
+    states.top()->render();
 }
 
 void StateManager::push(std::unique_ptr<State> s) { states.push(std::move(s)); }

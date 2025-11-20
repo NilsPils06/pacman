@@ -9,13 +9,13 @@
 class AbstractFactory {
 public:
     virtual ~AbstractFactory() = default;
-
-protected:
     virtual subjects::Ghost createGhost() = 0;
+    virtual subjects::Ghost createGhost(float x, float y) = 0;
     virtual subjects::Pacman createPacman() = 0;
     virtual subjects::Fruit createFruit() = 0;
     virtual subjects::Coin createCoin() = 0;
     virtual subjects::Wall createWall() = 0;
+    virtual subjects::Wall createWall(float x, float y) = 0;
 };
 
 #endif // PACMAN_ABSTRACTFACTORY_H

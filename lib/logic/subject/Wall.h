@@ -3,8 +3,10 @@
 #include "EntityModel.h"
 
 namespace subjects {
-class Wall : EntityModel {
+class Wall : public EntityModel {
 public:
+    Wall(float x, float y) : EntityModel(x, y) {}
+
     void notify() override;
 };
 } // namespace subjects

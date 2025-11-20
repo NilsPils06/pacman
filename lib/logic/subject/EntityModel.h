@@ -11,6 +11,10 @@ protected:
 public:
     EntityModel() : coords(0, 0) {};
 
+    explicit EntityModel(const EntityCoords& coords);
+
+    EntityModel(float x, float y) : coords(x,y) {};
+
     void setCoords(float x, float y);
 
     void setCoords(EntityCoords coords);

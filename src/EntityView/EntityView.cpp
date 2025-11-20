@@ -9,3 +9,4 @@ void view::EntityView::setSprite(const std::string& file) {
     }
     this->sprite.setTexture(texture);
 }
+void view::EntityView::update() {}

@@ -12,7 +12,7 @@ public:
 
     void update(const sf::Event& event);
 
-    void render(std::shared_ptr<sf::RenderWindow> window);
+    void render();
 
     void push(std::unique_ptr<State> s);
 

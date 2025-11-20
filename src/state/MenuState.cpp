@@ -6,10 +6,10 @@
 MenuState::~MenuState() = default;
 void MenuState::onKeyPress(sf::Event::KeyEvent event) {
     if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
-        state_manager->push(std::make_unique<LevelState>(state_manager));
+        state_manager->push(std::make_unique<LevelState>(state_manager, window));
     }
 }
-void MenuState::render(std::shared_ptr<sf::RenderWindow> window) {
+void MenuState::render() {
     sf::Text text;
 
     sf::Font font;

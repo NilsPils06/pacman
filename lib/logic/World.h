@@ -1,5 +1,6 @@
 #ifndef PACMAN_WORLD_H
 #define PACMAN_WORLD_H
+#include "AbstractFactory.h"
 #include "subject/EntityModel.h"
 
 #include <memory>
@@ -7,11 +8,9 @@
 
 class World {
     std::vector<std::unique_ptr<subjects::EntityModel>> entities;
-    int gridWidth;
-    int gridHeight;
+    std::shared_ptr<AbstractFactory> factory;
 public:
-    [[nodiscard]] int get_grid_width() const;
-    [[nodiscard]] int get_grid_height() const;
+    World(std::shared_ptr<AbstractFactory> factory);
 
     void checkCollisions();
 };

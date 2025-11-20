@@ -14,9 +14,8 @@ protected:
     std::shared_ptr<sf::RenderWindow> window;
 
 public:
-    EntityView(const std::shared_ptr<subjects::Subject>& subject, sf::Sprite sprite,
-               const std::shared_ptr<sf::RenderWindow>& window)
-        : Observer(subject), sprite(std::move(sprite)), window(window) {}
+    EntityView(const std::shared_ptr<subjects::Subject>& subject, const std::shared_ptr<sf::RenderWindow>& window)
+        : Observer(subject), window(window) {}
 
     void setSprite(const std::string& file);
 

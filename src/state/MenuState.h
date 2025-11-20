@@ -3,15 +3,17 @@
 
 #include "State.h"
 
+#include <utility>
+
 class MenuState : public State {
 public:
-    explicit MenuState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
+    explicit MenuState(const std::shared_ptr<StateManager>& manager, std::shared_ptr<sf::RenderWindow> window) : State(manager, std::move(window)) {}
 
     ~MenuState() override;
 
     void onKeyPress(sf::Event::KeyEvent event) override;
 
-    void render(std::shared_ptr<sf::RenderWindow> window) override;
+    void render() override;
 };
 
 #endif // PACMAN_MENUSTATE_H

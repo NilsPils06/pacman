@@ -9,3 +9,4 @@ void subjects::EntityModel::setCoords(EntityCoords coords) {
 void subjects::EntityModel::notify() {
 
 }
+subjects::EntityModel::EntityModel(const EntityCoords& coords) : coords(coords) {}

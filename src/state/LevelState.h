@@ -1,17 +1,19 @@
 #ifndef PACMAN_LEVELSTATE_H
 #define PACMAN_LEVELSTATE_H
+#include "../EntityFactory.h"
 #include "State.h"
 #include "World.h"
 
 class LevelState : public State {
     std::shared_ptr<World> world;
+    std::shared_ptr<EntityFactory> factory;
 
 public:
-    explicit LevelState(const std::shared_ptr<StateManager>& manager);
+    explicit LevelState(const std::shared_ptr<StateManager>& manager, std::shared_ptr<sf::RenderWindow> window) : State(manager, std::move(window)) {};
 
     void onKeyPress(sf::Event::KeyEvent event) override;
 
-    void render(std::shared_ptr<sf::RenderWindow> window) override;
+    void render() override;
 };
 
 #endif // PACMAN_LEVELSTATE_H

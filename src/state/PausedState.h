@@ -2,13 +2,15 @@
 #define PACMAN_PAUSEDSTATE_H
 #include "State.h"
 
+#include <utility>
+
 class PausedState : public State {
 public:
-    explicit PausedState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
+    explicit PausedState(const std::shared_ptr<StateManager>& manager, std::shared_ptr<sf::RenderWindow> window) : State(manager, std::move(window)) {}
 
     void onKeyPress(sf::Event::KeyEvent event) override;
 
-    void render(std::shared_ptr<sf::RenderWindow> window) override;
+    void render() override;
 };
 
 #endif // PACMAN_PAUSEDSTATE_H

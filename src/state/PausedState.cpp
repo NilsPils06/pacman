@@ -13,7 +13,7 @@ void PausedState::onKeyPress(sf::Event::KeyEvent event) {
         }
     }
 }
-void PausedState::render(std::shared_ptr<sf::RenderWindow> window) {
+void PausedState::render() {
     sf::Text text;
 
     sf::Font font;
