@@ -1,6 +1,7 @@
 #ifndef PACMAN_STOPWATCH_H
 #define PACMAN_STOPWATCH_H
 
+// TODO update pattern (see Camera)
 
 class Stopwatch {
     int tick = 0;

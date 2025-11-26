@@ -8,10 +8,10 @@ class StateManager;
 class State {
 protected:
     std::weak_ptr<StateManager> manager;
-    std::shared_ptr<sf::RenderWindow> window;
 
 public:
-    explicit State(std::shared_ptr<StateManager> manager, std::shared_ptr<sf::RenderWindow> window) : manager(manager), window(std::move(window)) {}
+    explicit State(const std::shared_ptr<StateManager>& manager)
+        : manager(manager) {}
 
     virtual ~State() = default;
 

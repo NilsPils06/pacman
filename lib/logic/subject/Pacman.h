@@ -3,12 +3,9 @@
 #include "EntityModel.h"
 
 namespace subjects {
-class Pacman : public EntityModel {
+class Pacman final : public EntityModel {
     int lives = 3;
     Direction facing = LEFT;
-
-public:
-    void notify() override;
 };
 } // namespace subjects
 

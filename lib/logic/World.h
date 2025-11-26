@@ -10,9 +10,10 @@ class World {
     std::vector<std::unique_ptr<subjects::EntityModel>> entities;
     std::shared_ptr<AbstractFactory> factory;
 public:
-    World(std::shared_ptr<AbstractFactory> factory);
+    explicit World(std::shared_ptr<AbstractFactory> factory);
 
     void checkCollisions();
+    void render() const;
 };
 
 #endif // PACMAN_WORLD_H

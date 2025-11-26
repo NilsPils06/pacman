@@ -26,6 +26,8 @@ SET(SRC
         Observer.h
         Score.cpp
         Score.h
-        EntityUtil.h)
+        EntityUtil.h
+        Event.cpp
+        Event.h)
 
 ADD_LIBRARY(logic STATIC ${SRC})

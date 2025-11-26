@@ -7,7 +7,7 @@
 
 class MenuState : public State {
 public:
-    explicit MenuState(const std::shared_ptr<StateManager>& manager, std::shared_ptr<sf::RenderWindow> window) : State(manager, std::move(window)) {}
+    explicit MenuState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
 
     ~MenuState() override;
 

@@ -1,4 +1,6 @@
 #include "World.h"
+
+#include "Event.h"
 #include "subject/Wall.h"
 #include <fstream>
 #include <utility>
@@ -49,5 +51,11 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         // voeg entitymodel toe aan world
 
         x += 1;
+    }
+}
+
+void World::render() const {
+    for (const auto& entity : entities) {
+        entity->notify(std::make_shared<PositonUpdateEvent>(entity->getCoords()));
     }
 }

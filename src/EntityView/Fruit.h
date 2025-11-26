@@ -1,9 +1,9 @@
-#ifndef PACMAN_FRUIT_H
-#define PACMAN_FRUIT_H
+#ifndef VIEW_FRUIT_H
+#define VIEW_FRUIT_H
 #include "EntityView.h"
 
 namespace view {
-class Fruit : public EntityView{};
+class Fruit final : public EntityView{};
 }
 
-#endif // PACMAN_FRUIT_H
+#endif // VIEW_FRUIT_H

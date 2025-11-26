@@ -1,5 +1,6 @@
 #include "PausedState.h"
 
+#include "../Game.h"
 #include "StateManager.h"
 
 #include <SFML/Graphics/Font.hpp>
@@ -8,7 +9,7 @@
 #include <SFML/Graphics/Texture.hpp>
 void PausedState::onKeyPress(sf::Event::KeyEvent event) {
     if (event.code == sf::Keyboard::Escape) {
-        if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
+        if (const std::shared_ptr<StateManager> state_manager = manager.lock()) {
             state_manager->pop();
         }
     }
@@ -33,8 +34,8 @@ void PausedState::render() {
     sf::FloatRect bounds = text.getLocalBounds();
     text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
 
-    sf::Vector2u size = window->getSize();
+    sf::Vector2u size = Game::window.getSize();
     text.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 2.f);
 
-    window->draw(text);
+    Game::window.draw(text);
 }

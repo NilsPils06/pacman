@@ -6,7 +6,7 @@
 
 class PausedState : public State {
 public:
-    explicit PausedState(const std::shared_ptr<StateManager>& manager, std::shared_ptr<sf::RenderWindow> window) : State(manager, std::move(window)) {}
+    explicit PausedState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
 
     void onKeyPress(sf::Event::KeyEvent event) override;
 

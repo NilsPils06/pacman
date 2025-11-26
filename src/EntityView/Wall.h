@@ -1,12 +1,14 @@
-#ifndef PACMAN_VIEW_WALL_H
-#define PACMAN_VIEW_WALL_H
+#ifndef VIEW_WALL_H
+#define VIEW_WALL_H
 #include "EntityView.h"
 
 namespace view {
-class Wall : public EntityView {
+class Wall final : public EntityView {
 public:
-    Wall(const std::shared_ptr<subjects::Subject>& subject, const std::shared_ptr<sf::RenderWindow>& window);
-};
-}
+    explicit Wall(const std::shared_ptr<subjects::Subject>& subject);
 
-#endif // PACMAN_VIEW_WALL_H
+    void update(std::shared_ptr<Event> e) override;
+};
+} // namespace view
+
+#endif // VIEW_WALL_H

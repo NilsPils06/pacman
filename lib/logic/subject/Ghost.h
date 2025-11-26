@@ -11,7 +11,6 @@ class Ghost : public EntityModel {
 
 public:
     explicit Ghost(const Movement movement) : movement(movement) {};
-    void notify() override;
 };
 } // namespace subjects
 

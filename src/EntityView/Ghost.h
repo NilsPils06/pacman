@@ -1,9 +1,9 @@
-#ifndef PACMAN_GHOST_H
-#define PACMAN_GHOST_H
+#ifndef VIEW_GHOST_H
+#define VIEW_GHOST_H
 #include "EntityView.h"
 
 namespace view {
 class Ghost : public EntityView {};
 }
 
-#endif // PACMAN_GHOST_H
+#endif // VIEW_GHOST_H

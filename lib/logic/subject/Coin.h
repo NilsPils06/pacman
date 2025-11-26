@@ -3,9 +3,7 @@
 #include "Collectable.h"
 
 namespace subjects {
-class Coin : public Collectable {
-public:
-    void notify() override;
+class Coin final : public Collectable {
 };
 } // namespace subjects
 

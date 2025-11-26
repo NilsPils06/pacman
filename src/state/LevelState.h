@@ -9,7 +9,7 @@ class LevelState : public State {
     std::shared_ptr<EntityFactory> factory;
 
 public:
-    explicit LevelState(const std::shared_ptr<StateManager>& manager, std::shared_ptr<sf::RenderWindow> window) : State(manager, std::move(window)) {};
+    explicit LevelState(const std::shared_ptr<StateManager>& manager);
 
     void onKeyPress(sf::Event::KeyEvent event) override;
 

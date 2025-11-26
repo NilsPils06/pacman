@@ -2,6 +2,7 @@
 #define PACMAN_OBSERVER_H
 #include <memory>
 
+class Event;
 namespace subjects {
 class Subject;
 }
@@ -14,7 +15,7 @@ public:
 
     explicit Observer(std::shared_ptr<subjects::Subject> subject);
 
-    virtual void update() = 0;
+    virtual void update(std::shared_ptr<Event> e) = 0;
 };
 
 #endif // PACMAN_OBSERVER_H

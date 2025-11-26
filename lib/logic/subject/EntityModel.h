@@ -19,7 +19,9 @@ public:
 
     void setCoords(EntityCoords coords);
 
-    void notify() override;
+    [[nodiscard]] EntityCoords getCoords() const;
+
+    void notify(std::shared_ptr<Event> e) override;
 };
 } // namespace subjects
 

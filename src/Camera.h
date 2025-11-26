@@ -4,9 +4,14 @@
 #include "World.h"
 
 class Camera {
-    std::shared_ptr<sf::RenderWindow> window;
+    Camera() = default;
 public:
-    void projectEntity(std::shared_ptr<view::EntityView> entity, EntityCoords coords);
+    static Camera& getInstance();
+
+    void project(sf::Sprite sprite, EntityCoords coords);
+
+    Camera(const Camera&) = delete;
+    void operator=(const Camera&) = delete;
 };
 
 #endif // PACMAN_CAMERA_H

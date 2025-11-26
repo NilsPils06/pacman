@@ -7,6 +7,7 @@
 
 namespace subjects {
 class Subject {
+protected:
     std::list<std::weak_ptr<Observer>> observers;
 
 public:
@@ -16,7 +17,7 @@ public:
 
     virtual void detach(std::weak_ptr<Observer> observer);
 
-    virtual void notify() = 0;
+    virtual void notify(std::shared_ptr<Event> e) = 0;
 };
 } // namespace subjects
 

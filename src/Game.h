@@ -7,9 +7,10 @@
 
 class Game {
     std::shared_ptr<StateManager> state_manager;
-    std::shared_ptr<sf::RenderWindow> window;
 
 public:
+    static sf::RenderWindow window;
+
     Game();
 
     void render();

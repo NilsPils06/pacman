@@ -4,30 +4,30 @@
 
 #include <SFML/Graphics.hpp>
 
+sf::RenderWindow Game::window{sf::VideoMode::getDesktopMode(), "Pacman"};
+
 Game::Game() {
-    window = std::make_shared<sf::RenderWindow>();
     state_manager = std::make_shared<StateManager>();
     state_manager->push(std::make_unique<MenuState>(state_manager));
-    window->create(sf::VideoMode::getDesktopMode(), "Pacman");
 }
 
 void Game::render() {
     // Start the game loop
-    while (window->isOpen()) {
+    while (window.isOpen()) {
         // Process events
         sf::Event event;
-        while (window->pollEvent(event)) {
+        while (window.pollEvent(event)) {
             state_manager->update(event);
             // Close window: exit
             if (event.type == sf::Event::Closed)
-                window->close();
+                window.close();
         }
 
         // Clear screen
-        window->clear();
-        state_manager->render(window);
+        window.clear();
+        state_manager->render();
 
         // Update the window
-        window->display();
+        window.display();
     }
 }
