@@ -6,7 +6,7 @@
 class Camera {
     std::shared_ptr<sf::RenderWindow> window;
 public:
-    void projectEntity(std::shared_ptr<view::EntityView> entity);
+    void projectEntity(std::shared_ptr<view::EntityView> entity, EntityCoords coords);
 };
 
 #endif // PACMAN_CAMERA_H

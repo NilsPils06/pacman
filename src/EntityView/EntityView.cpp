@@ -7,6 +7,12 @@ void view::EntityView::setSprite(const std::string& file) {
     if (!texture.loadFromFile(file)) {
         return;
     }
-    this->sprite.setTexture(texture);
+    sprite.setTexture(texture);
 }
 void view::EntityView::update() {}
+
+const sf::Sprite& view::EntityView::getSprite() const { return sprite; }
+
+void view::EntityView::setPosition(int x, int y) {
+    sprite.setPosition(x, y);
+}
