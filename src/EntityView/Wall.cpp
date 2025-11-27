@@ -2,6 +2,9 @@
 
 #include "../Camera.h"
 #include "Event.h"
+
+#include <iostream>
+
 view::Wall::Wall(const std::shared_ptr<subjects::Subject>& subject)
     : EntityView(subject) {}
 void view::Wall::update(std::shared_ptr<Event> e) {

@@ -3,6 +3,8 @@
 #include "EntityView/EntityView.h"
 #include "World.h"
 
+// TODO unique_ptr
+
 class Camera {
     Camera() = default;
 public:

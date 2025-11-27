@@ -9,10 +9,13 @@ Camera& Camera::getInstance() {
 
 void Camera::project(sf::Sprite sprite, EntityCoords coords) {
     auto screensize = Game::window.getSize();
-    unsigned int x = (coords.x/2 + 0.5) + screensize.x;
-    unsigned int y = (coords.y/2 + 0.5) + screensize.y;
+    const float x = (coords.x/2.f + 0.5f) * screensize.x;
+    const float y = (coords.y/2.f + 0.5f) * screensize.y;
+
+    const sf::FloatRect bounds = sprite.getLocalBounds();
+    sprite.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
 
     sprite.setPosition(x, y);
-    sprite.scale(50,50);
+    sprite.scale(1,1);
     Game::window.draw(sprite);
 }

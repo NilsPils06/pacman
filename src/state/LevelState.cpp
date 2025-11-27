@@ -12,6 +12,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <fstream>
 LevelState::LevelState(const std::shared_ptr<StateManager>& manager) : State(manager) {
+    factory = std::make_shared<EntityFactory>();
     world = std::make_shared<World>(factory);
 }
 
@@ -61,5 +62,5 @@ void LevelState::render() {
 
     sprite.setTextureRect(sprites::GHOST_RED_RIGHT_1);
 
-    Camera::getInstance().project(sprite, {0,0});
+    Camera::getInstance().project(sprite, {-1,-1});
 }

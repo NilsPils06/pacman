@@ -7,7 +7,7 @@
 #include <vector>
 
 class World {
-    std::vector<std::unique_ptr<subjects::EntityModel>> entities;
+    std::vector<std::shared_ptr<subjects::EntityModel>> entities;
     std::shared_ptr<AbstractFactory> factory;
 public:
     explicit World(std::shared_ptr<AbstractFactory> factory);

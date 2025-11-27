@@ -11,7 +11,7 @@ Game::Game() {
     state_manager->push(std::make_unique<MenuState>(state_manager));
 }
 
-void Game::render() {
+void Game::render() const {
     // Start the game loop
     while (window.isOpen()) {
         // Process events

@@ -7,13 +7,13 @@ namespace subjects {
 class Subject;
 }
 
-class Observer : public std::enable_shared_from_this<Observer>{
+class Observer : public std::enable_shared_from_this<Observer> {
     std::weak_ptr<subjects::Subject> subject;
 
 public:
     virtual ~Observer() = default;
 
-    explicit Observer(std::shared_ptr<subjects::Subject> subject);
+    explicit Observer(const std::shared_ptr<subjects::Subject>& subject);
 
     virtual void update(std::shared_ptr<Event> e) = 0;
 };

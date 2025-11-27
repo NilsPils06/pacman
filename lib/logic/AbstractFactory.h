@@ -8,6 +8,8 @@
 
 class AbstractFactory {
 public:
+    AbstractFactory() = default;
+
     virtual ~AbstractFactory() = default;
     virtual subjects::Ghost createGhost() = 0;
     virtual subjects::Ghost createGhost(float x, float y) = 0;
@@ -15,7 +17,7 @@ public:
     virtual subjects::Fruit createFruit() = 0;
     virtual subjects::Coin createCoin() = 0;
     virtual subjects::Wall createWall() = 0;
-    virtual subjects::Wall createWall(float x, float y) = 0;
+    virtual std::shared_ptr<subjects::Wall> createWall(float x, float y) = 0;
 };
 
 #endif // PACMAN_ABSTRACTFACTORY_H

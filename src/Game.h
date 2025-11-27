@@ -13,7 +13,7 @@ public:
 
     Game();
 
-    void render();
+    void render() const;
 };
 
 #endif // PACMAN_GAME_H

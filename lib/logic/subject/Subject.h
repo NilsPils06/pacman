@@ -8,14 +8,14 @@
 namespace subjects {
 class Subject {
 protected:
-    std::list<std::weak_ptr<Observer>> observers;
+    std::list<std::shared_ptr<Observer>> observers;
 
 public:
     virtual ~Subject() = default;
 
     virtual void attach(std::shared_ptr<Observer> observer);
 
-    virtual void detach(std::weak_ptr<Observer> observer);
+    virtual void detach(std::shared_ptr<Observer> observer);
 
     virtual void notify(std::shared_ptr<Event> e) = 0;
 };
