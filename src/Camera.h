@@ -3,10 +3,10 @@
 #include "EntityView/EntityView.h"
 #include "World.h"
 
-// TODO unique_ptr
-
 class Camera {
     Camera() = default;
+
+    static std::unique_ptr<Camera> instance;
 public:
     static Camera& getInstance();
 

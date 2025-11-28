@@ -1,5 +1,10 @@
 #include "Stopwatch.h"
 
-Stopwatch & Stopwatch::getInstance() {
-    return stopwatch;
+std::unique_ptr<Stopwatch> Stopwatch::instance = nullptr;
+
+Stopwatch& Stopwatch::getInstance() {
+    if (instance == nullptr) {
+        instance.reset(new Stopwatch());
+    }
+    return *instance;
 }
