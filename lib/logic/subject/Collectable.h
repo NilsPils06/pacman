@@ -3,7 +3,10 @@
 #include "EntityModel.h"
 
 namespace subjects {
-class Collectable : EntityModel {};
+class Collectable : public EntityModel {
+public:
+    explicit Collectable(const EntityCoords& coords) : EntityModel(coords) {}
+};
 } // namespace subjects
 
 #endif // PACMAN_COLLECTABLE_H

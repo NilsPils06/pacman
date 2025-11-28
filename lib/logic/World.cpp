@@ -41,6 +41,8 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
 
         EntityCoords coords{normalized_x,normalized_y,normalized_width,normalized_height};
 
+        // TODO update map layout so that you can distinguish the ghosts
+
         switch (token) {
         case 'W':
             entities.push_back(factory->createWall(coords));
@@ -50,6 +52,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'F':
             break;
         case 'C':
+            entities.push_back(factory->createCoin(coords));
             break;
         case 'P':
             entities.push_back(factory->createPacman(coords));
