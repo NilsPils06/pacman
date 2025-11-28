@@ -4,16 +4,8 @@
 #include "World.h"
 
 class Camera {
-    Camera() = default;
-
-    static std::unique_ptr<Camera> instance;
 public:
-    static Camera& getInstance();
-
-    void project(sf::Sprite sprite, EntityCoords coords);
-
-    Camera(const Camera&) = delete;
-    void operator=(const Camera&) = delete;
+    static void project(sf::Sprite sprite, EntityCoords coords);
 };
 
 #endif // PACMAN_CAMERA_H

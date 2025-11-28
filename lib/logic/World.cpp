@@ -28,8 +28,8 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
     file.clear();
     file.seekg(0);
 
-    float max_x = static_cast<float>(width - 1);
-    float max_y = static_cast<float>(height - 1);
+    auto max_x = static_cast<float>(width - 1);
+    auto max_y = static_cast<float>(height - 1);
 
     char token;
     int x = 0;
