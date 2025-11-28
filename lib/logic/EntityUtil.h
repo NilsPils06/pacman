@@ -5,7 +5,11 @@ struct EntityCoords {
     float x;
     float y;
 
-    EntityCoords(const float x, const float y) : x(x), y(y) {};
+    float width;
+    float height;
+
+    EntityCoords(const float x, const float y, const float width, const float height)
+        : x(x), y(y), width(width), height(height) {};
 };
 
 enum Movement { FIXED, CHASING, CUTTING };

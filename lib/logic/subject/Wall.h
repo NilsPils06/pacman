@@ -5,7 +5,7 @@
 namespace subjects {
 class Wall final : public EntityModel {
 public:
-    Wall(float x, float y) : EntityModel(x, y) {}
+    explicit Wall(const EntityCoords& coords) : EntityModel(coords) {}
 };
 } // namespace subjects
 

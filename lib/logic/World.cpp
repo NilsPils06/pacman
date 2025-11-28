@@ -21,6 +21,9 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         width = std::max(width, static_cast<int>(line.length()));
     }
 
+    float normalized_height = 2.0f / static_cast<float>(height);
+    float normalized_width = 2.0f / static_cast<float>(width);
+
     // reset positie op file
     file.clear();
     file.seekg(0);
@@ -36,9 +39,11 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         float normalized_x = 2.0f * (static_cast<float>(x) / max_x) - 1.0f;
         float normalized_y = 2.0f * (static_cast<float>(y) / max_y) - 1.0f;
 
+        EntityCoords coords{normalized_x,normalized_y,normalized_width,normalized_height};
+
         switch (token) {
         case 'W':
-            entities.push_back(factory->createWall(normalized_x, normalized_y));
+            entities.push_back(factory->createWall(coords));
             break;
         case '_':
             break;
