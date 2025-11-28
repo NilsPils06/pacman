@@ -5,6 +5,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+// TODO update EntityView so that it contains the animation sequence
+
 namespace view {
 class EntityView : public Observer {
 protected:
@@ -26,7 +28,10 @@ public:
 
 namespace sprites {
 const sf::IntRect GHOST_RED_RIGHT_1(-7, -4, 50, 50);
-const sf::IntRect GHOST_RED_RIGHT_2(-7, 47, 50, 50);
+const sf::IntRect GHOST_RED_RIGHT_2(-7, 46, 50, 50);
+const sf::IntRect PACMAN_RIGHT_1(843, -4, 50, 50);
+const sf::IntRect PACMAN_RIGHT_2(843, 46, 50, 50);
+const sf::IntRect PACMAN_RIGHT_3(843, 96, 50, 50);
 const sf::IntRect WALL(516, 173, 1, 1);
 } // namespace sprites
 

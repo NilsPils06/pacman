@@ -12,6 +12,7 @@ public:
 
     virtual ~AbstractFactory() = default;
     virtual std::shared_ptr<subjects::Wall> createWall(EntityCoords coords) = 0;
+    virtual std::shared_ptr<subjects::Pacman> createPacman(EntityCoords coords) = 0;
 };
 
 #endif // PACMAN_ABSTRACTFACTORY_H

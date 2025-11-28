@@ -52,6 +52,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'C':
             break;
         case 'P':
+            entities.push_back(factory->createPacman(coords));
             break;
         case 'G':
             break;
