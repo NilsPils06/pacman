@@ -26,6 +26,8 @@ public:
 
 namespace sprites {
 const sf::IntRect GHOST_RED_RIGHT_1(-7, -4, 50, 50);
+const sf::IntRect GHOST_RED_RIGHT_2(-7, 47, 50, 50);
+const sf::IntRect WALL(516, 173, 1, 1);
 } // namespace sprites
 
 #endif // PACMAN_ENTITYVIEW_H
