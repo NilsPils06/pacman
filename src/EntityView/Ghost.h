@@ -3,7 +3,10 @@
 #include "EntityView.h"
 
 namespace view {
-class Ghost : public EntityView {};
+class Ghost final : public EntityView {
+public:
+    explicit Ghost(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
+};
 }
 
 #endif // VIEW_GHOST_H

@@ -4,13 +4,13 @@
 
 namespace subjects {
 class Ghost : public EntityModel {
-    Movement movement;
+    Movement movement = FIXED;
     Direction lockedIn = UP;
     bool chasing = false;
     bool fear = false;
 
 public:
-    explicit Ghost(const Movement movement) : movement(movement) {};
+    explicit Ghost(const EntityCoords& coords) : EntityModel(coords) {}
 };
 } // namespace subjects
 

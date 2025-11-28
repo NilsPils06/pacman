@@ -2,6 +2,7 @@
 
 #include "EntityView/Coin.h"
 #include "EntityView/Fruit.h"
+#include "EntityView/Ghost.h"
 #include "EntityView/Pacman.h"
 #include "EntityView/Wall.h"
 #include "Game.h"
@@ -32,5 +33,12 @@ std::shared_ptr<subjects::Fruit> EntityFactory::createFruit(EntityCoords coords)
     std::shared_ptr<view::Fruit> view = std::make_shared<view::Fruit>(model);
     model->attach(view);
     view->setSprite(sprites::FRUIT);
+    return model;
+}
+std::shared_ptr<subjects::Ghost> EntityFactory::createGhost(EntityCoords coords) {
+    std::shared_ptr<subjects::Ghost> model = std::make_shared<subjects::Ghost>(coords);
+    std::shared_ptr<view::Ghost> view = std::make_shared<view::Ghost>(model);
+    model->attach(view);
+    view->setSprite(sprites::GHOST_RED_RIGHT_1);
     return model;
 }

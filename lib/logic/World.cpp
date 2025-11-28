@@ -48,6 +48,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
             entities.push_back(factory->createWall(coords));
             break;
         case '_':
+            // blank space
             break;
         case 'F':
             entities.push_back(factory->createFruit(coords));
@@ -59,6 +60,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
             entities.push_back(factory->createPacman(coords));
             break;
         case 'G':
+            entities.push_back(factory->createGhost(coords));
             break;
         default:
             x = 0;
