@@ -3,6 +3,8 @@
 #include "Collectable.h"
 namespace subjects {
 class Fruit final : public Collectable {
+public:
+    explicit Fruit(const EntityCoords& coords) : Collectable(coords) {}
 };
 } // namespace subjects
 

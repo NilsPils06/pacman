@@ -50,6 +50,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case '_':
             break;
         case 'F':
+            entities.push_back(factory->createFruit(coords));
             break;
         case 'C':
             entities.push_back(factory->createCoin(coords));

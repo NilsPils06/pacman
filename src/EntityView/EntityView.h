@@ -30,6 +30,7 @@ namespace sprites {
 const sf::IntRect GHOST_RED_RIGHT_1(-7, -4, 50, 50);
 const sf::IntRect GHOST_RED_RIGHT_2(-7, 46, 50, 50);
 const sf::IntRect COIN(393, 246, 50, 50);
+const sf::IntRect FRUIT(593, -4, 50, 50);
 const sf::IntRect PACMAN_RIGHT_1(843, -4, 50, 50);
 const sf::IntRect PACMAN_RIGHT_2(843, 46, 50, 50);
 const sf::IntRect PACMAN_RIGHT_3(843, 96, 50, 50);

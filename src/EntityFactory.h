@@ -8,6 +8,7 @@ public:
     std::shared_ptr<subjects::Wall> createWall(EntityCoords coords) override;
     std::shared_ptr<subjects::Pacman> createPacman(EntityCoords coords) override;
     std::shared_ptr<subjects::Coin> createCoin(EntityCoords coords) override;
+    std::shared_ptr<subjects::Fruit> createFruit(EntityCoords coords) override;
 };
 
 #endif // PACMAN_ENTITYFACTORY_H
