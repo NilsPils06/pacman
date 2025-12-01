@@ -12,6 +12,11 @@ class World {
 public:
     explicit World(std::shared_ptr<AbstractFactory> factory);
 
+    void moveLeft() const;
+    void moveUp() const;
+    void moveDown() const;
+    void moveRight() const;
+
     void checkCollisions();
     void render() const;
 };

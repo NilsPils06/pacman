@@ -6,6 +6,7 @@ namespace subjects {
 class Wall final : public EntityModel {
 public:
     explicit Wall(const EntityCoords& coords) : EntityModel(coords) {}
+    void tick() override;
 };
 } // namespace subjects
 

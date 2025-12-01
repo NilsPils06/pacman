@@ -22,6 +22,18 @@ void LevelState::onKeyPress(sf::Event::KeyEvent event) {
             state_manager->push(std::make_unique<PausedState>(state_manager));
         }
     }
+    if (event.code == sf::Keyboard::Right) {
+        world->moveRight();
+    }
+    if (event.code == sf::Keyboard::Left) {
+        world->moveLeft();
+    }
+    if (event.code == sf::Keyboard::Up) {
+        world->moveUp();
+    }
+    if (event.code == sf::Keyboard::Down) {
+        world->moveDown();
+    }
 }
 void LevelState::render() {
     world->render();

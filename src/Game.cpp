@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include "Stopwatch.h"
 #include "state/MenuState.h"
 
 #include <SFML/Graphics.hpp>
@@ -14,6 +15,8 @@ Game::Game() {
 void Game::render() const {
     // Start the game loop
     while (window.isOpen()) {
+        Stopwatch::getInstance().tick();
+
         // Process events
         sf::Event event;
         while (window.pollEvent(event)) {

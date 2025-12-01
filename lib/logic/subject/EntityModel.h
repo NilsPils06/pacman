@@ -17,6 +17,8 @@ public:
 
     [[nodiscard]] EntityCoords getCoords() const;
 
+    virtual void tick() = 0;
+
     void notify(std::shared_ptr<Event> e) override;
 };
 } // namespace subjects

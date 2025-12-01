@@ -71,9 +71,30 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         x += 1;
     }
 }
+void World::moveLeft() const {
+    for (const auto& entity : entities) {
+        entity->notify(std::make_shared<DirectionChangeEvent>(LEFT));
+    }
+}
+void World::moveUp() const {
+    for (const auto& entity : entities) {
+        entity->notify(std::make_shared<DirectionChangeEvent>(UP));
+    }
+}
+void World::moveDown() const {
+    for (const auto& entity : entities) {
+        entity->notify(std::make_shared<DirectionChangeEvent>(DOWN));
+    }
+}
+void World::moveRight() const {
+    for (const auto& entity : entities) {
+        entity->notify(std::make_shared<DirectionChangeEvent>(RIGHT));
+    }
+}
 
 void World::render() const {
     for (const auto& entity : entities) {
+        entity->tick();
         entity->notify(std::make_shared<PositonUpdateEvent>(entity->getCoords()));
     }
 }

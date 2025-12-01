@@ -11,6 +11,7 @@ class Ghost : public EntityModel {
 
 public:
     explicit Ghost(const EntityCoords& coords) : EntityModel(coords) {}
+    void tick() override;
 };
 } // namespace subjects
 

@@ -5,9 +5,11 @@
 namespace subjects {
 class Pacman final : public EntityModel {
     int lives = 3;
-    Direction facing = LEFT;
+    Direction facing = RIGHT;
 public:
     explicit Pacman(const EntityCoords& coords) : EntityModel(coords) {}
+    void notify(std::shared_ptr<Event> e) override;
+    void tick() override;
 };
 } // namespace subjects
 
