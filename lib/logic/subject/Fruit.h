@@ -4,7 +4,7 @@
 namespace subjects {
 class Fruit final : public Collectable {
 public:
-    explicit Fruit(const EntityCoords& coords) : Collectable(coords) {}
+    explicit Fruit(const Coords& coords) : Collectable(coords) {}
 };
 } // namespace subjects
 

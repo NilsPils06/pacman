@@ -10,7 +10,7 @@ class Ghost : public EntityModel {
     bool fear = false;
 
 public:
-    explicit Ghost(const EntityCoords& coords) : EntityModel(coords) {}
+    explicit Ghost(const Coords& coords) : EntityModel(coords) {}
     void tick() override;
 };
 } // namespace subjects

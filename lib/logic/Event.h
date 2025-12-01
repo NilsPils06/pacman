@@ -1,6 +1,9 @@
 #ifndef PACMAN_EVENT_H
 #define PACMAN_EVENT_H
-#include "EntityUtil.h"
+#include "Util.h"
+
+// TODO maybe update this so that it's the command pattern????
+
 enum EventType {
     POSITION_UPDATE,
     DIRECTION_UPDATE
@@ -14,12 +17,12 @@ public:
 };
 
 class PositonUpdateEvent final : public Event {
-    EntityCoords position;
+    Coords position;
 
 public:
-    explicit PositonUpdateEvent(const EntityCoords& position) : position(position) {}
+    explicit PositonUpdateEvent(const Coords& position) : position(position) {}
 
-    [[nodiscard]] EntityCoords getPosition() const;
+    [[nodiscard]] Coords getPosition() const;
 
     [[nodiscard]] EventType getType() const override;
 };

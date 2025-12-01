@@ -5,7 +5,7 @@
 
 class Camera {
 public:
-    static void project(sf::Sprite sprite, EntityCoords coords);
+    static void project(sf::Sprite sprite, Coords coords);
 };
 
 #endif // PACMAN_CAMERA_H

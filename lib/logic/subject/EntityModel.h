@@ -1,21 +1,24 @@
 #ifndef PACMAN_ENTITYMODEL_H
 #define PACMAN_ENTITYMODEL_H
-#include "../EntityUtil.h"
+#include "../Util.h"
 #include "Subject.h"
 
 namespace subjects {
+class Pacman;
+class Wall;
+
 class EntityModel : public Subject {
 protected:
-    EntityCoords coords;
+    Coords coords;
 
 public:
     EntityModel() : coords(0, 0, 0, 0) {};
 
-    explicit EntityModel(const EntityCoords& coords);
+    explicit EntityModel(const Coords& coords);
 
-    void setCoords(EntityCoords coords);
+    void setCoords(Coords coords);
 
-    [[nodiscard]] EntityCoords getCoords() const;
+    [[nodiscard]] Coords getCoords() const;
 
     virtual void tick() = 0;
 

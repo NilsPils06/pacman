@@ -5,7 +5,7 @@
 namespace subjects {
 class Collectable : public EntityModel {
 public:
-    explicit Collectable(const EntityCoords& coords) : EntityModel(coords) {}
+    explicit Collectable(const Coords& coords) : EntityModel(coords) {}
     void tick() override;
 };
 } // namespace subjects

@@ -1,8 +1,8 @@
 #include "EntityModel.h"
-void subjects::EntityModel::setCoords(EntityCoords coords) {
+void subjects::EntityModel::setCoords(Coords coords) {
     this->coords = coords;
 }
-EntityCoords subjects::EntityModel::getCoords() const {
+Coords subjects::EntityModel::getCoords() const {
     return coords;
 }
 void subjects::EntityModel::notify(std::shared_ptr<Event> e) {
@@ -11,4 +11,4 @@ void subjects::EntityModel::notify(std::shared_ptr<Event> e) {
     }
 }
 
-subjects::EntityModel::EntityModel(const EntityCoords& coords) : coords(coords) {}
+subjects::EntityModel::EntityModel(const Coords& coords) : coords(coords) {}

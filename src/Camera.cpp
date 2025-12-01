@@ -2,7 +2,7 @@
 
 #include "Game.h"
 
-void Camera::project(sf::Sprite sprite, EntityCoords coords) {
+void Camera::project(sf::Sprite sprite, Coords coords) {
     const auto screensize = Game::window.getSize();
     const auto screen_x = static_cast<float>(screensize.x);
     const auto screen_y = static_cast<float>(screensize.y);

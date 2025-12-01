@@ -5,7 +5,7 @@
 namespace subjects {
 class Coin final : public Collectable {
 public:
-    explicit Coin(const EntityCoords& coords) : Collectable(coords) {}
+    explicit Coin(const Coords& coords) : Collectable(coords) {}
 };
 } // namespace subjects
 

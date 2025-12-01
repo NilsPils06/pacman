@@ -6,11 +6,12 @@ void subjects::Pacman::notify(std::shared_ptr<Event> e) {
     if (e->getType() == DIRECTION_UPDATE) {
         const std::shared_ptr<DirectionChangeEvent> event = std::static_pointer_cast<DirectionChangeEvent>(e);
         facing = event->getDirection();
+        speed = 0.1f;
     }
     EntityModel::notify(e);
 }
 void subjects::Pacman::tick() {
-    constexpr float speed = 0.1f;
+    previousPosition = coords;
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
     switch (facing) {
         case RIGHT:
@@ -28,4 +29,8 @@ void subjects::Pacman::tick() {
         default:
             break;
     }
+}
+void subjects::Pacman::visit(std::shared_ptr<const subjects::Wall> e) {
+    speed = 0;
+    coords = previousPosition;
 }
