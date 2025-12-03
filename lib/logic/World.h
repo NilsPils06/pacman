@@ -12,6 +12,7 @@ class World {
     std::map<std::shared_ptr<subjects::EntityModel>, std::shared_ptr<CollisionVisitor>> visitors;
     std::map<std::shared_ptr<subjects::EntityModel>, std::shared_ptr<CollisionComponent>> components;
     std::shared_ptr<AbstractFactory> factory;
+
 public:
     explicit World(std::shared_ptr<AbstractFactory> factory);
 

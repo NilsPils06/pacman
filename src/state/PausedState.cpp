@@ -23,8 +23,6 @@ void PausedState::render() {
         // error...
     }
 
-    // TODO center text correctly
-
     text.setFont(font);
 
     text.setString("Paused\n\t1234569\npress ESC to continue.");

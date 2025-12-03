@@ -20,8 +20,6 @@ void MenuState::render() {
         // error...
     }
 
-    // TODO center text correctly
-
     text.setFont(font);
 
     text.setString("pac-man\n\t1234");
