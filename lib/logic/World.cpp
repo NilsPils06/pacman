@@ -21,14 +21,14 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         width = std::max(width, static_cast<int>(line.length()));
     }
 
-    float normalized_height = 2.0f / static_cast<float>(height-1);
-    float normalized_width = 2.0f / static_cast<float>(width-1);
+    float normalized_height = 2.0f / static_cast<float>(height - 1);
+    float normalized_width = 2.0f / static_cast<float>(width - 1);
 
     file.clear();
     file.seekg(0);
 
-    auto max_x = static_cast<float>(width-1);
-    auto max_y = static_cast<float>(height-1);
+    auto max_x = static_cast<float>(width - 1);
+    auto max_y = static_cast<float>(height - 1);
 
     char token;
     int x = 0;
@@ -62,7 +62,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'P': {
             std::shared_ptr<subjects::Pacman> pacman = factory->createPacman(coords);
             entities.push_back(pacman);
-            visitors[pacman] = pacman;
+            collisionHandler = PacmanCollisionHandler{pacman};
             break;
         }
         case 'G': {
@@ -101,38 +101,36 @@ void World::moveRight() const {
 }
 
 void World::checkCollisions() const {
-    for (const auto& [modelA, component]: components) {
-        for (const auto& [modelB, visitor] : visitors) {
-            Coords a = modelA->getCoords();
-            Coords b = modelB->getCoords();
+    for (const auto& [modelA, component] : components) {
+        const Coords a = modelA->getCoords();
+        const Coords b = collisionHandler.getPacmanCoords();
 
-            // Bottom left and top right of A
-            float x1 = a.x - (a.width / 2);
-            float y1 = a.y - (a.height / 2);
-            float x2 = a.x + (a.width / 2);
-            float y2 = a.y + (a.height / 2);
+        // Bottom left and top right of A
+        float x1 = a.x - (a.width / 2);
+        float y1 = a.y - (a.height / 2);
+        float x2 = a.x + (a.width / 2);
+        float y2 = a.y + (a.height / 2);
 
-            // Bottom left and top right of B
-            float x3 = b.x - (b.width / 2);
-            float y3 = b.y - (b.height / 2);
-            float x4 = b.x + (b.width / 2);
-            float y4 = b.y + (b.height / 2);
+        // Bottom left and top right of B
+        float x3 = b.x - (b.width / 2);
+        float y3 = b.y - (b.height / 2);
+        float x4 = b.x + (b.width / 2);
+        float y4 = b.y + (b.height / 2);
 
-            // Intersection bounds
-            const float x5 = std::max(x1, x3);
-            const float y5 = std::max(y1, y3);
-            const float x6 = std::min(x2, x4);
-            const float y6 = std::min(y2, y4);
+        // Intersection bounds
+        const float x5 = std::max(x1, x3);
+        const float y5 = std::max(y1, y3);
+        const float x6 = std::min(x2, x4);
+        const float y6 = std::min(y2, y4);
 
-            float overlapX = x6 - x5;
-            float overlapY = y6 - y5;
+        const float overlapX = x6 - x5;
+        const float overlapY = y6 - y5;
 
-            if (overlapX < 0.002f || overlapY < 0.002f) {
-                continue;
-            }
-
-            component->accept(visitor);
+        if (overlapX < 0.002f || overlapY < 0.002f) {
+            continue;
         }
+
+        component->accept(std::make_shared<PacmanCollisionHandler>(collisionHandler));
     }
 }
 

@@ -85,25 +85,23 @@ void subjects::Pacman::tick() {
             break;
     }
 }
-
-void subjects::Pacman::visit(std::shared_ptr<const Wall> e) {
+void subjects::Pacman::block() {
     speed = 0;
     blocked = true;
-
-    const Coords wall = e->getCoords();
-
+}
+void subjects::Pacman::snapPosition(const Coords& wall) {
     switch (facing) {
-        case RIGHT:
-            coords.x = wall.x - (wall.width / 2.0f) - (coords.width / 2.0f);
-            break;
-        case LEFT:
-            coords.x = wall.x + (wall.width / 2.0f) + (coords.width / 2.0f);
-            break;
-        case DOWN:
-            coords.y = wall.y - (wall.height / 2.0f) - (coords.height / 2.0f);
-            break;
-        case UP:
-            coords.y = wall.y + (wall.height / 2.0f) + (coords.height / 2.0f);
-            break;
+    case RIGHT:
+        coords.x = wall.x - (wall.width / 2.0f) - (coords.width / 2.0f);
+        break;
+    case LEFT:
+        coords.x = wall.x + (wall.width / 2.0f) + (coords.width / 2.0f);
+        break;
+    case DOWN:
+        coords.y = wall.y - (wall.height / 2.0f) - (coords.height / 2.0f);
+        break;
+    case UP:
+        coords.y = wall.y + (wall.height / 2.0f) + (coords.height / 2.0f);
+        break;
     }
 }

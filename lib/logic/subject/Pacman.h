@@ -4,7 +4,7 @@
 #include "EntityModel.h"
 
 namespace subjects {
-class Pacman final : public EntityModel, public CollisionVisitor {
+class Pacman final : public EntityModel {
     int lives = 3;
     Direction facing = RIGHT;
     Direction queuedDirection = RIGHT;
@@ -15,7 +15,8 @@ public:
     explicit Pacman(const Coords& coords) : EntityModel(coords) {}
     void notify(std::shared_ptr<Event> e) override;
     void tick() override;
-    void visit(std::shared_ptr<const subjects::Wall> e) override;
+    void block();
+    void snapPosition(const Coords& wall);
 };
 } // namespace subjects
 

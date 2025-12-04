@@ -28,6 +28,8 @@ SET(SRC
         Util.h
         Event.cpp
         Event.h
-        Collision.h)
+        Collision.h
+        PacmanCollisionHandler.cpp
+        PacmanCollisionHandler.h)
 
 ADD_LIBRARY(logic STATIC ${SRC})

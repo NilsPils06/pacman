@@ -13,7 +13,7 @@ class Wall;
 class CollisionVisitor {
 public:
     virtual ~CollisionVisitor() = default;
-    virtual void visit(std::shared_ptr<const subjects::Wall> e) = 0;
+    virtual void visit(const std::shared_ptr<const subjects::Wall>& e) = 0;
 };
 
 class CollisionComponent {
