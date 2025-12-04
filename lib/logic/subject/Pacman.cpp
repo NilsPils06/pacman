@@ -38,11 +38,10 @@ void subjects::Pacman::tick() {
 
         float distance = std::abs(axisValue - centerPos);
 
-        float threshold = (speed * deltaTime) * 1.5f;
+        float threshold = (speed * deltaTime);
 
         if (blocked)
             threshold = gridSize * 0.5f;
-
 
         if (distance < threshold) {
             if (queuedDirection == UP || queuedDirection == DOWN) coords.x = centerPos;

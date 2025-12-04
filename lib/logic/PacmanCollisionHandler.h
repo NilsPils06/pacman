@@ -3,7 +3,7 @@
 #include "Collision.h"
 #include "subject/Pacman.h"
 
-class PacmanCollisionHandler : public CollisionVisitor {
+class PacmanCollisionHandler final : public CollisionVisitor {
     std::shared_ptr<subjects::Pacman> pacman;
 public:
     PacmanCollisionHandler() : pacman(nullptr) {}
@@ -12,7 +12,8 @@ public:
 
     void visit(const std::shared_ptr<const subjects::Wall>& e) override;
 
-    Coords getPacmanCoords() const;
+    [[nodiscard]] Coords getPacmanCoords() const;
+    void visit(std::shared_ptr<subjects::Coin> e) override;
 };
 
 #endif // PACMAN_PACMANCOLLISIONHANDLER_H

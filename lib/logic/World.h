@@ -24,7 +24,7 @@ public:
     void moveRight() const;
 
     void checkCollisions() const;
-    void render() const;
+    void render();
 };
 
 #endif // PACMAN_WORLD_H

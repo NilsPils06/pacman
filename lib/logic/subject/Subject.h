@@ -17,6 +17,8 @@ public:
 
     virtual void detach(std::shared_ptr<Observer> observer);
 
+    virtual void detachAll();
+
     virtual void notify(std::shared_ptr<Event> e) = 0;
 };
 } // namespace subjects

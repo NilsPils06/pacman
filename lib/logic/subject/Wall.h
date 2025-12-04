@@ -8,7 +8,7 @@ class Wall final : public EntityModel, public CollisionComponent, public std::en
 public:
     explicit Wall(const Coords& coords) : EntityModel(coords) {}
     void tick() override;
-    void accept(std::shared_ptr<CollisionVisitor> visitor) const override;
+    void accept(std::shared_ptr<CollisionVisitor> visitor) override;
 };
 } // namespace subjects
 

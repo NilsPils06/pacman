@@ -10,6 +10,7 @@ class Wall;
 class EntityModel : public Subject {
 protected:
     Coords coords;
+    bool expired = false;
 
 public:
     EntityModel() : coords(0, 0, 0, 0) {};
@@ -23,6 +24,10 @@ public:
     virtual void tick() = 0;
 
     void notify(std::shared_ptr<Event> e) override;
+
+    [[nodiscard]] bool isExpired() const;
+
+    void setExpired();
 };
 } // namespace subjects
 

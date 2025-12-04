@@ -8,18 +8,20 @@
 namespace subjects {
 class Ghost;
 class Wall;
+class Coin;
 }
 
 class CollisionVisitor {
 public:
     virtual ~CollisionVisitor() = default;
     virtual void visit(const std::shared_ptr<const subjects::Wall>& e) = 0;
+    virtual void visit(std::shared_ptr<subjects::Coin> e) = 0;
 };
 
 class CollisionComponent {
 public:
     virtual ~CollisionComponent() = default;
-    virtual void accept(std::shared_ptr<CollisionVisitor> visitor) const = 0;
+    virtual void accept(std::shared_ptr<CollisionVisitor> visitor) = 0;
 };
 
 #endif // PACMAN_VISITOR_H

@@ -10,5 +10,11 @@ void subjects::EntityModel::notify(std::shared_ptr<Event> e) {
         observer->update(e);
     }
 }
+bool subjects::EntityModel::isExpired() const {
+    return expired;
+}
+void subjects::EntityModel::setExpired() {
+    expired = true;
+}
 
 subjects::EntityModel::EntityModel(const Coords& coords) : coords(coords) {}

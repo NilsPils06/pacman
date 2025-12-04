@@ -57,6 +57,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'C': {
             std::shared_ptr<subjects::Coin> coin = factory->createCoin(coords);
             entities.push_back(coin);
+            components[coin] = coin;
             break;
         }
         case 'P': {
@@ -102,6 +103,9 @@ void World::moveRight() const {
 
 void World::checkCollisions() const {
     for (const auto& [modelA, component] : components) {
+        if (modelA->isExpired())
+            continue;
+
         const Coords a = modelA->getCoords();
         const Coords b = collisionHandler.getPacmanCoords();
 
@@ -134,12 +138,25 @@ void World::checkCollisions() const {
     }
 }
 
-void World::render() const {
+void World::render() {
+    std::erase_if(entities, [](std::shared_ptr<subjects::EntityModel>& e) {
+        if (e->isExpired()) {
+            e->detachAll();
+            e.reset();
+            return true;
+        }
+        return false;
+    });
+
     for (const auto& entity : entities) {
+        if (entity->isExpired())
+            continue;
         entity->tick();
     }
     checkCollisions();
     for (const auto& entity : entities) {
+        if (entity->isExpired())
+            continue;
         entity->notify(std::make_shared<PositonUpdateEvent>(entity->getCoords()));
     }
 }

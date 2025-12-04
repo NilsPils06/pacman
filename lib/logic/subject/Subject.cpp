@@ -4,3 +4,6 @@ void subjects::Subject::attach(std::shared_ptr<Observer> observer) { observers.p
 void subjects::Subject::detach(std::shared_ptr<Observer> observer) {
     observers.remove(observer);
 }
+void subjects::Subject::detachAll() {
+    observers.clear();
+}
