@@ -34,6 +34,15 @@ const sf::IntRect FRUIT(593, -4, 50, 50);
 const sf::IntRect PACMAN_RIGHT_1(843, -4, 50, 50);
 const sf::IntRect PACMAN_RIGHT_2(843, 46, 50, 50);
 const sf::IntRect PACMAN_RIGHT_3(843, 96, 50, 50);
+const sf::IntRect PACMAN_DOWN_1(843, 146, 50, 50);
+const sf::IntRect PACMAN_DOWN_2(843, 196, 50, 50);
+const sf::IntRect PACMAN_DOWN_3(843, 246, 50, 50);
+const sf::IntRect PACMAN_LEFT_1(843, 296, 50, 50);
+const sf::IntRect PACMAN_LEFT_2(843, 346, 50, 50);
+const sf::IntRect PACMAN_LEFT_3(843, 396, 50, 50);
+const sf::IntRect PACMAN_UP_1(843, 446, 50, 50);
+const sf::IntRect PACMAN_UP_2(843, 496, 50, 50);
+const sf::IntRect PACMAN_UP_3(843, 546, 50, 50);
 const sf::IntRect WALL(516, 173, 1, 1);
 } // namespace sprites
 

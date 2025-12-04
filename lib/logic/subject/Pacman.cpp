@@ -26,7 +26,7 @@ void subjects::Pacman::notify(const std::shared_ptr<Event> e) {
 void subjects::Pacman::tick() {
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
 
-    speed = (facing == UP || facing == DOWN) ? 0.1f * ASPECT_RATIO : 0.1f;
+    speed = (facing == UP || facing == DOWN) ? 0.2f * ASPECT_RATIO : 0.2f;
 
     if (facing != queuedDirection) {
         float axisValue = (queuedDirection == UP || queuedDirection == DOWN) ? coords.x : coords.y;
