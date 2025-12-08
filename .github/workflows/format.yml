@@ -1,0 +1,23 @@
+name: Auto-format C++ Code
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
+      - name: Format C++ code
+        uses: pachadotdev/clang-format@main
+        with:
+          version: '18'
+          auto-commit: true
+          commit-message: 'style: auto-format code'

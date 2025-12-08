@@ -7,7 +7,7 @@ namespace subjects {
 class Subject;
 }
 
-class Observer : public std::enable_shared_from_this<Observer> {
+class Observer {
     std::weak_ptr<subjects::Subject> subject;
 
 public:
