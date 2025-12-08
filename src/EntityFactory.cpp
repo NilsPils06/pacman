@@ -18,6 +18,8 @@ std::shared_ptr<subjects::Pacman> EntityFactory::createPacman(Coords coords) {
     std::shared_ptr<subjects::Pacman> model = std::make_shared<subjects::Pacman>(coords);
     std::shared_ptr<view::Pacman> view = std::make_shared<view::Pacman>(model);
     model->attach(view);
+    model->attach(view);
+    score->setSubject(model);
     view->setSprite(sprites::PACMAN_RIGHT_2);
     return model;
 }

@@ -2,6 +2,9 @@
 
 #include "Game.h"
 
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+
 void Camera::project(sf::Sprite sprite, Coords coords) {
     const auto screensize = Game::window.getSize();
     const auto screen_x = static_cast<float>(screensize.x);
@@ -26,4 +29,22 @@ void Camera::project(sf::Sprite sprite, Coords coords) {
     sprite.setScale(cell_width / bounds.width, cell_height / bounds.height);
 
     Game::window.draw(sprite);
+}
+void Camera::showScore(int score) {
+    sf::Text text;
+    sf::Font font;
+    if (!font.loadFromFile("../../assets/PAC-FONT.TTF")) {
+        // error...
+    }
+    text.setFont(font);
+    text.setString("SCORE: " + std::to_string(score));
+    text.setCharacterSize(60);
+    text.setFillColor(sf::Color::Yellow);
+
+    // kyan cook
+    const sf::FloatRect textRect = text.getLocalBounds();
+    text.setOrigin(textRect.left + textRect.width, textRect.top + textRect.height);
+    text.setPosition(static_cast<float>(Game::window.getSize().x) / 2,static_cast<float>(Game::window.getSize().y) -10);
+
+    Game::window.draw(text);
 }

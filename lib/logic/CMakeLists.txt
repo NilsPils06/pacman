@@ -21,7 +21,6 @@ SET(SRC
         subject/Fruit.h
         subject/Wall.cpp
         subject/Wall.h
-        Observer.cpp
         Observer.h
         Score.cpp
         Score.h

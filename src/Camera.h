@@ -6,6 +6,8 @@
 class Camera {
 public:
     static void project(sf::Sprite sprite, Coords coords);
+
+    static void showScore(int score);
 };
 
 #endif // PACMAN_CAMERA_H

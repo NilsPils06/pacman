@@ -7,6 +7,7 @@
 class LevelState : public State {
     std::shared_ptr<World> world;
     std::shared_ptr<EntityFactory> factory;
+    Score score{};
 
 public:
     explicit LevelState(const std::shared_ptr<StateManager>& manager);

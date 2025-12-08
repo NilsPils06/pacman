@@ -12,7 +12,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <fstream>
 LevelState::LevelState(const std::shared_ptr<StateManager>& manager) : State(manager) {
-    factory = std::make_shared<EntityFactory>();
+    factory = std::make_shared<EntityFactory>(std::make_shared<Score>(score));
     world = std::make_shared<World>(factory);
 }
 
@@ -35,4 +35,7 @@ void LevelState::onKeyPress(sf::Event::KeyEvent event) {
         world->moveDown();
     }
 }
-void LevelState::render() { world->render(); }
+void LevelState::render() {
+    world->render();
+    Camera::showScore(score.getScore());
+}
