@@ -10,7 +10,8 @@ void StateManager::update(const sf::Event& event) {
     }
 }
 void StateManager::render() {
-    if (states.empty()) return;
+    if (states.empty())
+        return;
     states.top()->render();
 }
 

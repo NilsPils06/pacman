@@ -9,11 +9,11 @@ class Random {
     static Random random;
 
     Random() : gen(rd()) {}
+
 public:
     static Random& getInstance();
 
     int generateInt();
 };
 
-
-#endif //PACMAN_RANDOM_H
+#endif // PACMAN_RANDOM_H

@@ -7,6 +7,6 @@ class Ghost final : public EntityView {
 public:
     explicit Ghost(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
 };
-}
+} // namespace view
 
 #endif // VIEW_GHOST_H

@@ -18,8 +18,7 @@ void PausedState::render() {
     sf::Text text;
 
     sf::Font font;
-    if (!font.loadFromFile("../../assets/PAC-FONT.TTF"))
-    {
+    if (!font.loadFromFile("../../assets/PAC-FONT.TTF")) {
         // error...
     }
 

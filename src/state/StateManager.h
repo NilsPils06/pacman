@@ -7,6 +7,7 @@
 
 class StateManager {
     std::stack<std::unique_ptr<State>> states;
+
 public:
     explicit StateManager() = default;
 

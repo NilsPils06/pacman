@@ -10,6 +10,7 @@ class Stopwatch {
     static std::unique_ptr<Stopwatch> instance;
 
     Stopwatch() = default;
+
 public:
     static Stopwatch& getInstance();
 
@@ -23,5 +24,4 @@ public:
     void operator=(const Stopwatch&) = delete;
 };
 
-
-#endif //PACMAN_STOPWATCH_H
+#endif // PACMAN_STOPWATCH_H

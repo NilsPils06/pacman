@@ -9,7 +9,7 @@ namespace subjects {
 class Ghost;
 class Wall;
 class Coin;
-}
+} // namespace subjects
 
 class CollisionVisitor {
 public:

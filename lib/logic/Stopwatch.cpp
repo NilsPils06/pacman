@@ -19,9 +19,7 @@ float Stopwatch::tick() {
 
     return deltaTime;
 }
-float Stopwatch::getDeltaTime() const {
-    return deltaTime;
-}
+float Stopwatch::getDeltaTime() const { return deltaTime; }
 void Stopwatch::reset() {
     lastTime = std::chrono::steady_clock::now();
     deltaTime = 0.0f;

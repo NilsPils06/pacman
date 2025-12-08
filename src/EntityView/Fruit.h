@@ -9,6 +9,6 @@ class Fruit final : public EntityView {
 public:
     explicit Fruit(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
 };
-}
+} // namespace view
 
 #endif // VIEW_FRUIT_H

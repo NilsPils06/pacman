@@ -1,7 +1,7 @@
 #ifndef PACMAN_WALL_H
 #define PACMAN_WALL_H
-#include "EntityModel.h"
 #include "../Collision.h"
+#include "EntityModel.h"
 
 namespace subjects {
 class Wall final : public EntityModel, public CollisionComponent, public std::enable_shared_from_this<Wall> {

@@ -4,10 +4,7 @@
 
 // TODO maybe update this so that it's the command pattern????
 
-enum EventType {
-    POSITION_UPDATE,
-    DIRECTION_UPDATE
-};
+enum EventType { POSITION_UPDATE, DIRECTION_UPDATE };
 
 class Event {
 public:

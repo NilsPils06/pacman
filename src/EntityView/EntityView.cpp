@@ -1,7 +1,7 @@
 #include "EntityView.h"
-#include "iostream"
 #include "../Camera.h"
 #include "Event.h"
+#include "iostream"
 
 #include <SFML/Graphics/Texture.hpp>
 

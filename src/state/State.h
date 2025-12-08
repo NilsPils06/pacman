@@ -10,8 +10,7 @@ protected:
     std::weak_ptr<StateManager> manager;
 
 public:
-    explicit State(const std::shared_ptr<StateManager>& manager)
-        : manager(manager) {}
+    explicit State(const std::shared_ptr<StateManager>& manager) : manager(manager) {}
 
     virtual ~State() = default;
 

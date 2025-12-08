@@ -6,6 +6,6 @@ class Coin : public EntityView {
 public:
     explicit Coin(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
 };
-}
+} // namespace view
 
 #endif // VIEW_COIN_H

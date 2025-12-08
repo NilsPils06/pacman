@@ -35,6 +35,4 @@ void LevelState::onKeyPress(sf::Event::KeyEvent event) {
         world->moveDown();
     }
 }
-void LevelState::render() {
-    world->render();
-}
+void LevelState::render() { world->render(); }

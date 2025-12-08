@@ -8,10 +8,14 @@
 constexpr float ASPECT_RATIO = 16.0f / 9.0f;
 
 bool isOpposite(const Direction a, const Direction b) {
-    if (a == UP && b == DOWN) return true;
-    if (a == DOWN && b == UP) return true;
-    if (a == LEFT && b == RIGHT) return true;
-    if (a == RIGHT && b == LEFT) return true;
+    if (a == UP && b == DOWN)
+        return true;
+    if (a == DOWN && b == UP)
+        return true;
+    if (a == LEFT && b == RIGHT)
+        return true;
+    if (a == RIGHT && b == LEFT)
+        return true;
     return false;
 }
 
@@ -44,8 +48,10 @@ void subjects::Pacman::tick() {
             threshold = gridSize * 0.5f;
 
         if (distance < threshold) {
-            if (queuedDirection == UP || queuedDirection == DOWN) coords.x = centerPos;
-            else coords.y = centerPos;
+            if (queuedDirection == UP || queuedDirection == DOWN)
+                coords.x = centerPos;
+            else
+                coords.y = centerPos;
 
             facing = queuedDirection;
         }
@@ -61,27 +67,28 @@ void subjects::Pacman::tick() {
         const float diff = target - current;
         const float move = correctionSpeed * deltaTime;
 
-         if (std::abs(diff) < move) return target;
-         return current + (diff > 0 ? move : -move);
+        if (std::abs(diff) < move)
+            return target;
+        return current + (diff > 0 ? move : -move);
     };
 
     switch (facing) {
-        case RIGHT:
-            coords.x += speed * deltaTime;
-            coords.y = alignToCenter(coords.y, coords.height);
-            break;
-        case UP:
-            coords.y -= speed * deltaTime;
-            coords.x = alignToCenter(coords.x, coords.width);
-            break;
-        case DOWN:
-            coords.y += speed * deltaTime;
-            coords.x = alignToCenter(coords.x, coords.width);
-            break;
-        case LEFT:
-            coords.x -= speed * deltaTime;
-            coords.y = alignToCenter(coords.y, coords.height);
-            break;
+    case RIGHT:
+        coords.x += speed * deltaTime;
+        coords.y = alignToCenter(coords.y, coords.height);
+        break;
+    case UP:
+        coords.y -= speed * deltaTime;
+        coords.x = alignToCenter(coords.x, coords.width);
+        break;
+    case DOWN:
+        coords.y += speed * deltaTime;
+        coords.x = alignToCenter(coords.x, coords.width);
+        break;
+    case LEFT:
+        coords.x -= speed * deltaTime;
+        coords.y = alignToCenter(coords.y, coords.height);
+        break;
     }
 }
 void subjects::Pacman::block() {

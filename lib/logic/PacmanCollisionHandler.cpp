@@ -11,9 +11,5 @@ void PacmanCollisionHandler::visit(const std::shared_ptr<const subjects::Wall>& 
 
     pacman->snapPosition(wall);
 }
-Coords PacmanCollisionHandler::getPacmanCoords() const {
-    return pacman->getCoords();
-}
-void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Coin> e) {
-    e->setExpired();
-}
+Coords PacmanCollisionHandler::getPacmanCoords() const { return pacman->getCoords(); }
+void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Coin> e) { e->setExpired(); }

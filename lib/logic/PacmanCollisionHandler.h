@@ -5,6 +5,7 @@
 
 class PacmanCollisionHandler final : public CollisionVisitor {
     std::shared_ptr<subjects::Pacman> pacman;
+
 public:
     PacmanCollisionHandler() : pacman(nullptr) {}
 

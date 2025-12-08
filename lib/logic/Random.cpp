@@ -1,8 +1,6 @@
 #include "Random.h"
 
-Random & Random::getInstance() {
-    return random;
-}
+Random& Random::getInstance() { return random; }
 
 int Random::generateInt() {
     std::binomial_distribution<> dis(1, 0.5);

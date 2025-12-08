@@ -4,6 +4,7 @@
 
 class Score final : public Observer {
     int score = 0;
+
 public:
     explicit Score(const std::shared_ptr<subjects::Subject>& subject) : Observer(subject) {}
     void update(std::shared_ptr<Event> e) override;
