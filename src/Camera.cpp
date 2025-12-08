@@ -44,7 +44,8 @@ void Camera::showScore(int score) {
     // kyan cook
     const sf::FloatRect textRect = text.getLocalBounds();
     text.setOrigin(textRect.left + textRect.width, textRect.top + textRect.height);
-    text.setPosition(static_cast<float>(Game::window.getSize().x) / 2,static_cast<float>(Game::window.getSize().y) -10);
+    text.setPosition(static_cast<float>(Game::window.getSize().x) / 2,
+                     static_cast<float>(Game::window.getSize().y) - 10);
 
     Game::window.draw(text);
 }
