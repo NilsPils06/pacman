@@ -30,22 +30,18 @@ void Camera::project(sf::Sprite sprite, Coords coords) {
 
     Game::window.draw(sprite);
 }
-void Camera::showScore(int score) {
+void Camera::showScore(const int score) {
     sf::Text text;
-    sf::Font font;
-    if (!font.loadFromFile("../../assets/PAC-FONT.TTF")) {
-        // error...
-    }
-    text.setFont(font);
+
+    text.setFont(Game::font);
     text.setString("SCORE: " + std::to_string(score));
     text.setCharacterSize(60);
     text.setFillColor(sf::Color::Yellow);
 
-    // kyan cook
     const sf::FloatRect textRect = text.getLocalBounds();
-    text.setOrigin(textRect.left + textRect.width, textRect.top + textRect.height);
-    text.setPosition(static_cast<float>(Game::window.getSize().x) / 2,
-                     static_cast<float>(Game::window.getSize().y) - 10);
+
+    text.setOrigin(textRect.left, textRect.top + textRect.height);
+    text.setPosition(10.0f, static_cast<float>(Game::window.getSize().y) - 10.0f);
 
     Game::window.draw(text);
 }

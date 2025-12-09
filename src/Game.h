@@ -3,6 +3,7 @@
 #include "EntityFactory.h"
 #include "state/StateManager.h"
 
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
 class Game {
@@ -10,6 +11,8 @@ class Game {
 
 public:
     static sf::RenderWindow window;
+    static inline sf::Font font;
+    static inline sf::Texture texture;
 
     Game();
 

@@ -4,7 +4,7 @@
 #include "State.h"
 #include "World.h"
 
-class LevelState : public State {
+class LevelState final : public State {
     std::shared_ptr<World> world;
     std::shared_ptr<EntityFactory> factory;
     Score score{};

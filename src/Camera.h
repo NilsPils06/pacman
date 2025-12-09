@@ -3,8 +3,12 @@
 #include "EntityView/EntityView.h"
 #include "World.h"
 
+#include <SFML/Graphics/Font.hpp>
+
 class Camera {
 public:
+    static void init();
+
     static void project(sf::Sprite sprite, Coords coords);
 
     static void showScore(int score);

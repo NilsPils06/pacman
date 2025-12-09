@@ -11,7 +11,6 @@ namespace view {
 class EntityView : public Observer {
 protected:
     sf::Sprite sprite;
-    sf::Texture texture;
 
 public:
     explicit EntityView(const std::shared_ptr<subjects::Subject>& subject) : Observer(subject) {}

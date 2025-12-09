@@ -1,5 +1,6 @@
 #include "EntityView.h"
 #include "../Camera.h"
+#include "../Game.h"
 #include "Event.h"
 #include "iostream"
 
@@ -7,11 +8,7 @@
 
 void view::EntityView::setSprite(const sf::IntRect& spriteRect) {
     if (sprite.getTexture() == nullptr) {
-        if (!texture.loadFromFile("../../assets/sprite.png")) {
-            std::cerr << "failed to load sprite" << std::endl;
-            return;
-        }
-        sprite.setTexture(texture);
+        sprite.setTexture(Game::texture);
     }
 
     sprite.setTextureRect(spriteRect);

@@ -17,14 +17,9 @@ void PausedState::onKeyPress(sf::Event::KeyEvent event) {
 void PausedState::render() {
     sf::Text text;
 
-    sf::Font font;
-    if (!font.loadFromFile("../../assets/PAC-FONT.TTF")) {
-        // error...
-    }
+    text.setFont(Game::font);
 
-    text.setFont(font);
-
-    text.setString("Paused\n\t1234569\npress ESC to continue.");
+    text.setString("\t\t\t\tPaused\nPress ESC to continue.");
     text.setFillColor(sf::Color::Yellow);
     text.setCharacterSize(64);
 

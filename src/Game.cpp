@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include "Camera.h"
 #include "Stopwatch.h"
 #include "state/MenuState.h"
 
@@ -10,6 +11,11 @@ sf::RenderWindow Game::window{sf::VideoMode::getDesktopMode(), "Pacman"};
 Game::Game() {
     state_manager = std::make_shared<StateManager>();
     state_manager->push(std::make_unique<MenuState>(state_manager));
+    if (!texture.loadFromFile("../../assets/sprite.png"))
+        throw std::runtime_error("Failed to load texture!");
+
+    if (!font.loadFromFile("../../assets/crackman/Crackman.otf"))
+        throw std::runtime_error("Failed to load font!");
 }
 
 void Game::render() const {

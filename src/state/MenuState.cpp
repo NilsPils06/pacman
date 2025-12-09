@@ -14,14 +14,9 @@ void MenuState::onKeyPress(sf::Event::KeyEvent event) {
 void MenuState::render() {
     sf::Text text;
 
-    sf::Font font;
-    if (!font.loadFromFile("../../assets/PAC-FONT.TTF")) {
-        // error...
-    }
+    text.setFont(Game::font);
 
-    text.setFont(font);
-
-    text.setString("pac-man\n\t1234");
+    text.setString("Pac-Man");
     text.setFillColor(sf::Color::Yellow);
     text.setCharacterSize(128);
 
