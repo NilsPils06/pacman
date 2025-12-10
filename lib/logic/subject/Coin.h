@@ -6,7 +6,7 @@
 namespace subjects {
 class Coin final : public Collectable, public CollisionComponent, public std::enable_shared_from_this<Coin> {
 public:
-    explicit Coin(const Coords& coords) : Collectable(coords) {}
+    explicit Coin(const Coords& coords) : Collectable(coords, 10) {}
     void accept(std::shared_ptr<CollisionVisitor> visitor) override;
 };
 } // namespace subjects

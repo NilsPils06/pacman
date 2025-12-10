@@ -4,9 +4,11 @@
 
 namespace subjects {
 class Collectable : public EntityModel {
+    int multiplier;
 public:
-    explicit Collectable(const Coords& coords) : EntityModel(coords) {}
+    explicit Collectable(const Coords& coords, const int multiplier) : EntityModel(coords), multiplier(multiplier) {}
     void tick() override;
+    [[nodiscard]] int getScoreMultiplier() const;
 };
 } // namespace subjects
 

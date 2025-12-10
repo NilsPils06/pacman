@@ -5,7 +5,7 @@
 
 class Stopwatch {
     std::chrono::steady_clock::time_point lastTime;
-    float deltaTime;
+    float deltaTime = 0;
 
     static std::unique_ptr<Stopwatch> instance;
 

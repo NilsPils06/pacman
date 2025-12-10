@@ -1,10 +1,13 @@
 #ifndef PACMAN_EVENT_H
 #define PACMAN_EVENT_H
 #include "Util.h"
+#include "subject/Collectable.h"
+
+#include <memory>
 
 // TODO maybe update this so that it's the command pattern????
 
-enum EventType { POSITION_UPDATE, DIRECTION_UPDATE };
+enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT };
 
 class Event {
 public:
@@ -32,6 +35,15 @@ public:
 
     [[nodiscard]] Direction getDirection() const;
     [[nodiscard]] EventType getType() const override;
+};
+
+class CollectEvent final : public Event {
+    std::shared_ptr<subjects::Collectable> collectable;
+public:
+    explicit CollectEvent(const std::shared_ptr<subjects::Collectable>& collectable) : collectable(collectable) {}
+
+    [[nodiscard]] EventType getType() const override;
+[[nodiscard]] std::shared_ptr<subjects::Collectable> getCollectable() const;
 };
 
 #endif // PACMAN_EVENT_H

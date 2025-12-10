@@ -1,4 +1,6 @@
 #include "EntityModel.h"
+#include "../Score.h"
+
 void subjects::EntityModel::setCoords(Coords coords) { this->coords = coords; }
 Coords subjects::EntityModel::getCoords() const { return coords; }
 void subjects::EntityModel::notify(std::shared_ptr<Event> e) {
