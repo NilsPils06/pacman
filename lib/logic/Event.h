@@ -39,11 +39,12 @@ public:
 
 class CollectEvent final : public Event {
     std::shared_ptr<subjects::Collectable> collectable;
+
 public:
     explicit CollectEvent(const std::shared_ptr<subjects::Collectable>& collectable) : collectable(collectable) {}
 
     [[nodiscard]] EventType getType() const override;
-[[nodiscard]] std::shared_ptr<subjects::Collectable> getCollectable() const;
+    [[nodiscard]] std::shared_ptr<subjects::Collectable> getCollectable() const;
 };
 
 #endif // PACMAN_EVENT_H
