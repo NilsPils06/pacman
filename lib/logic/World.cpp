@@ -52,6 +52,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'F': {
             std::shared_ptr<subjects::Fruit> fruit = factory->createFruit(coords);
             entities.push_back(fruit);
+            components[fruit] = fruit;
             break;
         }
         case 'C': {

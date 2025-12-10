@@ -15,6 +15,7 @@ public:
 
     [[nodiscard]] Coords getPacmanCoords() const;
     void visit(std::shared_ptr<subjects::Coin> e) override;
+    void visit(std::shared_ptr<subjects::Fruit> e) override;
 };
 
 #endif // PACMAN_PACMANCOLLISIONHANDLER_H
