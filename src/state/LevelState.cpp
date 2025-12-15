@@ -38,5 +38,6 @@ void LevelState::onKeyPress(sf::Event::KeyEvent event) {
 }
 void LevelState::render() {
     world->render();
+    score->tick();
     Camera::showScore(score->getScore());
 }
