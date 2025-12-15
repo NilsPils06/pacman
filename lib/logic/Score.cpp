@@ -7,7 +7,7 @@ void Score::update(std::shared_ptr<Event> e) {
         const std::shared_ptr<CollectEvent> event = std::static_pointer_cast<CollectEvent>(e);
 
         const float multiplier = static_cast<float>(event->getCollectable()->getScoreMultiplier());
-        const int bonus = static_cast<int>(multiplier*1.f / (timeSinceCollection + 0.1f));
+        const int bonus = static_cast<int>(multiplier * 1.f / (timeSinceCollection + 0.1f));
 
         score += bonus;
         timeSinceCollection = 0.0f;

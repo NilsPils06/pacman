@@ -7,7 +7,6 @@
 
 class Camera {
 public:
-
     static void project(sf::Sprite& sprite, const Coords& coords);
 
     static void showScore(int score);

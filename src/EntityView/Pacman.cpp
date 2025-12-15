@@ -12,7 +12,7 @@ void view::Pacman::update(std::shared_ptr<Event> e) {
 
         if (animTimer >= FRAME_DUR) {
             animTimer -= FRAME_DUR;
-            currentFrame = (currentFrame+1) % frameSequence.size();
+            currentFrame = (currentFrame + 1) % frameSequence.size();
         }
         const int spriteIndex = frameSequence[currentFrame];
 

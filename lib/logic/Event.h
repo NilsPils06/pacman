@@ -22,7 +22,7 @@ class TickEvent final : public Event {
 
 public:
     TickEvent(const Coords& pos, const Direction& facing) : pos(pos), facing(facing) {}
-[[nodiscard]] Coords getPosition() const;
+    [[nodiscard]] Coords getPosition() const;
     [[nodiscard]] Direction getFacing() const;
     [[nodiscard]] EventType getType() const override;
 };
