@@ -113,9 +113,5 @@ void subjects::Pacman::snapPosition(const Coords& wall) {
         break;
     }
 }
-int subjects::Pacman::getLives() const {
-    return lives;
-}
-void subjects::Pacman::hurt() {
-    lives--;
-}
+int subjects::Pacman::getLives() const { return lives; }
+void subjects::Pacman::hurt() { lives--; }

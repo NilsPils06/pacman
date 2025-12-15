@@ -160,9 +160,5 @@ void World::render() {
     checkCollisions();
     collectables -= collisionHandler->getAmountOfCollections();
 }
-bool World::isOver() const {
-    return collisionHandler->isDead();
-}
-bool World::isCompleted() const {
-    return collectables <= 0;
-}
+bool World::isOver() const { return collisionHandler->isDead(); }
+bool World::isCompleted() const { return collectables <= 0; }

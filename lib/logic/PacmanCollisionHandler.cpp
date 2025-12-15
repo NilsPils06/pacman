@@ -12,9 +12,7 @@ void PacmanCollisionHandler::visit(const std::shared_ptr<const subjects::Wall>& 
     pacman->snapPosition(wall);
 }
 Coords PacmanCollisionHandler::getPacmanCoords() const { return pacman->getCoords(); }
-bool PacmanCollisionHandler::isDead() const {
-    return pacman->getLives() <= 0;
-}
+bool PacmanCollisionHandler::isDead() const { return pacman->getLives() <= 0; }
 int PacmanCollisionHandler::getAmountOfCollections() {
     const int out = amountOfCollections;
     amountOfCollections = 0;
@@ -30,6 +28,4 @@ void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Fruit> e) {
     pacman->notify(std::make_shared<CollectEvent>(e));
     e->setExpired();
 }
-void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Ghost> e) {
-    pacman->hurt();
-}
+void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Ghost> e) { pacman->hurt(); }
