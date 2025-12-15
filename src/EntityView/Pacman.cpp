@@ -2,23 +2,41 @@
 
 #include "../Camera.h"
 #include "Event.h"
+#include "Stopwatch.h"
 void view::Pacman::update(std::shared_ptr<Event> e) {
     if (e->getType() == TICK) {
         const std::shared_ptr<TickEvent> event = std::static_pointer_cast<TickEvent>(e);
+
+        animTimer += Stopwatch::getInstance().getDeltaTime();
+        static const std::vector frameSequence = {0, 1, 2, 1};
+
+        if (animTimer >= FRAME_DUR) {
+            animTimer -= FRAME_DUR;
+            currentFrame = (currentFrame+1) % frameSequence.size();
+        }
+        const int spriteIndex = frameSequence[currentFrame];
+
+        static const std::vector animUp = {sprites::PACMAN_UP_1, sprites::PACMAN_UP_2, sprites::PACMAN_UP_3};
+        static const std::vector animDown = {sprites::PACMAN_DOWN_1, sprites::PACMAN_DOWN_2, sprites::PACMAN_DOWN_3};
+        static const std::vector animLeft = {sprites::PACMAN_LEFT_1, sprites::PACMAN_LEFT_2, sprites::PACMAN_LEFT_3};
+        static const std::vector animRight = {sprites::PACMAN_RIGHT_1, sprites::PACMAN_RIGHT_2,
+                                              sprites::PACMAN_RIGHT_3};
+
         switch (event->getFacing()) {
         case UP:
-            setSprite(sprites::PACMAN_UP_2);
+            setSprite(animUp[spriteIndex]);
             break;
         case DOWN:
-            setSprite(sprites::PACMAN_DOWN_2);
+            setSprite(animDown[spriteIndex]);
             break;
         case LEFT:
-            setSprite(sprites::PACMAN_LEFT_2);
+            setSprite(animLeft[spriteIndex]);
             break;
         case RIGHT:
-            setSprite(sprites::PACMAN_RIGHT_2);
+            setSprite(animRight[spriteIndex]);
             break;
         }
+
         Camera::project(sprite, event->getPosition());
     }
 }

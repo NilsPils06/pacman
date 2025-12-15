@@ -4,6 +4,9 @@
 
 namespace view {
 class Pacman final : public EntityView {
+    float animTimer = 0.0f;
+    size_t currentFrame = 0;
+    const float FRAME_DUR = 0.25f;
 public:
     explicit Pacman(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
     void update(std::shared_ptr<Event> e) override;
