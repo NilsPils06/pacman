@@ -25,6 +25,7 @@ public:
 
     void checkCollisions() const;
     void render();
+    [[nodiscard]] bool isOver() const;
 };
 
 #endif // PACMAN_WORLD_H

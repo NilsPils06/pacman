@@ -70,6 +70,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'G': {
             std::shared_ptr<subjects::Ghost> ghost = factory->createGhost(coords);
             entities.push_back(ghost);
+            components[ghost] = ghost;
             break;
         }
         default:
@@ -155,4 +156,7 @@ void World::render() {
         entity->tick();
     }
     checkCollisions();
+}
+bool World::isOver() const {
+    return collisionHandler.isDead();
 }

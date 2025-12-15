@@ -18,6 +18,7 @@ public:
     virtual void visit(const std::shared_ptr<const subjects::Wall>& e) = 0;
     virtual void visit(std::shared_ptr<subjects::Coin> e) = 0;
     virtual void visit(std::shared_ptr<subjects::Fruit> e) = 0;
+    virtual void visit(std::shared_ptr<subjects::Ghost> e) = 0;
 };
 
 class CollisionComponent {

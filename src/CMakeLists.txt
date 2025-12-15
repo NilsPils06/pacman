@@ -23,7 +23,9 @@ SET(SRC main.cpp Game.cpp
         EntityFactory.cpp
         EntityFactory.h
         Camera.cpp
-        Camera.h)
+        Camera.h
+        state/DefeatState.cpp
+        state/DefeatState.h)
 ADD_EXECUTABLE(game ${SRC})
 
 FIND_PACKAGE(SFML COMPONENTS system window graphics)

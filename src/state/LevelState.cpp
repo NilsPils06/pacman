@@ -3,6 +3,7 @@
 #include "../Camera.h"
 #include "../EntityFactory.h"
 #include "../Game.h"
+#include "DefeatState.h"
 #include "PausedState.h"
 #include "StateManager.h"
 
@@ -37,6 +38,14 @@ void LevelState::onKeyPress(sf::Event::KeyEvent event) {
     }
 }
 void LevelState::render() {
+    if (world->isOver()) {
+        if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
+            state_manager->pop();
+            state_manager->push(std::make_unique<DefeatState>(state_manager));
+        }
+        return;
+    }
+
     world->render();
     score->tick();
     Camera::showScore(score->getScore());

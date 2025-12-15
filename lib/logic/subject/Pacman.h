@@ -16,6 +16,8 @@ public:
     void tick() override;
     void block();
     void snapPosition(const Coords& wall);
+    [[nodiscard]] int getLives() const;
+    void hurt();
 };
 } // namespace subjects
 
