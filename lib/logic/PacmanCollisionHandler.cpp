@@ -15,11 +15,18 @@ Coords PacmanCollisionHandler::getPacmanCoords() const { return pacman->getCoord
 bool PacmanCollisionHandler::isDead() const {
     return pacman->getLives() <= 0;
 }
+int PacmanCollisionHandler::getAmountOfCollections() {
+    const int out = amountOfCollections;
+    amountOfCollections = 0;
+    return out;
+}
 void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Coin> e) {
+    ++amountOfCollections;
     pacman->notify(std::make_shared<CollectEvent>(e));
     e->setExpired();
 }
 void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Fruit> e) {
+    ++amountOfCollections;
     pacman->notify(std::make_shared<CollectEvent>(e));
     e->setExpired();
 }

@@ -5,6 +5,7 @@
 
 class PacmanCollisionHandler final : public CollisionVisitor {
     std::shared_ptr<subjects::Pacman> pacman;
+    int amountOfCollections = 0;
 
 public:
     PacmanCollisionHandler() : pacman(nullptr) {}
@@ -15,6 +16,7 @@ public:
 
     [[nodiscard]] Coords getPacmanCoords() const;
     [[nodiscard]] bool isDead() const;
+    [[nodiscard]] int getAmountOfCollections();
     void visit(std::shared_ptr<subjects::Coin> e) override;
     void visit(std::shared_ptr<subjects::Fruit> e) override;
     void visit(std::shared_ptr<subjects::Ghost> e) override;

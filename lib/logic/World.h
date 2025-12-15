@@ -11,9 +11,10 @@
 class PacmanCollisionHandler;
 class World {
     std::vector<std::shared_ptr<subjects::EntityModel>> entities;
-    PacmanCollisionHandler collisionHandler{};
+    std::shared_ptr<PacmanCollisionHandler> collisionHandler{};
     std::map<std::shared_ptr<subjects::EntityModel>, std::shared_ptr<CollisionComponent>> components;
     std::shared_ptr<AbstractFactory> factory;
+    int collectables = 0;
 
 public:
     explicit World(std::shared_ptr<AbstractFactory> factory);
@@ -26,6 +27,7 @@ public:
     void checkCollisions() const;
     void render();
     [[nodiscard]] bool isOver() const;
+    [[nodiscard]] bool isCompleted() const;
 };
 
 #endif // PACMAN_WORLD_H

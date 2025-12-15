@@ -53,18 +53,20 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
             std::shared_ptr<subjects::Fruit> fruit = factory->createFruit(coords);
             entities.push_back(fruit);
             components[fruit] = fruit;
+            collectables++;
             break;
         }
         case 'C': {
             std::shared_ptr<subjects::Coin> coin = factory->createCoin(coords);
             entities.push_back(coin);
             components[coin] = coin;
+            collectables++;
             break;
         }
         case 'P': {
             std::shared_ptr<subjects::Pacman> pacman = factory->createPacman(coords);
             entities.push_back(pacman);
-            collisionHandler = PacmanCollisionHandler{pacman};
+            collisionHandler = std::make_shared<PacmanCollisionHandler>(pacman);
             break;
         }
         case 'G': {
@@ -109,7 +111,7 @@ void World::checkCollisions() const {
             continue;
 
         const Coords a = modelA->getCoords();
-        const Coords b = collisionHandler.getPacmanCoords();
+        const Coords b = collisionHandler->getPacmanCoords();
 
         // Bottom left and top right of A
         float x1 = a.x - (a.width / 2);
@@ -136,7 +138,7 @@ void World::checkCollisions() const {
             continue;
         }
 
-        component->accept(std::make_shared<PacmanCollisionHandler>(collisionHandler));
+        component->accept(collisionHandler);
     }
 }
 
@@ -156,7 +158,11 @@ void World::render() {
         entity->tick();
     }
     checkCollisions();
+    collectables -= collisionHandler->getAmountOfCollections();
 }
 bool World::isOver() const {
-    return collisionHandler.isDead();
+    return collisionHandler->isDead();
+}
+bool World::isCompleted() const {
+    return collectables <= 0;
 }

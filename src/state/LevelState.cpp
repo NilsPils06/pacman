@@ -6,6 +6,7 @@
 #include "DefeatState.h"
 #include "PausedState.h"
 #include "StateManager.h"
+#include "VictoryState.h"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -42,6 +43,14 @@ void LevelState::render() {
         if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
             state_manager->pop();
             state_manager->push(std::make_unique<DefeatState>(state_manager));
+        }
+        return;
+    }
+
+    if (world->isCompleted()) {
+        if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
+            state_manager->pop();
+            state_manager->push(std::make_unique<VictoryState>(state_manager));
         }
         return;
     }
