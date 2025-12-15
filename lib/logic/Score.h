@@ -4,7 +4,8 @@
 
 class Score final : public Observer {
     int score = 0;
-    double pendingLoss = 0;
+    float pendingLoss = 0;
+    float timeSinceCollection = 0;
 
 public:
     Score() = default;
