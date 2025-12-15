@@ -33,14 +33,14 @@ void subjects::Pacman::tick() {
     speed = (facing == UP || facing == DOWN) ? 0.2f * ASPECT_RATIO : 0.2f;
 
     if (facing != queuedDirection) {
-        float axisValue = (queuedDirection == UP || queuedDirection == DOWN) ? coords.x : coords.y;
-        float gridSize = (queuedDirection == UP || queuedDirection == DOWN) ? coords.width : coords.height;
+        const float axisValue = (queuedDirection == UP || queuedDirection == DOWN) ? coords.x : coords.y;
+        const float gridSize = (queuedDirection == UP || queuedDirection == DOWN) ? coords.width : coords.height;
 
-        float normalizedPos = (axisValue + 1.0f) / gridSize;
-        float idealIndex = std::round(normalizedPos);
-        float centerPos = (idealIndex * gridSize) - 1.0f;
+        const float normalizedPos = (axisValue + 1.0f) / gridSize;
+        const float idealIndex = std::round(normalizedPos);
+        const float centerPos = (idealIndex * gridSize) - 1.0f;
 
-        float distance = std::abs(axisValue - centerPos);
+        const float distance = std::abs(axisValue - centerPos);
 
         float threshold = (speed * deltaTime);
 
@@ -58,7 +58,7 @@ void subjects::Pacman::tick() {
     }
 
     blocked = false;
-    float correctionSpeed = speed * 2.0f;
+    const float correctionSpeed = speed * 2.0f;
 
     auto alignToCenter = [&](const float& current, const float& step) -> float {
         const float norm = (current + 1.0f) / step;
@@ -90,6 +90,8 @@ void subjects::Pacman::tick() {
         coords.y = alignToCenter(coords.y, coords.height);
         break;
     }
+
+    notify(std::make_shared<TickEvent>(getCoords(), facing));
 }
 void subjects::Pacman::block() {
     speed = 0;

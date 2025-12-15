@@ -7,13 +7,24 @@
 
 // TODO maybe update this so that it's the command pattern????
 
-enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT };
+enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT, TICK };
 
 class Event {
 public:
     virtual ~Event() = default;
 
     [[nodiscard]] virtual EventType getType() const = 0;
+};
+
+class TickEvent final : public Event {
+    Coords pos;
+    Direction facing;
+
+public:
+    TickEvent(const Coords& pos, const Direction& facing) : pos(pos), facing(facing) {}
+[[nodiscard]] Coords getPosition() const;
+    [[nodiscard]] Direction getFacing() const;
+    [[nodiscard]] EventType getType() const override;
 };
 
 class PositonUpdateEvent final : public Event {

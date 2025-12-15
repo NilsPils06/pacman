@@ -1,4 +1,7 @@
 #include "Event.h"
+Coords TickEvent::getPosition() const { return pos; }
+Direction TickEvent::getFacing() const { return facing; }
+EventType TickEvent::getType() const {return TICK;}
 Coords PositonUpdateEvent::getPosition() const { return position; }
 
 EventType PositonUpdateEvent::getType() const { return POSITION_UPDATE; }

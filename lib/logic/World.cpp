@@ -155,9 +155,4 @@ void World::render() {
         entity->tick();
     }
     checkCollisions();
-    for (const auto& entity : entities) {
-        if (entity->isExpired())
-            continue;
-        entity->notify(std::make_shared<PositonUpdateEvent>(entity->getCoords()));
-    }
 }
