@@ -1,6 +1,5 @@
 #ifndef PACMAN_PACMAN_H
 #define PACMAN_PACMAN_H
-#include "../Collision.h"
 #include "EntityModel.h"
 
 namespace subjects {

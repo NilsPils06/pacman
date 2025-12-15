@@ -3,7 +3,7 @@
 #include "EntityModel.h"
 
 namespace subjects {
-class Ghost : public EntityModel {
+class Ghost final : public EntityModel {
     Movement movement = FIXED;
     Direction lockedIn = UP;
     bool chasing = false;

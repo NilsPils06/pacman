@@ -3,9 +3,7 @@
 
 #include "State.h"
 
-#include <utility>
-
-class MenuState : public State {
+class MenuState final : public State {
 public:
     explicit MenuState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
 

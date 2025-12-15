@@ -1,9 +1,9 @@
 #include "EntityModel.h"
 #include "../Score.h"
 
-void subjects::EntityModel::setCoords(Coords coords) { this->coords = coords; }
+void subjects::EntityModel::setCoords(const Coords c) { coords = c; }
 Coords subjects::EntityModel::getCoords() const { return coords; }
-void subjects::EntityModel::notify(std::shared_ptr<Event> e) {
+void subjects::EntityModel::notify(const std::shared_ptr<Event> e) {
     for (const auto& observer : observers) {
         observer->update(e);
     }

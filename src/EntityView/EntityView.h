@@ -3,7 +3,6 @@
 
 #include "Observer.h"
 #include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
 
 // TODO update EntityView so that it contains the animation sequence
 

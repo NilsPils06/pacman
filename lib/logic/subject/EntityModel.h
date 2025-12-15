@@ -17,7 +17,7 @@ public:
 
     explicit EntityModel(const Coords& coords);
 
-    void setCoords(Coords coords);
+    void setCoords(Coords c);
 
     [[nodiscard]] Coords getCoords() const;
 

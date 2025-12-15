@@ -4,8 +4,6 @@
 #include "subject/Coin.h"
 #include "subject/Fruit.h"
 #include "subject/Wall.h"
-
-#include <iostream>
 void PacmanCollisionHandler::visit(const std::shared_ptr<const subjects::Wall>& e) {
     pacman->block();
 

@@ -2,9 +2,7 @@
 #define PACMAN_PAUSEDSTATE_H
 #include "State.h"
 
-#include <utility>
-
-class PausedState : public State {
+class PausedState final : public State {
 public:
     explicit PausedState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
 

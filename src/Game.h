@@ -1,6 +1,5 @@
 #ifndef PACMAN_GAME_H
 #define PACMAN_GAME_H
-#include "EntityFactory.h"
 #include "state/StateManager.h"
 
 #include <SFML/Graphics/Font.hpp>

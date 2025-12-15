@@ -13,9 +13,9 @@ protected:
 public:
     virtual ~Subject() = default;
 
-    virtual void attach(std::shared_ptr<Observer> observer);
+    virtual void attach(const std::shared_ptr<Observer>& observer);
 
-    virtual void detach(std::shared_ptr<Observer> observer);
+    virtual void detach(const std::shared_ptr<Observer>& observer);
 
     virtual void detachAll();
 

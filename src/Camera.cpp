@@ -1,11 +1,9 @@
 #include "Camera.h"
 
 #include "Game.h"
-
-#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 
-void Camera::project(sf::Sprite sprite, Coords coords) {
+void Camera::project(sf::Sprite& sprite, const Coords& coords) {
     const auto screensize = Game::window.getSize();
     const auto screen_x = static_cast<float>(screensize.x);
     const auto screen_y = static_cast<float>(screensize.y);

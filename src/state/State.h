@@ -1,6 +1,5 @@
 #ifndef PACMAN_STATE_H
 #define PACMAN_STATE_H
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <memory>
 

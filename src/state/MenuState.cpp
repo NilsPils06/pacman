@@ -20,10 +20,10 @@ void MenuState::render() {
     text.setFillColor(sf::Color::Yellow);
     text.setCharacterSize(128);
 
-    sf::FloatRect bounds = text.getLocalBounds();
+    const sf::FloatRect bounds = text.getLocalBounds();
     text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
 
-    sf::Vector2u size = Game::window.getSize();
+    const sf::Vector2u size = Game::window.getSize();
     text.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 2.f);
 
     Game::window.draw(text);

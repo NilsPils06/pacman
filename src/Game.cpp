@@ -24,7 +24,7 @@ void Game::render() const {
         Stopwatch::getInstance().tick();
 
         // Process events
-        sf::Event event;
+        sf::Event event{};
         while (window.pollEvent(event)) {
             state_manager->update(event);
             // Close window: exit

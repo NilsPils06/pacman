@@ -8,15 +8,15 @@
 #include "Game.h"
 
 std::shared_ptr<subjects::Wall> EntityFactory::createWall(Coords coords) {
-    std::shared_ptr<subjects::Wall> model = std::make_shared<subjects::Wall>(coords);
-    std::shared_ptr<view::Wall> view = std::make_shared<view::Wall>(model);
+    auto model = std::make_shared<subjects::Wall>(coords);
+    const auto view = std::make_shared<view::Wall>(model);
     model->attach(view);
     view->setSprite(sprites::WALL);
     return model;
 }
 std::shared_ptr<subjects::Pacman> EntityFactory::createPacman(Coords coords) {
-    std::shared_ptr<subjects::Pacman> model = std::make_shared<subjects::Pacman>(coords);
-    std::shared_ptr<view::Pacman> view = std::make_shared<view::Pacman>(model);
+    auto model = std::make_shared<subjects::Pacman>(coords);
+    const auto view = std::make_shared<view::Pacman>(model);
     model->attach(view);
     model->attach(score);
     score->setSubject(model);
@@ -24,22 +24,22 @@ std::shared_ptr<subjects::Pacman> EntityFactory::createPacman(Coords coords) {
     return model;
 }
 std::shared_ptr<subjects::Coin> EntityFactory::createCoin(Coords coords) {
-    std::shared_ptr<subjects::Coin> model = std::make_shared<subjects::Coin>(coords);
-    std::shared_ptr<view::Coin> view = std::make_shared<view::Coin>(model);
+    auto model = std::make_shared<subjects::Coin>(coords);
+    const auto view = std::make_shared<view::Coin>(model);
     model->attach(view);
     view->setSprite(sprites::COIN);
     return model;
 }
 std::shared_ptr<subjects::Fruit> EntityFactory::createFruit(Coords coords) {
-    std::shared_ptr<subjects::Fruit> model = std::make_shared<subjects::Fruit>(coords);
-    std::shared_ptr<view::Fruit> view = std::make_shared<view::Fruit>(model);
+    auto model = std::make_shared<subjects::Fruit>(coords);
+    const auto view = std::make_shared<view::Fruit>(model);
     model->attach(view);
     view->setSprite(sprites::FRUIT);
     return model;
 }
 std::shared_ptr<subjects::Ghost> EntityFactory::createGhost(Coords coords) {
-    std::shared_ptr<subjects::Ghost> model = std::make_shared<subjects::Ghost>(coords);
-    std::shared_ptr<view::Ghost> view = std::make_shared<view::Ghost>(model);
+    auto model = std::make_shared<subjects::Ghost>(coords);
+    const auto view = std::make_shared<view::Ghost>(model);
     model->attach(view);
     view->setSprite(sprites::GHOST_RED_RIGHT_1);
     return model;
