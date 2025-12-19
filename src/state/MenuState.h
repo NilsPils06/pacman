@@ -11,6 +11,7 @@ class MenuState final : public State {
     std::map<std::string, int> scores;
     std::string playerName;
     sf::RectangleShape playButton;
+
 public:
     explicit MenuState(const std::shared_ptr<StateManager>& manager);
 

@@ -95,9 +95,7 @@ void MenuState::loadScores() {
         }
     }
 }
-void MenuState::saveScore(const int score) {
-    scores[playerName] = score;
-}
+void MenuState::saveScore(const int score) { scores[playerName] = score; }
 
 void MenuState::renderScoreboard() {
     const sf::Vector2u size = Game::window.getSize();
