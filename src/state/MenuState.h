@@ -21,6 +21,7 @@ public:
     void render() override;
 
     void loadScores();
+    void saveScore(int score);
 
     void renderScoreboard();
     void onTextEntered(sf::Event::TextEvent event) override;

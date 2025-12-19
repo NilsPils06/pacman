@@ -4,6 +4,7 @@
 #include "../EntityFactory.h"
 #include "../Game.h"
 #include "DefeatState.h"
+#include "MenuState.h"
 #include "PausedState.h"
 #include "StateManager.h"
 #include "VictoryState.h"

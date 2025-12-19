@@ -18,7 +18,15 @@ MenuState::MenuState(const std::shared_ptr<StateManager>& manager) : State(manag
 
     loadScores();
 }
-MenuState::~MenuState() = default;
+MenuState::~MenuState() {
+    if (std::ofstream out{"../../assets/scores.json"}; out.is_open()) {
+        json j;
+        for (auto& [name, score] : scores)
+            j[name] = score;
+
+        out << j;
+    }
+};
 void MenuState::onKeyPress(sf::Event::KeyEvent event) {
     if (event.code != sf::Keyboard::Enter)
         return;
@@ -87,6 +95,9 @@ void MenuState::loadScores() {
         }
     }
 }
+void MenuState::saveScore(const int score) {
+    scores[playerName] = score;
+}
 
 void MenuState::renderScoreboard() {
     const sf::Vector2u size = Game::window.getSize();
@@ -116,8 +127,9 @@ void MenuState::onTextEntered(sf::Event::TextEvent event) {
     }
 }
 void MenuState::onMouseClick(sf::Event::MouseButtonEvent event) {
+    if (playerName.empty())
+        return;
     if (event.button == sf::Mouse::Left) {
-
         if (const sf::Vector2f mousePos(static_cast<float>(event.x), static_cast<float>(event.y));
             playButton.getGlobalBounds().contains(mousePos)) {
             if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
