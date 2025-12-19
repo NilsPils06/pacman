@@ -8,6 +8,12 @@ void StateManager::update(const sf::Event& event) {
     if (event.type == sf::Event::KeyPressed) {
         states.top()->onKeyPress(event.key);
     }
+    if (event.type == sf::Event::TextEntered) {
+        states.top()->onTextEntered(event.text);
+    }
+    if (event.type == sf::Event::MouseButtonPressed) {
+        states.top()->onMouseClick(event.mouseButton);
+    }
 }
 void StateManager::render() {
     if (states.empty())

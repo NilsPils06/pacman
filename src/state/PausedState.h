@@ -9,6 +9,7 @@ public:
     void onKeyPress(sf::Event::KeyEvent event) override;
 
     void render() override;
+    void onTextEntered(sf::Event::TextEvent event) override {};
 };
 
 #endif // PACMAN_PAUSEDSTATE_H

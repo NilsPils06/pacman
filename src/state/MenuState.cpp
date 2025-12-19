@@ -3,7 +3,6 @@
 #include "LevelState.h"
 #include "StateManager.h"
 #include "json.hpp"
-
 #include <SFML/Graphics/Text.hpp>
 #include <fstream>
 #include <iostream>
@@ -11,45 +10,68 @@
 using nlohmann::json;
 
 MenuState::MenuState(const std::shared_ptr<StateManager>& manager) : State(manager) {
-    sf::Text text;
-
-    text.setFont(Game::font);
-
-    text.setString("Pac-Man");
-    text.setFillColor(sf::Color::Yellow);
-    text.setCharacterSize(128);
-
-    const sf::FloatRect bounds = text.getLocalBounds();
-    text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
-
     const sf::Vector2u size = Game::window.getSize();
-    text.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 2.f);
+    playButton.setSize(sf::Vector2f(200.f, 60.f));
+    playButton.setFillColor(sf::Color::Green);
+    playButton.setOrigin(100.f, 30.f);
+    playButton.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 2.f);
 
     loadScores();
 }
 MenuState::~MenuState() = default;
 void MenuState::onKeyPress(sf::Event::KeyEvent event) {
+    if (event.code != sf::Keyboard::Enter)
+        return;
+    if (playerName.empty())
+        return;
     if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
         state_manager->push(std::make_unique<LevelState>(state_manager));
     }
 }
 void MenuState::render() {
-    static sf::Text text;
+    static sf::Text title;
 
-    if (text.getString().isEmpty()) {
-        text.setFont(Game::font);
+    if (title.getString().isEmpty()) {
+        title.setFont(Game::font);
 
-        text.setString("Pac-Man");
-        text.setFillColor(sf::Color::Yellow);
-        text.setCharacterSize(128);
+        title.setString("Pac-Man");
+        title.setFillColor(sf::Color::Yellow);
+        title.setCharacterSize(128);
 
-        const sf::FloatRect bounds = text.getLocalBounds();
-        text.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+        const sf::FloatRect bounds = title.getLocalBounds();
+        title.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
 
         const sf::Vector2u size = Game::window.getSize();
-        text.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 2.f);
+        title.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 4.f);
     }
-    Game::window.draw(text);
+
+    static sf::Text playText;
+    if (playText.getString().isEmpty()) {
+        playText.setFont(Game::fontFront);
+        playText.setString("PLAY");
+        playText.setCharacterSize(60);
+        playText.setFillColor(sf::Color::Black);
+        const sf::FloatRect bounds = playText.getLocalBounds();
+        playText.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+        playText.setPosition(playButton.getPosition());
+    }
+
+    static sf::Text inputText;
+    inputText.setFont(Game::font);
+    inputText.setString("Enter Name: " + playerName + "_");
+    inputText.setCharacterSize(40);
+    inputText.setFillColor(sf::Color::Cyan);
+
+    const sf::FloatRect bounds = inputText.getLocalBounds();
+    inputText.setOrigin(bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f);
+
+    const sf::Vector2u size = Game::window.getSize();
+    inputText.setPosition(static_cast<float>(size.x) / 2.f, static_cast<float>(size.y) / 4.f + 80.f);
+
+    Game::window.draw(title);
+    Game::window.draw(inputText);
+    Game::window.draw(playButton);
+    Game::window.draw(playText);
 
     renderScoreboard();
 }
@@ -66,10 +88,9 @@ void MenuState::loadScores() {
     }
 }
 
-
 void MenuState::renderScoreboard() {
     const sf::Vector2u size = Game::window.getSize();
-    float y = static_cast<float>(size.y)*2 / 3.f;
+    float y = static_cast<float>(size.y) * 2 / 3.f;
 
     for (auto const& [name, score] : scores) {
         sf::Text t;
@@ -83,5 +104,25 @@ void MenuState::renderScoreboard() {
         t.setPosition(static_cast<float>(size.x) / 2.f, y);
         Game::window.draw(t);
         y += 40.f;
+    }
+}
+void MenuState::onTextEntered(sf::Event::TextEvent event) {
+    // 8 is backspace
+    if (event.unicode == 8) {
+        if (!playerName.empty())
+            playerName.pop_back();
+    } else if (event.unicode < 128 && playerName.length() < 12) {
+        playerName += static_cast<char>(event.unicode);
+    }
+}
+void MenuState::onMouseClick(sf::Event::MouseButtonEvent event) {
+    if (event.button == sf::Mouse::Left) {
+
+        if (const sf::Vector2f mousePos(static_cast<float>(event.x), static_cast<float>(event.y));
+            playButton.getGlobalBounds().contains(mousePos)) {
+            if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
+                state_manager->push(std::make_unique<LevelState>(state_manager));
+            }
+        }
     }
 }

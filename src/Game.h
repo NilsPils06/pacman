@@ -11,6 +11,7 @@ class Game {
 public:
     static sf::RenderWindow window;
     static inline sf::Font font;
+    static inline sf::Font fontFront;
     static inline sf::Texture texture;
 
     Game();

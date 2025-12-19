@@ -3,11 +3,14 @@
 
 #include "State.h"
 
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <map>
 
 class MenuState final : public State {
     std::map<std::string, int> scores;
+    std::string playerName;
+    sf::RectangleShape playButton;
 public:
     explicit MenuState(const std::shared_ptr<StateManager>& manager);
 
@@ -20,6 +23,8 @@ public:
     void loadScores();
 
     void renderScoreboard();
+    void onTextEntered(sf::Event::TextEvent event) override;
+    void onMouseClick(sf::Event::MouseButtonEvent event) override;
 };
 
 #endif // PACMAN_MENUSTATE_H

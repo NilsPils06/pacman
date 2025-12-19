@@ -16,6 +16,8 @@ Game::Game() {
 
     if (!font.loadFromFile("../../assets/crackman/Crackman.otf"))
         throw std::runtime_error("Failed to load font!");
+    if (!fontFront.loadFromFile("../../assets/crackman/Crackman Front.otf"))
+        throw std::runtime_error("Failed to load font!");
 }
 
 void Game::render() const {

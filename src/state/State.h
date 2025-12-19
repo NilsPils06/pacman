@@ -14,6 +14,8 @@ public:
     virtual ~State() = default;
 
     virtual void onKeyPress(sf::Event::KeyEvent event) = 0;
+    virtual void onTextEntered(sf::Event::TextEvent event) {}
+    virtual void onMouseClick(sf::Event::MouseButtonEvent event) {};
 
     virtual void render() = 0;
 };
