@@ -29,6 +29,7 @@ SET(SRC
         Event.h
         Collision.h
         PacmanCollisionHandler.cpp
-        PacmanCollisionHandler.h)
+        PacmanCollisionHandler.h
+        json.hpp)
 
 ADD_LIBRARY(logic STATIC ${SRC})

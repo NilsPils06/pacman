@@ -49,7 +49,7 @@ void LevelState::render() {
 
     if (world->isCompleted()) {
         if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
-            state_manager->pop();
+            // reset world/new level
             state_manager->push(std::make_unique<VictoryState>(state_manager));
         }
         return;
