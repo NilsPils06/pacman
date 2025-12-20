@@ -8,7 +8,7 @@
 #include <map>
 
 class MenuState final : public State {
-    std::map<std::string, int> scores;
+    std::shared_ptr<std::map<std::string, int>> scores;
     std::string playerName;
     sf::RectangleShape playButton;
 
@@ -22,7 +22,6 @@ public:
     void render() override;
 
     void loadScores();
-    void saveScore(int score);
 
     void renderScoreboard();
     void onTextEntered(sf::Event::TextEvent event) override;

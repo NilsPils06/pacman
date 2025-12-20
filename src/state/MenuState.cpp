@@ -21,7 +21,7 @@ MenuState::MenuState(const std::shared_ptr<StateManager>& manager) : State(manag
 MenuState::~MenuState() {
     if (std::ofstream out{"../../assets/scores.json"}; out.is_open()) {
         json j;
-        for (auto& [name, score] : scores)
+        for (auto& [name, score] : (*scores))
             j[name] = score;
 
         out << j;
@@ -88,20 +88,19 @@ void MenuState::loadScores() {
         try {
             json j;
             input >> j;
-            scores = j.get<std::map<std::string, int>>();
+            scores = std::make_shared<std::map<std::string, int>>(j.get<std::map<std::string, int>>());
         } catch (nlohmann::detail::parse_error& e) {
             std::cerr << e.what() << std::endl;
-            scores = {};
+            scores = std::make_shared<std::map<std::string, int>>();
         }
     }
 }
-void MenuState::saveScore(const int score) { scores[playerName] = score; }
 
 void MenuState::renderScoreboard() {
     const sf::Vector2u size = Game::window.getSize();
     float y = static_cast<float>(size.y) * 2 / 3.f;
 
-    for (auto const& [name, score] : scores) {
+    for (auto const& [name, score] : (*scores)) {
         sf::Text t;
         t.setFont(Game::font);
         t.setString(name + ": " + std::to_string(score));
@@ -131,7 +130,7 @@ void MenuState::onMouseClick(sf::Event::MouseButtonEvent event) {
         if (const sf::Vector2f mousePos(static_cast<float>(event.x), static_cast<float>(event.y));
             playButton.getGlobalBounds().contains(mousePos)) {
             if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
-                state_manager->push(std::make_unique<LevelState>(state_manager));
+                state_manager->push(std::make_unique<LevelState>(state_manager, playerName, scores));
             }
         }
     }
