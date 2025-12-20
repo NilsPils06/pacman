@@ -9,15 +9,20 @@ class Pacman final : public EntityModel {
     Direction queuedDirection = RIGHT;
     float speed = 0.1f;
     bool blocked = false;
+    Coords spawn;
+    bool dying = false;
+    float deathTimer = 0.0f;
+    const float DEATH_DURATION = 1.5f;
 
 public:
-    explicit Pacman(const Coords& coords) : EntityModel(coords) {}
+    explicit Pacman(const Coords& coords) : EntityModel(coords), spawn(coords) {}
     void notify(std::shared_ptr<Event> e) override;
     void tick() override;
     void block();
     void snapPosition(const Coords& wall);
     [[nodiscard]] int getLives() const;
     void hurt();
+    [[nodiscard]] bool isDying() const;
 };
 } // namespace subjects
 

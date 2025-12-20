@@ -29,6 +29,18 @@ void subjects::Pacman::notify(const std::shared_ptr<Event> e) {
 
 void subjects::Pacman::tick() {
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
+    if (dying) {
+        deathTimer += Stopwatch::getInstance().getDeltaTime();
+        notify(std::make_shared<DieEvent>(getCoords(), deathTimer, DEATH_DURATION));
+
+        if (deathTimer >= 1.5f) {
+            lives--;
+            setCoords(spawn);
+            dying = false;
+            deathTimer = 0.0f;
+        }
+        return;
+    }
 
     speed = (facing == UP || facing == DOWN) ? 0.3f * ASPECT_RATIO : 0.3f;
 
@@ -114,4 +126,9 @@ void subjects::Pacman::snapPosition(const Coords& wall) {
     }
 }
 int subjects::Pacman::getLives() const { return lives; }
-void subjects::Pacman::hurt() { lives--; }
+void subjects::Pacman::hurt() {
+    if (dying) return;
+    dying = true;
+    deathTimer = 0.0f;
+}
+bool subjects::Pacman::isDying() const {return dying;}

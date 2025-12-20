@@ -33,7 +33,7 @@ void MenuState::onKeyPress(sf::Event::KeyEvent event) {
     if (playerName.empty())
         return;
     if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
-        state_manager->push(std::make_unique<LevelState>(state_manager));
+        state_manager->push(std::make_unique<LevelState>(state_manager, playerName, scores));
     }
 }
 void MenuState::render() {

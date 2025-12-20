@@ -9,3 +9,7 @@ Direction DirectionChangeEvent::getDirection() const { return direction; }
 EventType DirectionChangeEvent::getType() const { return DIRECTION_UPDATE; }
 EventType CollectEvent::getType() const { return COLLECT; }
 std::shared_ptr<subjects::Collectable> CollectEvent::getCollectable() const { return collectable; }
+EventType DieEvent::getType() const {return DIE;}
+Coords DieEvent::getPosition() const { return position; }
+float DieEvent::getTimeElapsed() const { return timeElapsed; }
+float DieEvent::getDuration() const {return duration;}

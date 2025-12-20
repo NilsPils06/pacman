@@ -152,13 +152,17 @@ void World::render() {
         return false;
     });
 
-    for (const auto& entity : entities) {
-        if (entity->isExpired())
-            continue;
-        entity->tick();
+    if (collisionHandler->isDying()) {
+        collisionHandler->tick();
+    } else {
+        for (const auto& entity : entities) {
+            if (entity->isExpired())
+                continue;
+            entity->tick();
+        }
+        checkCollisions();
+        collectables -= collisionHandler->getAmountOfCollections();
     }
-    checkCollisions();
-    collectables -= collisionHandler->getAmountOfCollections();
 }
 bool World::isOver() const { return collisionHandler->isDead(); }
 bool World::isCompleted() const { return collectables <= 0; }

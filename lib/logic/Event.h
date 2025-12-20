@@ -5,9 +5,7 @@
 
 #include <memory>
 
-// TODO maybe update this so that it's the command pattern????
-
-enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT, TICK };
+enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT, TICK, DIE };
 
 class Event {
 public:
@@ -56,6 +54,19 @@ public:
 
     [[nodiscard]] EventType getType() const override;
     [[nodiscard]] std::shared_ptr<subjects::Collectable> getCollectable() const;
+};
+
+class DieEvent final : public Event {
+    Coords position;
+    float timeElapsed;
+    float duration;
+
+public:
+    DieEvent(const Coords& position, const float time_elapsed, const float duration) : position(position), timeElapsed(time_elapsed), duration(duration) {}
+    [[nodiscard]] EventType getType() const override;
+    [[nodiscard]] Coords getPosition() const;
+    [[nodiscard]] float getTimeElapsed() const;
+    [[nodiscard]] float getDuration() const;
 };
 
 #endif // PACMAN_EVENT_H
