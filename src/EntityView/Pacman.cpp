@@ -8,18 +8,9 @@ void view::Pacman::update(std::shared_ptr<Event> e) {
         const auto event = std::static_pointer_cast<DieEvent>(e);
 
         static const std::vector deathAnim = {
-            sprites::PACMAN_DEATH_1,
-            sprites::PACMAN_DEATH_2,
-            sprites::PACMAN_DEATH_3,
-            sprites::PACMAN_DEATH_4,
-            sprites::PACMAN_DEATH_5,
-            sprites::PACMAN_DEATH_6,
-            sprites::PACMAN_DEATH_7,
-            sprites::PACMAN_DEATH_8,
-            sprites::PACMAN_DEATH_9,
-            sprites::PACMAN_DEATH_10,
-            sprites::PACMAN_DEATH_11,
-            sprites::PACMAN_DEATH_12,
+            sprites::PACMAN_DEATH_1, sprites::PACMAN_DEATH_2,  sprites::PACMAN_DEATH_3,  sprites::PACMAN_DEATH_4,
+            sprites::PACMAN_DEATH_5, sprites::PACMAN_DEATH_6,  sprites::PACMAN_DEATH_7,  sprites::PACMAN_DEATH_8,
+            sprites::PACMAN_DEATH_9, sprites::PACMAN_DEATH_10, sprites::PACMAN_DEATH_11, sprites::PACMAN_DEATH_12,
         };
 
         const float timePerFrame = event->getDuration() / static_cast<float>(deathAnim.size());

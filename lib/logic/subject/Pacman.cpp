@@ -127,8 +127,9 @@ void subjects::Pacman::snapPosition(const Coords& wall) {
 }
 int subjects::Pacman::getLives() const { return lives; }
 void subjects::Pacman::hurt() {
-    if (dying) return;
+    if (dying)
+        return;
     dying = true;
     deathTimer = 0.0f;
 }
-bool subjects::Pacman::isDying() const {return dying;}
+bool subjects::Pacman::isDying() const { return dying; }

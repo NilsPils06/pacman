@@ -54,7 +54,8 @@ void Camera::showLives(const int lives) {
     const sf::FloatRect textRect = text.getLocalBounds();
 
     text.setOrigin(textRect.left, textRect.top + textRect.height);
-    text.setPosition(static_cast<float>(Game::window.getSize().x) /6*5, static_cast<float>(Game::window.getSize().y) - 10.0f);
+    text.setPosition(static_cast<float>(Game::window.getSize().x) / 6 * 5,
+                     static_cast<float>(Game::window.getSize().y) - 10.0f);
 
     Game::window.draw(text);
 }

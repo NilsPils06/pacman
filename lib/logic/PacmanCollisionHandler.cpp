@@ -18,11 +18,9 @@ int PacmanCollisionHandler::getAmountOfCollections() {
     amountOfCollections = 0;
     return out;
 }
-int PacmanCollisionHandler::getLives() const { return pacman->getLives();}
-bool PacmanCollisionHandler::isDying() const {return pacman->isDying(); }
-void PacmanCollisionHandler::tick() const {
-    pacman->tick();
-}
+int PacmanCollisionHandler::getLives() const { return pacman->getLives(); }
+bool PacmanCollisionHandler::isDying() const { return pacman->isDying(); }
+void PacmanCollisionHandler::tick() const { pacman->tick(); }
 void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Coin> e) {
     ++amountOfCollections;
     pacman->notify(std::make_shared<CollectEvent>(e));

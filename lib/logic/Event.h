@@ -62,7 +62,8 @@ class DieEvent final : public Event {
     float duration;
 
 public:
-    DieEvent(const Coords& position, const float time_elapsed, const float duration) : position(position), timeElapsed(time_elapsed), duration(duration) {}
+    DieEvent(const Coords& position, const float time_elapsed, const float duration)
+        : position(position), timeElapsed(time_elapsed), duration(duration) {}
     [[nodiscard]] EventType getType() const override;
     [[nodiscard]] Coords getPosition() const;
     [[nodiscard]] float getTimeElapsed() const;
