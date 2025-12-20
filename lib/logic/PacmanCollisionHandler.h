@@ -17,6 +17,7 @@ public:
     [[nodiscard]] Coords getPacmanCoords() const;
     [[nodiscard]] bool isDead() const;
     [[nodiscard]] int getAmountOfCollections();
+    [[nodiscard]] int getLives() const;
     [[nodiscard]] bool isDying() const;
     void tick() const;
     void visit(std::shared_ptr<subjects::Coin> e) override;

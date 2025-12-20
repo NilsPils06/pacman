@@ -43,3 +43,18 @@ void Camera::showScore(const int score) {
 
     Game::window.draw(text);
 }
+void Camera::showLives(const int lives) {
+    sf::Text text;
+
+    text.setFont(Game::font);
+    text.setString("LIVES: " + std::to_string(lives));
+    text.setCharacterSize(60);
+    text.setFillColor(sf::Color::Yellow);
+
+    const sf::FloatRect textRect = text.getLocalBounds();
+
+    text.setOrigin(textRect.left, textRect.top + textRect.height);
+    text.setPosition(static_cast<float>(Game::window.getSize().x) /6*5, static_cast<float>(Game::window.getSize().y) - 10.0f);
+
+    Game::window.draw(text);
+}

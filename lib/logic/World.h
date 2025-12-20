@@ -28,6 +28,7 @@ public:
     void render();
     [[nodiscard]] bool isOver() const;
     [[nodiscard]] bool isCompleted() const;
+    [[nodiscard]] int getLives() const;
 };
 
 #endif // PACMAN_WORLD_H

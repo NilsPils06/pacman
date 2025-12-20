@@ -24,7 +24,7 @@ void view::Pacman::update(std::shared_ptr<Event> e) {
 
         const float timePerFrame = event->getDuration() / static_cast<float>(deathAnim.size());
 
-        int frameIndex = static_cast<int>(event->getTimeElapsed() / timePerFrame);
+        auto frameIndex = static_cast<size_t>(event->getTimeElapsed() / timePerFrame);
 
         if (frameIndex >= deathAnim.size()) {
             frameIndex = static_cast<int>(deathAnim.size()) - 1;

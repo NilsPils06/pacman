@@ -10,6 +10,7 @@ public:
     static void project(sf::Sprite& sprite, const Coords& coords);
 
     static void showScore(int score);
+    static void showLives(int lives);
 };
 
 #endif // PACMAN_CAMERA_H

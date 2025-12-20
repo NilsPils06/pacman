@@ -71,4 +71,5 @@ void LevelState::render() {
     world->render();
     score->tick();
     Camera::showScore(score->getScore());
+    Camera::showLives(world->getLives());
 }

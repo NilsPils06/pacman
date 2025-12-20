@@ -166,3 +166,4 @@ void World::render() {
 }
 bool World::isOver() const { return collisionHandler->isDead(); }
 bool World::isCompleted() const { return collectables <= 0; }
+int World::getLives() const {return collisionHandler->getLives();}
