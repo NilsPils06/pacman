@@ -15,8 +15,9 @@ LevelState::LevelState(const std::shared_ptr<StateManager>& manager) : State(man
     factory = std::make_shared<EntityFactory>(score);
     world = std::make_shared<World>(factory);
 }
-LevelState::LevelState(const std::shared_ptr<StateManager>& manager, std::string  playerName,
-                       const std::shared_ptr<std::map<std::string, int>>& scores) : State(manager), playerName(std::move(playerName)), scores(scores) {
+LevelState::LevelState(const std::shared_ptr<StateManager>& manager, std::string playerName,
+                       const std::shared_ptr<std::map<std::string, int>>& scores)
+    : State(manager), playerName(std::move(playerName)), scores(scores) {
     score = std::make_shared<Score>();
     factory = std::make_shared<EntityFactory>(score);
     world = std::make_shared<World>(factory);
