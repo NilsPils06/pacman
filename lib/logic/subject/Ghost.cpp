@@ -1,42 +1,44 @@
 #include "Ghost.h"
 #include "../Event.h"
+#include "../Random.h"
 #include "../Stopwatch.h"
 
 #include <cmath>
 constexpr float ASPECT_RATIO = 16.f / 9.f;
 
+// TODO return to spawn after pacman dies
+
 void subjects::Ghost::tick() {
-    // copied from Pacman
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
 
     speed = (facing == UP || facing == DOWN) ? 0.3f * ASPECT_RATIO : 0.3f;
 
-    if (facing != queuedDirection) {
-        const float axisValue = (queuedDirection == UP || queuedDirection == DOWN) ? coords.x : coords.y;
-        const float gridSize = (queuedDirection == UP || queuedDirection == DOWN) ? coords.width : coords.height;
+    auto isAtCenter = [&](float tolerance = 0.05f) -> bool {
+        const float axisValue = (facing == UP || facing == DOWN) ? coords.y : coords.x;
+        const float gridSize = (facing == UP || facing == DOWN) ? coords.height : coords.width;
 
         const float normalizedPos = (axisValue + 1.0f) / gridSize;
         const float idealIndex = std::round(normalizedPos);
         const float centerPos = (idealIndex * gridSize) - 1.0f;
 
-        const float distance = std::abs(axisValue - centerPos);
+        return std::abs(axisValue - centerPos) < (speed * deltaTime * 2.0f);
+    };
+    if (blocked) {
+        std::vector directions = {UP, DOWN, LEFT, RIGHT};
+        std::erase(directions, facing);
 
-        float threshold = (speed * deltaTime);
+        const int randIndex = Random::getInstance().getInt(0, static_cast<int>(directions.size() - 1));
+        facing = directions[randIndex];
 
-        if (blocked)
-            threshold = gridSize * 0.5f;
-
-        if (distance < threshold) {
-            if (queuedDirection == UP || queuedDirection == DOWN)
-                coords.x = centerPos;
-            else
-                coords.y = centerPos;
-
-            facing = queuedDirection;
+        blocked = false;
+    } else if (isAtCenter()) {
+        if (Random::getInstance().getInt(0, 1)) {
+            const std::vector directions = {UP, DOWN, LEFT, RIGHT};
+            const int randIndex = Random::getInstance().getInt(0, static_cast<int>(directions.size() - 1));
+            facing = directions[randIndex];
         }
     }
 
-    blocked = false;
     const float correctionSpeed = speed * 2.0f;
 
     auto alignToCenter = [&](const float& current, const float& step) -> float {

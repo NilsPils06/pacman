@@ -10,7 +10,6 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     bool chasing = false;
     bool fear = false;
     Direction facing = RIGHT;
-    Direction queuedDirection = RIGHT;
     float speed = 0.1f;
     bool blocked = false;
     Coords spawn;
