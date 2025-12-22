@@ -21,9 +21,9 @@ void subjects::Ghost::tick() {
         offset *= 0.2f;
 
         if (dir == UP || dir == DOWN)
-            p.x = std::round((p.x + 1) / coords.width) * coords.width - 1.0f;
+            p.x = std::round((p.x + 1.0f) / coords.width) * coords.width - 1.0f;
         else
-            p.y = std::round((p.y + 1) / coords.height) * coords.height - 1.0f;
+            p.y = std::round((p.y + 1.0f) / coords.height) * coords.height - 1.0f;
 
         if (dir == UP)
             p.y -= offset;
@@ -37,7 +37,7 @@ void subjects::Ghost::tick() {
         return wallValidator(p);
     };
 
-    auto isAtCenter = [&](float tolerance = 0.05f) -> bool {
+    auto isAtCenter = [&]() -> bool {
         const float axisValue = (facing == UP || facing == DOWN) ? coords.y : coords.x;
         const float gridSize = (facing == UP || facing == DOWN) ? coords.height : coords.width;
         const float normalizedPos = (axisValue + 1.0f) / gridSize;
@@ -56,10 +56,8 @@ void subjects::Ghost::tick() {
             turnDecision = true;
         }
     }
-
     if (turnDecision) {
         std::vector<Direction> candidates;
-
         Direction reverseDir;
         if (facing == UP)
             reverseDir = DOWN;
@@ -81,14 +79,16 @@ void subjects::Ghost::tick() {
 
         if (!candidates.empty()) {
             const int index = Random::getInstance().getInt(0, static_cast<int>(candidates.size() - 1));
-            facing = candidates[index];
+            Direction newFacing = candidates[index];
+            if (newFacing != facing) {
+                facing = newFacing;
+                const float gridSize = (facing == UP || facing == DOWN) ? coords.height : coords.width;
 
-            const float gridSize = (facing == UP || facing == DOWN) ? coords.height : coords.width;
-            if (facing == UP || facing == DOWN)
-                coords.x = std::round((coords.x + 1) / gridSize) * gridSize - 1;
-            else
-                coords.y = std::round((coords.y + 1) / gridSize) * gridSize - 1;
-
+                if (facing == UP || facing == DOWN)
+                    coords.x = std::round((coords.x + 1.0f) / gridSize) * gridSize - 1.0f;
+                else
+                    coords.y = std::round((coords.y + 1.0f) / gridSize) * gridSize - 1.0f;
+            }
         } else if (wallAhead) {
             facing = reverseDir;
         }
@@ -106,23 +106,25 @@ void subjects::Ghost::tick() {
         return current + (diff > 0 ? move : -move);
     };
 
-    switch (facing) {
-    case RIGHT:
-        coords.x += speed * deltaTime;
-        coords.y = alignToCenter(coords.y, coords.height);
-        break;
-    case UP:
-        coords.y -= speed * deltaTime;
-        coords.x = alignToCenter(coords.x, coords.width);
-        break;
-    case DOWN:
-        coords.y += speed * deltaTime;
-        coords.x = alignToCenter(coords.x, coords.width);
-        break;
-    case LEFT:
-        coords.x -= speed * deltaTime;
-        coords.y = alignToCenter(coords.y, coords.height);
-        break;
+    if (canMoveTo(facing)) {
+        switch (facing) {
+        case RIGHT:
+            coords.x += speed * deltaTime;
+            coords.y = alignToCenter(coords.y, coords.height);
+            break;
+        case UP:
+            coords.y -= speed * deltaTime;
+            coords.x = alignToCenter(coords.x, coords.width);
+            break;
+        case DOWN:
+            coords.y += speed * deltaTime;
+            coords.x = alignToCenter(coords.x, coords.width);
+            break;
+        case LEFT:
+            coords.x -= speed * deltaTime;
+            coords.y = alignToCenter(coords.y, coords.height);
+            break;
+        }
     }
 
     notify(std::make_shared<TickEvent>(getCoords(), facing));
