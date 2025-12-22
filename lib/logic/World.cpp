@@ -3,6 +3,7 @@
 #include "Event.h"
 #include "subject/Wall.h"
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <utility>
 
@@ -44,7 +45,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'W': {
             std::shared_ptr<subjects::Wall> wall = factory->createWall(coords);
             entities.push_back(wall);
-            components[wall] = wall;
+            walls.push_back(wall);
             break;
         }
         case '_':
@@ -52,15 +53,13 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'F': {
             std::shared_ptr<subjects::Fruit> fruit = factory->createFruit(coords);
             entities.push_back(fruit);
-            components[fruit] = fruit;
-            collectables++;
+            collectables.push_back(fruit);
             break;
         }
         case 'C': {
             std::shared_ptr<subjects::Coin> coin = factory->createCoin(coords);
             entities.push_back(coin);
-            components[coin] = coin;
-            collectables++;
+            collectables.push_back(coin);
             break;
         }
         case 'P': {
@@ -72,8 +71,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'G': {
             std::shared_ptr<subjects::Ghost> ghost = factory->createGhost(coords);
             entities.push_back(ghost);
-            components[ghost] = ghost;
-            ghostHandlers.push_back(std::make_shared<GhostCollisionHandler>(ghost));
+            ghosts.push_back(ghost);
             break;
         }
         default:
@@ -83,6 +81,16 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         }
 
         x += 1;
+    }
+
+    std::function walkCheck = [this](const Coords& c) {
+        return this->isWalkable(c);
+    };
+
+    pacmanHandler->setWallValidator(walkCheck);
+
+    for (const auto& gh : ghosts) {
+        gh->setWallValidator(walkCheck);
     }
 }
 void World::moveLeft() const {
@@ -106,76 +114,39 @@ void World::moveRight() const {
     }
 }
 
+bool World::isWalkable(const Coords& target) const {
+    if (target.x < -1.0f || target.x > 1.0f || target.y < -1.0f || target.y > 1.0f) {
+        return false;
+    }
+    for (const auto& wall : walls) {
+        Coords hitBox = target;
+        hitBox.width *= 0.9f;
+        hitBox.height *= 0.9f;
+
+        if (hitBox.overlaps(wall->getCoords())) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void World::checkCollisions() const {
-    for (const auto& [modelA, component] : components) {
-        if (modelA->isExpired())
-            continue;
-
-        for (const auto& ghostHandler : ghostHandlers) {
-            const Coords a = modelA->getCoords();
-            const Coords b = ghostHandler->getGhostCoords();
-
-            // Bottom left and top right of A
-            float x1 = a.x - (a.width / 2);
-            float y1 = a.y - (a.height / 2);
-            float x2 = a.x + (a.width / 2);
-            float y2 = a.y + (a.height / 2);
-
-            // Bottom left and top right of B
-            float x3 = b.x - (b.width / 2);
-            float y3 = b.y - (b.height / 2);
-            float x4 = b.x + (b.width / 2);
-            float y4 = b.y + (b.height / 2);
-
-            // Intersection bounds
-            const float x5 = std::max(x1, x3);
-            const float y5 = std::max(y1, y3);
-            const float x6 = std::min(x2, x4);
-            const float y6 = std::min(y2, y4);
-
-            const float overlapX = x6 - x5;
-            const float overlapY = y6 - y5;
-
-            if (overlapX < 0.002f || overlapY < 0.002f) {
-                continue;
-            }
-
-            component->accept(ghostHandler);
+    const Coords pacmanCoords = pacmanHandler->getPacmanCoords();
+    for (const auto& ghost : ghosts) {
+        if (pacmanCoords.overlaps(ghost->getCoords())) {
+            ghost->accept(pacmanHandler);
         }
-        const Coords a = modelA->getCoords();
-        const Coords b = pacmanHandler->getPacmanCoords();
+    }
 
-        // Bottom left and top right of A
-        float x1 = a.x - (a.width / 2);
-        float y1 = a.y - (a.height / 2);
-        float x2 = a.x + (a.width / 2);
-        float y2 = a.y + (a.height / 2);
-
-        // Bottom left and top right of B
-        float x3 = b.x - (b.width / 2);
-        float y3 = b.y - (b.height / 2);
-        float x4 = b.x + (b.width / 2);
-        float y4 = b.y + (b.height / 2);
-
-        // Intersection bounds
-        const float x5 = std::max(x1, x3);
-        const float y5 = std::max(y1, y3);
-        const float x6 = std::min(x2, x4);
-        const float y6 = std::min(y2, y4);
-
-        const float overlapX = x6 - x5;
-        const float overlapY = y6 - y5;
-
-        if (overlapX < 0.002f || overlapY < 0.002f) {
-            continue;
+    for (const auto& collectable : collectables) {
+        if (collectable->getCoords().overlaps(pacmanCoords)) {
+            collectable->accept(pacmanHandler);
         }
-
-        component->accept(pacmanHandler);
     }
 }
 
 void World::render() {
-    std::erase_if(entities, [](std::shared_ptr<subjects::EntityModel>& e) {
+    std::erase_if(collectables, [](std::shared_ptr<subjects::Collectable>& e) {
         if (e->isExpired()) {
             e->detachAll();
             e.reset();
@@ -193,9 +164,8 @@ void World::render() {
             entity->tick();
         }
         checkCollisions();
-        collectables -= pacmanHandler->getAmountOfCollections();
     }
 }
 bool World::isOver() const { return pacmanHandler->isDead(); }
-bool World::isCompleted() const { return collectables <= 0; }
+bool World::isCompleted() const { return collectables.empty(); }
 int World::getLives() const { return pacmanHandler->getLives(); }

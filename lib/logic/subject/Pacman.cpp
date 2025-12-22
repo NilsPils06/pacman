@@ -29,6 +29,7 @@ void subjects::Pacman::notify(const std::shared_ptr<Event> e) {
 
 void subjects::Pacman::tick() {
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
+
     if (dying) {
         deathTimer += Stopwatch::getInstance().getDeltaTime();
         notify(std::make_shared<DieEvent>(getCoords(), deathTimer, DEATH_DURATION));
@@ -38,11 +39,36 @@ void subjects::Pacman::tick() {
             setCoords(spawn);
             dying = false;
             deathTimer = 0.0f;
+            facing = RIGHT;
+            queuedDirection = RIGHT;
         }
         return;
     }
-
     speed = (facing == UP || facing == DOWN) ? 0.3f * ASPECT_RATIO : 0.3f;
+
+    auto canMoveTo = [&](const Direction dir) -> bool {
+        if (!wallValidator)
+            return true;
+
+        Coords p = coords;
+        float offset = (dir == UP || dir == DOWN) ? coords.height : coords.width;
+        offset *= 0.1f;
+
+        if (dir == UP || dir == DOWN)
+            p.x = std::round((p.x + 1.0f) / coords.width) * coords.width - 1.0f;
+        else
+            p.y = std::round((p.y + 1.0f) / coords.height) * coords.height - 1.0f;
+        if (dir == UP)
+            p.y -= offset;
+        if (dir == DOWN)
+            p.y += offset;
+        if (dir == LEFT)
+            p.x -= offset;
+        if (dir == RIGHT)
+            p.x += offset;
+
+        return wallValidator(p);
+    };
 
     if (facing != queuedDirection) {
         const float axisValue = (queuedDirection == UP || queuedDirection == DOWN) ? coords.x : coords.y;
@@ -51,15 +77,9 @@ void subjects::Pacman::tick() {
         const float normalizedPos = (axisValue + 1.0f) / gridSize;
         const float idealIndex = std::round(normalizedPos);
         const float centerPos = (idealIndex * gridSize) - 1.0f;
-
         const float distance = std::abs(axisValue - centerPos);
 
-        float threshold = (speed * deltaTime);
-
-        if (blocked)
-            threshold = gridSize * 0.5f;
-
-        if (distance < threshold) {
+        if (distance < (speed * deltaTime * 1.5f) && canMoveTo(queuedDirection)) {
             if (queuedDirection == UP || queuedDirection == DOWN)
                 coords.x = centerPos;
             else
@@ -69,61 +89,59 @@ void subjects::Pacman::tick() {
         }
     }
 
-    blocked = false;
-    const float correctionSpeed = speed * 2.0f;
+    if (!canMoveTo(facing)) {
+        const float gridSize = (facing == UP || facing == DOWN) ? coords.height : coords.width;
 
-    auto alignToCenter = [&](const float& current, const float& step) -> float {
-        const float norm = (current + 1.0f) / step;
-        const float ideal = std::round(norm);
-        const float target = (ideal * step) - 1.0f;
-        const float diff = target - current;
-        const float move = correctionSpeed * deltaTime;
+        const float axisValue = (queuedDirection == UP || queuedDirection == DOWN) ? coords.x : coords.y;
 
-        if (std::abs(diff) < move)
-            return target;
-        return current + (diff > 0 ? move : -move);
-    };
+        const float normalizedPos = (axisValue + 1.0f) / gridSize;
+        const float idealIndex = std::round(normalizedPos);
+        const float centerPos = (idealIndex * gridSize) - 1.0f;
 
-    switch (facing) {
-    case RIGHT:
-        coords.x += speed * deltaTime;
-        coords.y = alignToCenter(coords.y, coords.height);
-        break;
-    case UP:
-        coords.y -= speed * deltaTime;
-        coords.x = alignToCenter(coords.x, coords.width);
-        break;
-    case DOWN:
-        coords.y += speed * deltaTime;
-        coords.x = alignToCenter(coords.x, coords.width);
-        break;
-    case LEFT:
-        coords.x -= speed * deltaTime;
-        coords.y = alignToCenter(coords.y, coords.height);
-        break;
+        float currentPos = (facing == UP || facing == DOWN) ? coords.y : coords.x;
+
+        if (std::abs(currentPos - centerPos) < (gridSize * 0.5f)) {
+            if (facing == UP || facing == DOWN)
+                coords.y = centerPos;
+            else
+                coords.x = centerPos;
+        }
+    } else {
+        const float correctionSpeed = speed * 2.0f;
+
+        auto alignToCenter = [&](const float& current, const float& step) -> float {
+            const float norm = (current + 1.0f) / step;
+            const float ideal = std::round(norm);
+            const float target = (ideal * step) - 1.0f;
+            const float diff = target - current;
+            const float move = correctionSpeed * deltaTime;
+
+            if (std::abs(diff) < move)
+                return target;
+            return current + (diff > 0 ? move : -move);
+        };
+
+        switch (facing) {
+        case RIGHT:
+            coords.x += speed * deltaTime;
+            coords.y = alignToCenter(coords.y, coords.height);
+            break;
+        case UP:
+            coords.y -= speed * deltaTime;
+            coords.x = alignToCenter(coords.x, coords.width);
+            break;
+        case DOWN:
+            coords.y += speed * deltaTime;
+            coords.x = alignToCenter(coords.x, coords.width);
+            break;
+        case LEFT:
+            coords.x -= speed * deltaTime;
+            coords.y = alignToCenter(coords.y, coords.height);
+            break;
+        }
     }
 
     notify(std::make_shared<TickEvent>(getCoords(), facing));
-}
-void subjects::Pacman::block() {
-    speed = 0;
-    blocked = true;
-}
-void subjects::Pacman::snapPosition(const Coords& wall) {
-    switch (facing) {
-    case RIGHT:
-        coords.x = wall.x - (wall.width / 2.0f) - (coords.width / 2.0f);
-        break;
-    case LEFT:
-        coords.x = wall.x + (wall.width / 2.0f) + (coords.width / 2.0f);
-        break;
-    case DOWN:
-        coords.y = wall.y - (wall.height / 2.0f) - (coords.height / 2.0f);
-        break;
-    case UP:
-        coords.y = wall.y + (wall.height / 2.0f) + (coords.height / 2.0f);
-        break;
-    }
 }
 int subjects::Pacman::getLives() const { return lives; }
 void subjects::Pacman::hurt() {
@@ -133,3 +151,6 @@ void subjects::Pacman::hurt() {
     deathTimer = 0.0f;
 }
 bool subjects::Pacman::isDying() const { return dying; }
+void subjects::Pacman::setWallValidator(const std::function<bool(const Coords&)>& validator) {
+    wallValidator = validator;
+}

@@ -1,22 +1,20 @@
 #ifndef PACMAN_WORLD_H
 #define PACMAN_WORLD_H
 #include "AbstractFactory.h"
-#include "GhostCollisionHandler.h"
 #include "PacmanCollisionHandler.h"
 #include "subject/EntityModel.h"
-
-#include <map>
 #include <memory>
 #include <vector>
 
 class PacmanCollisionHandler;
 class World {
+    // TODO remove entities
     std::vector<std::shared_ptr<subjects::EntityModel>> entities;
+    std::vector<std::shared_ptr<subjects::Wall>> walls;
+    std::vector<std::shared_ptr<subjects::Ghost>> ghosts;
+    std::vector<std::shared_ptr<subjects::Collectable>> collectables;
     std::shared_ptr<PacmanCollisionHandler> pacmanHandler{};
-    std::vector<std::shared_ptr<GhostCollisionHandler>> ghostHandlers{};
-    std::map<std::shared_ptr<subjects::EntityModel>, std::shared_ptr<CollisionComponent>> components;
     std::shared_ptr<AbstractFactory> factory;
-    int collectables = 0;
 
 public:
     explicit World(std::shared_ptr<AbstractFactory> factory);
@@ -27,6 +25,7 @@ public:
     void moveRight() const;
 
     void checkCollisions() const;
+    [[nodiscard]] bool isWalkable(const Coords& target) const;
     void render();
     [[nodiscard]] bool isOver() const;
     [[nodiscard]] bool isCompleted() const;
