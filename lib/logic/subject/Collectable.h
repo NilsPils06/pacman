@@ -1,7 +1,7 @@
 #ifndef PACMAN_COLLECTABLE_H
 #define PACMAN_COLLECTABLE_H
-#include "EntityModel.h"
 #include "../Collision.h"
+#include "EntityModel.h"
 
 namespace subjects {
 class Collectable : public EntityModel, public CollisionComponent {

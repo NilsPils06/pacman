@@ -20,9 +20,5 @@ float Random::getFloat(const float min, const float max) {
     std::uniform_real_distribution dis(min, max);
     return dis(gen);
 }
-int Random::getInt(const int max) {
-    return getInt(0, max);
-}
-float Random::getFloat(const float max) {
-    return getFloat(0.f,max);
-}
+int Random::getInt(const int max) { return getInt(0, max); }
+float Random::getFloat(const float max) { return getFloat(0.f, max); }

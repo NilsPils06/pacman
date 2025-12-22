@@ -83,9 +83,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         x += 1;
     }
 
-    std::function walkCheck = [this](const Coords& c) {
-        return this->isWalkable(c);
-    };
+    std::function walkCheck = [this](const Coords& c) { return this->isWalkable(c); };
 
     pacmanHandler->setWallValidator(walkCheck);
 
