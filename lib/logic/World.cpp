@@ -66,13 +66,14 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'P': {
             std::shared_ptr<subjects::Pacman> pacman = factory->createPacman(coords);
             entities.push_back(pacman);
-            collisionHandler = std::make_shared<PacmanCollisionHandler>(pacman);
+            pacmanHandler = std::make_shared<PacmanCollisionHandler>(pacman);
             break;
         }
         case 'G': {
             std::shared_ptr<subjects::Ghost> ghost = factory->createGhost(coords);
             entities.push_back(ghost);
             components[ghost] = ghost;
+            ghostHandlers.push_back(std::make_shared<GhostCollisionHandler>(ghost));
             break;
         }
         default:
@@ -110,8 +111,39 @@ void World::checkCollisions() const {
         if (modelA->isExpired())
             continue;
 
+        for (const auto& ghostHandler : ghostHandlers) {
+            const Coords a = modelA->getCoords();
+            const Coords b = ghostHandler->getGhostCoords();
+
+            // Bottom left and top right of A
+            float x1 = a.x - (a.width / 2);
+            float y1 = a.y - (a.height / 2);
+            float x2 = a.x + (a.width / 2);
+            float y2 = a.y + (a.height / 2);
+
+            // Bottom left and top right of B
+            float x3 = b.x - (b.width / 2);
+            float y3 = b.y - (b.height / 2);
+            float x4 = b.x + (b.width / 2);
+            float y4 = b.y + (b.height / 2);
+
+            // Intersection bounds
+            const float x5 = std::max(x1, x3);
+            const float y5 = std::max(y1, y3);
+            const float x6 = std::min(x2, x4);
+            const float y6 = std::min(y2, y4);
+
+            const float overlapX = x6 - x5;
+            const float overlapY = y6 - y5;
+
+            if (overlapX < 0.002f || overlapY < 0.002f) {
+                continue;
+            }
+
+            component->accept(ghostHandler);
+        }
         const Coords a = modelA->getCoords();
-        const Coords b = collisionHandler->getPacmanCoords();
+        const Coords b = pacmanHandler->getPacmanCoords();
 
         // Bottom left and top right of A
         float x1 = a.x - (a.width / 2);
@@ -138,7 +170,7 @@ void World::checkCollisions() const {
             continue;
         }
 
-        component->accept(collisionHandler);
+        component->accept(pacmanHandler);
     }
 }
 
@@ -152,8 +184,8 @@ void World::render() {
         return false;
     });
 
-    if (collisionHandler->isDying()) {
-        collisionHandler->tick();
+    if (pacmanHandler->isDying()) {
+        pacmanHandler->tick();
     } else {
         for (const auto& entity : entities) {
             if (entity->isExpired())
@@ -161,9 +193,9 @@ void World::render() {
             entity->tick();
         }
         checkCollisions();
-        collectables -= collisionHandler->getAmountOfCollections();
+        collectables -= pacmanHandler->getAmountOfCollections();
     }
 }
-bool World::isOver() const { return collisionHandler->isDead(); }
+bool World::isOver() const { return pacmanHandler->isDead(); }
 bool World::isCompleted() const { return collectables <= 0; }
-int World::getLives() const { return collisionHandler->getLives(); }
+int World::getLives() const { return pacmanHandler->getLives(); }

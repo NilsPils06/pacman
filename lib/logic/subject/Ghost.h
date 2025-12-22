@@ -9,10 +9,17 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     Direction lockedIn = UP;
     bool chasing = false;
     bool fear = false;
+    Direction facing = RIGHT;
+    Direction queuedDirection = RIGHT;
+    float speed = 0.1f;
+    bool blocked = false;
+    Coords spawn;
 
 public:
-    explicit Ghost(const Coords& coords) : EntityModel(coords) {}
+    explicit Ghost(const Coords& coords) : EntityModel(coords), spawn(coords) {}
     void tick() override;
+    void block();
+    void snapPosition(const Coords& wall);
     void accept(std::shared_ptr<CollisionVisitor> visitor) override;
 };
 } // namespace subjects
