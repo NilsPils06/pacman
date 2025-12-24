@@ -40,9 +40,7 @@ struct Coords {
         }
         return true;
     }
-    bool operator==(const Coords& other) const {
-        return x == other.x && y == other.y;
-    }
+    bool operator==(const Coords& other) const { return x == other.x && y == other.y; }
 };
 
 struct Hitbox {

@@ -4,7 +4,7 @@
 #include "subject/Coin.h"
 #include "subject/Fruit.h"
 #include "subject/Wall.h"
-std::shared_ptr<subjects::Pacman> PacmanCollisionHandler::getPacman() const {return pacman;}
+std::shared_ptr<subjects::Pacman> PacmanCollisionHandler::getPacman() const { return pacman; }
 bool PacmanCollisionHandler::isDead() const { return pacman->getLives() <= 0; }
 void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Coin> e) {
     pacman->notify(std::make_shared<CollectEvent>(e));
