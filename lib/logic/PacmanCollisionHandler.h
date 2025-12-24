@@ -15,11 +15,8 @@ public:
 
     void visit(const std::shared_ptr<const subjects::Wall>& e) override {};
 
-    [[nodiscard]] Coords getPacmanCoords() const;
+    [[nodiscard]] std::shared_ptr<subjects::Pacman> getPacman() const;
     [[nodiscard]] bool isDead() const;
-    [[nodiscard]] int getLives() const;
-    [[nodiscard]] bool isDying() const;
-    void tick() const;
     void visit(std::shared_ptr<subjects::Coin> e) override;
     void visit(std::shared_ptr<subjects::Fruit> e) override;
     void visit(std::shared_ptr<subjects::Ghost> e) override;

@@ -44,7 +44,6 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         switch (token) {
         case 'W': {
             std::shared_ptr<subjects::Wall> wall = factory->createWall(coords);
-            entities.push_back(wall);
             walls.push_back(wall);
             break;
         }
@@ -52,25 +51,21 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
             break;
         case 'F': {
             std::shared_ptr<subjects::Fruit> fruit = factory->createFruit(coords);
-            entities.push_back(fruit);
             collectables.push_back(fruit);
             break;
         }
         case 'C': {
             std::shared_ptr<subjects::Coin> coin = factory->createCoin(coords);
-            entities.push_back(coin);
             collectables.push_back(coin);
             break;
         }
         case 'P': {
             std::shared_ptr<subjects::Pacman> pacman = factory->createPacman(coords);
-            entities.push_back(pacman);
             pacmanHandler = std::make_shared<PacmanCollisionHandler>(pacman);
             break;
         }
         case 'G': {
             std::shared_ptr<subjects::Ghost> ghost = factory->createGhost(coords);
-            entities.push_back(ghost);
             ghosts.push_back(ghost);
             break;
         }
@@ -91,26 +86,10 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         gh->setWallValidator(walkCheck);
     }
 }
-void World::moveLeft() const {
-    for (const auto& entity : entities) {
-        entity->notify(std::make_shared<DirectionChangeEvent>(LEFT));
-    }
-}
-void World::moveUp() const {
-    for (const auto& entity : entities) {
-        entity->notify(std::make_shared<DirectionChangeEvent>(UP));
-    }
-}
-void World::moveDown() const {
-    for (const auto& entity : entities) {
-        entity->notify(std::make_shared<DirectionChangeEvent>(DOWN));
-    }
-}
-void World::moveRight() const {
-    for (const auto& entity : entities) {
-        entity->notify(std::make_shared<DirectionChangeEvent>(RIGHT));
-    }
-}
+void World::moveLeft() const { pacmanHandler->getPacman()->notify(std::make_shared<DirectionChangeEvent>(LEFT)); }
+void World::moveUp() const { pacmanHandler->getPacman()->notify(std::make_shared<DirectionChangeEvent>(UP)); }
+void World::moveDown() const { pacmanHandler->getPacman()->notify(std::make_shared<DirectionChangeEvent>(DOWN)); }
+void World::moveRight() const { pacmanHandler->getPacman()->notify(std::make_shared<DirectionChangeEvent>(RIGHT)); }
 
 bool World::isWalkable(const Coords& target) const {
     if (target.x < -1.0f || target.x > 1.0f || target.y < -1.0f || target.y > 1.0f) {
@@ -129,7 +108,7 @@ bool World::isWalkable(const Coords& target) const {
 }
 
 void World::checkCollisions() const {
-    const Coords pacmanCoords = pacmanHandler->getPacmanCoords();
+    const Coords pacmanCoords = pacmanHandler->getPacman()->getCoords();
     for (const auto& ghost : ghosts) {
         if (pacmanCoords.overlaps(ghost->getCoords())) {
             ghost->accept(pacmanHandler);
@@ -153,17 +132,23 @@ void World::render() {
         return false;
     });
 
-    if (pacmanHandler->isDying()) {
-        pacmanHandler->tick();
-    } else {
-        for (const auto& entity : entities) {
-            if (entity->isExpired())
-                continue;
-            entity->tick();
-        }
-        checkCollisions();
+    pacmanHandler->getPacman()->tick();
+    if (pacmanHandler->getPacman()->isDying())
+        return;
+
+    for (const auto& entity : collectables) {
+        if (entity->isExpired())
+            continue;
+        entity->tick();
     }
+    for (const auto& entity : walls) {
+        entity->tick();
+    }
+    for (const auto& entity : ghosts) {
+        entity->tick();
+    }
+    checkCollisions();
 }
 bool World::isOver() const { return pacmanHandler->isDead(); }
 bool World::isCompleted() const { return collectables.empty(); }
-int World::getLives() const { return pacmanHandler->getLives(); }
+int World::getLives() const { return pacmanHandler->getPacman()->getLives(); }

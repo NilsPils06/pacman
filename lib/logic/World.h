@@ -8,8 +8,6 @@
 
 class PacmanCollisionHandler;
 class World {
-    // TODO remove entities
-    std::vector<std::shared_ptr<subjects::EntityModel>> entities;
     std::vector<std::shared_ptr<subjects::Wall>> walls;
     std::vector<std::shared_ptr<subjects::Ghost>> ghosts;
     std::vector<std::shared_ptr<subjects::Collectable>> collectables;
