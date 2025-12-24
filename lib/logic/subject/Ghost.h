@@ -21,6 +21,7 @@ public:
     void tick() override;
     void accept(std::shared_ptr<CollisionVisitor> visitor) override;
     void setWallValidator(const std::function<bool(const Coords&)>& validator);
+    void resetPosition();
 };
 } // namespace subjects
 

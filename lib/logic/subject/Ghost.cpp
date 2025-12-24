@@ -133,3 +133,8 @@ void subjects::Ghost::accept(std::shared_ptr<CollisionVisitor> visitor) { visito
 void subjects::Ghost::setWallValidator(const std::function<bool(const Coords&)>& validator) {
     wallValidator = validator;
 }
+void subjects::Ghost::resetPosition() {
+    if (coords == spawn)
+        return;
+    coords = spawn;
+}

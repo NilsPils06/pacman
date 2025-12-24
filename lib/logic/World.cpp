@@ -133,20 +133,23 @@ void World::render() {
     });
 
     pacmanHandler->getPacman()->tick();
-    if (pacmanHandler->getPacman()->isDying())
+    if (pacmanHandler->getPacman()->isDying()) {
+        for (const auto& ghost : ghosts)
+            ghost->resetPosition();
         return;
+    }
 
     for (const auto& entity : collectables) {
         if (entity->isExpired())
             continue;
         entity->tick();
     }
-    for (const auto& entity : walls) {
+    for (const auto& entity : walls)
         entity->tick();
-    }
-    for (const auto& entity : ghosts) {
+
+    for (const auto& entity : ghosts)
         entity->tick();
-    }
+
     checkCollisions();
 }
 bool World::isOver() const { return pacmanHandler->isDead(); }
