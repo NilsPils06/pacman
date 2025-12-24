@@ -23,7 +23,7 @@ public:
 
     void loadScores();
 
-    void renderScoreboard();
+    void renderScoreboard() const;
     void onTextEntered(sf::Event::TextEvent event) override;
     void onMouseClick(sf::Event::MouseButtonEvent event) override;
 };

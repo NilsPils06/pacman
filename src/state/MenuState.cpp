@@ -96,11 +96,23 @@ void MenuState::loadScores() {
     }
 }
 
-void MenuState::renderScoreboard() {
+bool cmp(const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) { return a.second > b.second; }
+
+std::vector<std::pair<std::string, int>> getSorted(const std::shared_ptr<std::map<std::string, int>>& M) {
+    std::vector<std::pair<std::string, int>> A;
+    for (auto& it : (*M)) {
+        A.emplace_back(it);
+    }
+    std::ranges::sort(A, cmp);
+
+    return A;
+}
+
+void MenuState::renderScoreboard() const {
     const sf::Vector2u size = Game::window.getSize();
     float y = static_cast<float>(size.y) * 2 / 3.f;
 
-    for (auto const& [name, score] : (*scores)) {
+    for (auto const& [name, score] : getSorted(scores)) {
         sf::Text t;
         t.setFont(Game::font);
         t.setString(name + ": " + std::to_string(score));
@@ -115,7 +127,7 @@ void MenuState::renderScoreboard() {
     }
 }
 void MenuState::onTextEntered(sf::Event::TextEvent event) {
-    // 8 is backspace
+    // 8 is a backspace
     if (event.unicode == 8) {
         if (!playerName.empty())
             playerName.pop_back();
