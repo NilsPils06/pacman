@@ -27,7 +27,8 @@ SET(SRC main.cpp Game.cpp
         state/DefeatState.cpp
         state/DefeatState.h
         state/VictoryState.cpp
-        state/VictoryState.h)
+        state/VictoryState.h
+        EntityView/AnimatedView.h)
 ADD_EXECUTABLE(game ${SRC})
 
 FIND_PACKAGE(SFML COMPONENTS system window graphics)

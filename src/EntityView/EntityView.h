@@ -4,8 +4,6 @@
 #include "Observer.h"
 #include <SFML/Graphics/Sprite.hpp>
 
-// TODO update EntityView so that it contains the animation sequence
-
 namespace view {
 class EntityView : public Observer {
 protected:
@@ -15,8 +13,6 @@ public:
     explicit EntityView(const std::shared_ptr<subjects::Subject>& subject) : Observer(subject) {}
 
     void setSprite(const sf::IntRect& spriteRect);
-
-    // virtual void updateSprite(int i) = 0;
 
     const sf::Sprite& getSprite() const;
 
@@ -42,6 +38,24 @@ const sf::IntRect GHOST_PINK_LEFT_1(43, 196, 50, 50);
 const sf::IntRect GHOST_PINK_LEFT_2(43, 246, 50, 50);
 const sf::IntRect GHOST_PINK_UP_1(43, 296, 50, 50);
 const sf::IntRect GHOST_PINK_UP_2(43, 346, 50, 50);
+
+const sf::IntRect GHOST_BLUE_RIGHT_1(93, -4, 50, 50);
+const sf::IntRect GHOST_BLUE_RIGHT_2(93, 46, 50, 50);
+const sf::IntRect GHOST_BLUE_DOWN_1(93, 96, 50, 50);
+const sf::IntRect GHOST_BLUE_DOWN_2(93, 146, 50, 50);
+const sf::IntRect GHOST_BLUE_LEFT_1(93, 196, 50, 50);
+const sf::IntRect GHOST_BLUE_LEFT_2(93, 246, 50, 50);
+const sf::IntRect GHOST_BLUE_UP_1(93, 296, 50, 50);
+const sf::IntRect GHOST_BLUE_UP_2(93, 346, 50, 50);
+
+const sf::IntRect GHOST_ORANGE_RIGHT_1(143, -4, 50, 50);
+const sf::IntRect GHOST_ORANGE_RIGHT_2(143, 46, 50, 50);
+const sf::IntRect GHOST_ORANGE_DOWN_1(143, 96, 50, 50);
+const sf::IntRect GHOST_ORANGE_DOWN_2(143, 146, 50, 50);
+const sf::IntRect GHOST_ORANGE_LEFT_1(143, 196, 50, 50);
+const sf::IntRect GHOST_ORANGE_LEFT_2(143, 246, 50, 50);
+const sf::IntRect GHOST_ORANGE_UP_1(143, 296, 50, 50);
+const sf::IntRect GHOST_ORANGE_UP_2(143, 346, 50, 50);
 
 const sf::IntRect COIN(393, 246, 50, 50);
 

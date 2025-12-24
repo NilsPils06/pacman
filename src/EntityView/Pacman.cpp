@@ -3,7 +3,14 @@
 #include "../Camera.h"
 #include "Event.h"
 #include "Stopwatch.h"
-void view::Pacman::update(std::shared_ptr<Event> e) {
+view::Pacman::Pacman(const std::shared_ptr<subjects::Subject>& subject) : AnimatedView(subject) {
+    animUp = {sprites::PACMAN_UP_1, sprites::PACMAN_UP_2, sprites::PACMAN_UP_3};
+    animDown = {sprites::PACMAN_DOWN_1, sprites::PACMAN_DOWN_2, sprites::PACMAN_DOWN_3};
+    animLeft = {sprites::PACMAN_LEFT_1, sprites::PACMAN_LEFT_2, sprites::PACMAN_LEFT_3};
+    animRight = {sprites::PACMAN_RIGHT_1, sprites::PACMAN_RIGHT_2,
+                                          sprites::PACMAN_RIGHT_3};
+}
+void view::Pacman::update(const std::shared_ptr<Event> e) {
     if (e->getType() == DIE) {
         const auto event = std::static_pointer_cast<DieEvent>(e);
 
@@ -36,12 +43,6 @@ void view::Pacman::update(std::shared_ptr<Event> e) {
             currentFrame = (currentFrame + 1) % frameSequence.size();
         }
         const int spriteIndex = frameSequence[currentFrame];
-
-        static const std::vector animUp = {sprites::PACMAN_UP_1, sprites::PACMAN_UP_2, sprites::PACMAN_UP_3};
-        static const std::vector animDown = {sprites::PACMAN_DOWN_1, sprites::PACMAN_DOWN_2, sprites::PACMAN_DOWN_3};
-        static const std::vector animLeft = {sprites::PACMAN_LEFT_1, sprites::PACMAN_LEFT_2, sprites::PACMAN_LEFT_3};
-        static const std::vector animRight = {sprites::PACMAN_RIGHT_1, sprites::PACMAN_RIGHT_2,
-                                              sprites::PACMAN_RIGHT_3};
 
         switch (event->getFacing()) {
         case UP:

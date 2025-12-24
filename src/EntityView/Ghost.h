@@ -1,15 +1,12 @@
 #ifndef VIEW_GHOST_H
 #define VIEW_GHOST_H
-#include "EntityView.h"
+#include "AnimatedView.h"
+#include "Util.h"
 
 namespace view {
-class Ghost final : public EntityView {
-    float animTimer = 0.0f;
-    size_t currentFrame = 0;
-    const float FRAME_DUR = 0.25f;
-
+class Ghost final : public AnimatedView {
 public:
-    explicit Ghost(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
+    explicit Ghost(const std::shared_ptr<subjects::Subject>& subject, Color color);
     void update(std::shared_ptr<Event> e) override;
 };
 } // namespace view

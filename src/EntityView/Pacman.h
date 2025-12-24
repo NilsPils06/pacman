@@ -1,15 +1,12 @@
 #ifndef VIEW_PACMAN_H
 #define VIEW_PACMAN_H
+#include "AnimatedView.h"
 #include "EntityView.h"
 
 namespace view {
-class Pacman final : public EntityView {
-    float animTimer = 0.0f;
-    size_t currentFrame = 0;
-    const float FRAME_DUR = 0.25f;
-
+class Pacman final : public AnimatedView {
 public:
-    explicit Pacman(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
+    explicit Pacman(const std::shared_ptr<subjects::Subject>& subject);
     void update(std::shared_ptr<Event> e) override;
 };
 } // namespace view

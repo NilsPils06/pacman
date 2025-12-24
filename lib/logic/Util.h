@@ -56,4 +56,6 @@ enum Movement { FIXED, CHASING, CUTTING };
 
 enum Direction { UP, DOWN, LEFT, RIGHT };
 
+enum Color { RED, PINK, BLUE, ORANGE };
+
 #endif // PACMAN_ENTITYUTIL_H

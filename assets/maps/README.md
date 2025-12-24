@@ -7,5 +7,5 @@ waardat de layout van het level wordt beschreven.
 - C = coin
 - P = pacman
 - W = wall
-- G = ghost
+- G = ghost (maximum of 4)
 - _ = empty
