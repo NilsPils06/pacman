@@ -34,7 +34,8 @@ public:
     Direction decideFixed(const std::vector<Direction>& candidates, bool wallAhead) const;
     Direction decideTargetBased(const std::vector<Direction>& candidates) const;
     Coords getTargetPosition() const;
-    Direction getBestManhattanDirection(const Coords& target, const std::vector<Direction>& candidates, bool maximize) const;
+    Direction getBestManhattanDirection(const Coords& target, const std::vector<Direction>& candidates,
+                                        bool maximize) const;
 };
 } // namespace subjects
 
