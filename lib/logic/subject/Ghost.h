@@ -9,8 +9,9 @@ namespace subjects {
 class Ghost final : public EntityModel, public CollisionComponent, public std::enable_shared_from_this<Ghost> {
     Movement movement = FIXED;
     Direction lockedIn = UP;
-    bool chasing = false;
     bool fear = false;
+    const float FEAR_DUR = 5.f;
+    float fearTimer = 0;
     Direction facing = RIGHT;
     float speed = 0.1f;
     Coords spawn;
@@ -25,6 +26,8 @@ public:
     void resetPosition();
     void setPacmanLocator(const std::function<std::pair<Coords, Direction>()>& locator);
     void setMovementType(Movement m);
+    void setFear(bool f);
+    [[nodiscard]] bool inFear() const;
 
     bool canMoveTo(Direction dir) const;
     Direction decideDirection(const std::vector<Direction>& candidates, bool wallAhead) const;

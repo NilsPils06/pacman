@@ -10,8 +10,15 @@ constexpr float ASPECT_RATIO = 16.f / 9.f;
 
 void subjects::Ghost::tick() {
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
-    speed = (facing == UP || facing == DOWN) ? 0.3f * ASPECT_RATIO : 0.3f;
-    if (fear) speed *= 0.5f;
+    speed = facing == UP || facing == DOWN ? 0.3f * ASPECT_RATIO : 0.3f;
+    if (fear) {
+        fearTimer += deltaTime;
+        if (fearTimer >= FEAR_DUR) {
+            fear = false;
+            fearTimer = 0.0f;
+        } else
+            speed *= 0.5f;
+    }
     const bool wallAhead = !canMoveTo(facing);
     const float axisValue = (facing == UP || facing == DOWN) ? coords.y : coords.x;
     const float gridSize = (facing == UP || facing == DOWN) ? coords.height : coords.width;
@@ -74,7 +81,7 @@ void subjects::Ghost::tick() {
             break;
         }
     }
-    notify(std::make_shared<TickEvent>(getCoords(), facing));
+    notify(std::make_shared<TickEvent>(getCoords(), facing, fear));
 }
 Direction subjects::Ghost::decideDirection(const std::vector<Direction>& candidates, const bool wallAhead) const {
     if (fear)
@@ -149,7 +156,7 @@ Direction subjects::Ghost::getBestManhattanDirection(const Coords& target, const
             bestDist = dist;
             bestCandidates.clear();
             bestCandidates.push_back(dir);
-        } else if (std::abs(dist - bestDist) < 0.001f) { // Equal (float safe)
+        } else if (std::abs(dist - bestDist) < 0.001f) {
             bestCandidates.push_back(dir);
         }
     }
@@ -195,5 +202,6 @@ void subjects::Ghost::resetPosition() {
 void subjects::Ghost::setPacmanLocator(const std::function<std::pair<Coords, Direction>()>& locator) {
     pacmanLocator = locator;
 }
-void subjects::Ghost::setMovementType(const Movement m) {movement = m;}
-
+void subjects::Ghost::setMovementType(const Movement m) { movement = m; }
+void subjects::Ghost::setFear(const bool f) { fear = f; }
+bool subjects::Ghost::inFear() const { return fear; }

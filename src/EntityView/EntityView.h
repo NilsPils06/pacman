@@ -57,6 +57,9 @@ const sf::IntRect GHOST_ORANGE_LEFT_2(143, 246, 50, 50);
 const sf::IntRect GHOST_ORANGE_UP_1(143, 296, 50, 50);
 const sf::IntRect GHOST_ORANGE_UP_2(143, 346, 50, 50);
 
+const sf::IntRect GHOST_FEAR_1(-7, 546, 50, 50);
+const sf::IntRect GHOST_FEAR_2(-7, 596, 50, 50);
+
 const sf::IntRect COIN(393, 246, 50, 50);
 
 const sf::IntRect FRUIT(593, -4, 50, 50);

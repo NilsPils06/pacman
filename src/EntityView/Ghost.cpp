@@ -44,19 +44,24 @@ void view::Ghost::update(std::shared_ptr<Event> e) {
         }
         const int spriteIndex = frameSequence[currentFrame];
 
-        switch (event->getFacing()) {
-        case UP:
-            setSprite(animUp[spriteIndex]);
-            break;
-        case DOWN:
-            setSprite(animDown[spriteIndex]);
-            break;
-        case LEFT:
-            setSprite(animLeft[spriteIndex]);
-            break;
-        case RIGHT:
-            setSprite(animRight[spriteIndex]);
-            break;
+        if (event->getVariable()) { // Fear mode?
+            static const std::vector animFear = {sprites::GHOST_FEAR_1, sprites::GHOST_FEAR_2};
+            setSprite(animFear[spriteIndex]);
+        } else {
+            switch (event->getFacing()) {
+            case UP:
+                setSprite(animUp[spriteIndex]);
+                break;
+            case DOWN:
+                setSprite(animDown[spriteIndex]);
+                break;
+            case LEFT:
+                setSprite(animLeft[spriteIndex]);
+                break;
+            case RIGHT:
+                setSprite(animRight[spriteIndex]);
+                break;
+            }
         }
 
         Camera::project(sprite, event->getPosition());

@@ -79,8 +79,13 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
     }
 
     std::function walkCheck = [this](const Coords& c) { return this->isWalkable(c); };
+    std::function ghostFearer = [this]() {
+        for (const auto& g : ghosts)
+            g->setFear(true);
+    };
 
     pacmanHandler->setWallValidator(walkCheck);
+    pacmanHandler->setGhostFearer(ghostFearer);
 
     std::function locator = [this]() {
         const auto p = pacmanHandler->getPacman();
@@ -124,9 +129,6 @@ void World::checkCollisions() const {
     for (const auto& collectable : collectables) {
         if (collectable->getCoords().overlaps(pacmanCoords)) {
             collectable->accept(pacmanHandler);
-            for (const auto& ghost : ghosts) {
-                // set fear
-            }
         }
     }
 }

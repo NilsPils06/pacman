@@ -34,7 +34,7 @@ void subjects::Pacman::tick() {
         deathTimer += Stopwatch::getInstance().getDeltaTime();
         notify(std::make_shared<DieEvent>(getCoords(), deathTimer, DEATH_DURATION));
 
-        if (deathTimer >= 1.5f) {
+        if (deathTimer >= DEATH_DURATION) {
             lives--;
             setCoords(spawn);
             dying = false;
@@ -141,7 +141,7 @@ void subjects::Pacman::tick() {
         }
     }
 
-    notify(std::make_shared<TickEvent>(getCoords(), facing));
+    notify(std::make_shared<TickEvent>(getCoords(), facing, !canMoveTo(facing)));
 }
 int subjects::Pacman::getLives() const { return lives; }
 void subjects::Pacman::hurt() {

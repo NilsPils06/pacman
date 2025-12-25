@@ -33,15 +33,21 @@ void view::Pacman::update(const std::shared_ptr<Event> e) {
     }
     if (e->getType() == TICK) {
         const std::shared_ptr<TickEvent> event = std::static_pointer_cast<TickEvent>(e);
+        int spriteIndex = 0;
 
-        animTimer += Stopwatch::getInstance().getDeltaTime();
-        static const std::vector frameSequence = {0, 1, 2, 1};
+        if (event->getVariable()) { // Blocked?
+            animTimer = 0;
+            currentFrame = 0;
+        } else {
+            animTimer += Stopwatch::getInstance().getDeltaTime();
+            static const std::vector frameSequence = {0, 1, 2, 1};
 
-        if (animTimer >= FRAME_DUR) {
-            animTimer -= FRAME_DUR;
-            currentFrame = (currentFrame + 1) % frameSequence.size();
+            if (animTimer >= FRAME_DUR) {
+                animTimer -= FRAME_DUR;
+                currentFrame = (currentFrame + 1) % frameSequence.size();
+            }
+            spriteIndex = frameSequence[currentFrame];
         }
-        const int spriteIndex = frameSequence[currentFrame];
 
         switch (event->getFacing()) {
         case UP:

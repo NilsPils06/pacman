@@ -24,7 +24,7 @@ public:
     void hurt();
     [[nodiscard]] bool isDying() const;
     void setWallValidator(const std::function<bool(const Coords&)>& validator);
-[[nodiscard]] Direction getFacing() const;
+    [[nodiscard]] Direction getFacing() const;
 };
 } // namespace subjects
 

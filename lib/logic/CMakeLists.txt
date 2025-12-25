@@ -25,7 +25,6 @@ SET(SRC
         Score.cpp
         Score.h
         Util.h
-        Event.cpp
         Event.h
         Collision.h
         PacmanCollisionHandler.cpp

@@ -7,6 +7,7 @@
 
 class PacmanCollisionHandler final : public CollisionVisitor {
     std::shared_ptr<subjects::Pacman> pacman;
+    std::function<void()> ghostFearer;
 
 public:
     PacmanCollisionHandler() : pacman(nullptr) {}
@@ -21,6 +22,7 @@ public:
     void visit(std::shared_ptr<subjects::Fruit> e) override;
     void visit(std::shared_ptr<subjects::Ghost> e) override;
     void setWallValidator(const std::function<bool(const Coords&)>& function) const;
+    void setGhostFearer(const std::function<void()>& ghost_fearer);
 };
 
 #endif // PACMAN_PACMANCOLLISIONHANDLER_H
