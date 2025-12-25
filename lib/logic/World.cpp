@@ -82,8 +82,14 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
 
     pacmanHandler->setWallValidator(walkCheck);
 
+    std::function locator = [this]() {
+        const auto p = pacmanHandler->getPacman();
+        return std::make_pair(p->getCoords(), p->getFacing());
+    };
+
     for (const auto& gh : ghosts) {
         gh->setWallValidator(walkCheck);
+        gh->setPacmanLocator(locator);
     }
 }
 void World::moveLeft() const { pacmanHandler->getPacman()->notify(std::make_shared<DirectionChangeEvent>(LEFT)); }
@@ -118,6 +124,9 @@ void World::checkCollisions() const {
     for (const auto& collectable : collectables) {
         if (collectable->getCoords().overlaps(pacmanCoords)) {
             collectable->accept(pacmanHandler);
+            for (const auto& ghost : ghosts) {
+                // set fear
+            }
         }
     }
 }

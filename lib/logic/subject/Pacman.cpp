@@ -154,3 +154,4 @@ bool subjects::Pacman::isDying() const { return dying; }
 void subjects::Pacman::setWallValidator(const std::function<bool(const Coords&)>& validator) {
     wallValidator = validator;
 }
+Direction subjects::Pacman::getFacing() const { return facing; }
