@@ -9,6 +9,13 @@ constexpr float ASPECT_RATIO = 16.f / 9.f;
 // TODO return to spawn after pacman dies
 
 void subjects::Ghost::tick() {
+    float distanceToSpawn = std::abs(coords.x - spawn.x) + std::abs(coords.y - spawn.y);
+    if (eaten && distanceToSpawn <= 0.1f) {
+        eaten = false;
+        coords = spawn;
+        facing = UP;
+    }
+
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
     speed = facing == UP || facing == DOWN ? 0.3f * ASPECT_RATIO : 0.3f;
     if (fear) {
@@ -32,7 +39,7 @@ void subjects::Ghost::tick() {
         const Direction reverseDir = (facing == UP) ? DOWN : (facing == DOWN) ? UP : (facing == LEFT) ? RIGHT : LEFT;
 
         for (const auto d : {UP, DOWN, LEFT, RIGHT})
-            if (canMoveTo(d) && (fear || wallAhead || d != reverseDir))
+            if (canMoveTo(d) && (fear || eaten || wallAhead || d != reverseDir))
                 candidates.push_back(d);
 
         if (!candidates.empty()) {
@@ -81,10 +88,14 @@ void subjects::Ghost::tick() {
             break;
         }
     }
-    notify(std::make_shared<TickEvent>(getCoords(), facing, fear));
+
+    if (eaten)
+        notify(std::make_shared<EatenEvent>(getCoords(), facing));
+    else
+        notify(std::make_shared<TickEvent>(getCoords(), facing, fear));
 }
 Direction subjects::Ghost::decideDirection(const std::vector<Direction>& candidates, const bool wallAhead) const {
-    if (fear)
+    if (fear || eaten)
         return decideTargetBased(candidates);
 
     switch (movement) {
@@ -113,6 +124,9 @@ Direction subjects::Ghost::decideTargetBased(const std::vector<Direction>& candi
     return getBestManhattanDirection(target, candidates, maximizeDistance);
 }
 Coords subjects::Ghost::getTargetPosition() const {
+    if (eaten)
+        return spawn;
+
     if (!pacmanLocator)
         return {0, 0, 0, 0};
 
@@ -204,4 +218,10 @@ void subjects::Ghost::setPacmanLocator(const std::function<std::pair<Coords, Dir
 }
 void subjects::Ghost::setMovementType(const Movement m) { movement = m; }
 void subjects::Ghost::setFear(const bool f) { fear = f; }
+void subjects::Ghost::setEaten(const bool e) {
+    eaten = e;
+    fear = false;
+    fearTimer = 0.0f;
+}
 bool subjects::Ghost::inFear() const { return fear; }
+bool subjects::Ghost::isEaten() const { return eaten; }

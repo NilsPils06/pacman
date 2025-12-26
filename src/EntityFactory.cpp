@@ -39,10 +39,9 @@ std::shared_ptr<subjects::Fruit> EntityFactory::createFruit(Coords coords) {
 }
 std::shared_ptr<subjects::Ghost> EntityFactory::createGhost(Coords coords) {
     auto model = std::make_shared<subjects::Ghost>(coords);
-    model->setMovementType(types.top());
-    types.pop();
-    const auto view = std::make_shared<view::Ghost>(model, colors.top());
-    colors.pop();
+    model->setMovementType(ghostTypes.top().second);
+    const auto view = std::make_shared<view::Ghost>(model, ghostTypes.top().first);
+    ghostTypes.pop();
     model->attach(view);
     view->setSprite(sprites::GHOST_RED_RIGHT_1);
     return model;

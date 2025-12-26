@@ -32,6 +32,26 @@ view::Ghost::Ghost(const std::shared_ptr<subjects::Subject>& subject, const Colo
     }
 }
 void view::Ghost::update(std::shared_ptr<Event> e) {
+    if (e->getType() == EATEN) {
+        const std::shared_ptr<EatenEvent> event = std::static_pointer_cast<EatenEvent>(e);
+        switch (event->getFacing()) {
+        case UP:
+            setSprite(sprites::GHOST_EATEN_UP);
+            break;
+        case DOWN:
+            setSprite(sprites::GHOST_EATEN_DOWN);
+            break;
+        case LEFT:
+            setSprite(sprites::GHOST_EATEN_LEFT);
+            break;
+        case RIGHT:
+            setSprite(sprites::GHOST_EATEN_RIGHT);
+            break;
+        }
+
+        Camera::project(sprite, event->getPosition());
+        return;
+    }
     if (e->getType() == TICK) {
         const std::shared_ptr<TickEvent> event = std::static_pointer_cast<TickEvent>(e);
 

@@ -5,7 +5,7 @@
 
 #include <memory>
 
-enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT, TICK, DIE };
+enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT, TICK, DIE, EATEN };
 
 class Event {
 public:
@@ -25,6 +25,17 @@ public:
     [[nodiscard]] Direction getFacing() const { return facing; }
     [[nodiscard]] EventType getType() const override { return TICK; }
     [[nodiscard]] bool getVariable() const { return variable; }
+};
+
+class EatenEvent final : public Event {
+    Coords pos;
+    Direction facing;
+
+public:
+    EatenEvent(const Coords& pos, const Direction& facing) : pos(pos), facing(facing) {}
+    [[nodiscard]] Coords getPosition() const { return pos; }
+    [[nodiscard]] Direction getFacing() const { return facing; }
+    [[nodiscard]] EventType getType() const override { return EATEN; }
 };
 
 class PositonUpdateEvent final : public Event {

@@ -10,6 +10,7 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     Movement movement = FIXED;
     Direction lockedIn = UP;
     bool fear = false;
+    bool eaten = false;
     const float FEAR_DUR = 5.f;
     float fearTimer = 0;
     Direction facing = RIGHT;
@@ -27,7 +28,9 @@ public:
     void setPacmanLocator(const std::function<std::pair<Coords, Direction>()>& locator);
     void setMovementType(Movement m);
     void setFear(bool f);
+    void setEaten(bool e);
     [[nodiscard]] bool inFear() const;
+    [[nodiscard]] bool isEaten() const;
 
     bool canMoveTo(Direction dir) const;
     Direction decideDirection(const std::vector<Direction>& candidates, bool wallAhead) const;

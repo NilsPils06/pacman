@@ -44,7 +44,7 @@ void subjects::Pacman::tick() {
         }
         return;
     }
-    speed = (facing == UP || facing == DOWN) ? 0.3f * ASPECT_RATIO : 0.3f;
+    speed = (facing == UP || facing == DOWN) ? 0.4f * ASPECT_RATIO : 0.4f;
 
     auto canMoveTo = [&](const Direction dir) -> bool {
         if (!wallValidator)

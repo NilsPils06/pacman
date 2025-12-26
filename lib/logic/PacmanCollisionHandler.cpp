@@ -17,8 +17,11 @@ void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Fruit> e) {
     ghostFearer();
 }
 void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Ghost> e) {
+    if (e->isEaten())
+        return;
+
     if (e->inFear())
-        e->resetPosition();
+        e->setEaten(true);
     else
         pacman->hurt();
 }
