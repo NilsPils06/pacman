@@ -65,7 +65,7 @@ void LevelState::render() {
             world.reset();
             factory->resetStack();
             world = std::make_shared<World>(factory, ++level);
-            state_manager->push(std::make_unique<VictoryState>(state_manager, level-1));
+            state_manager->push(std::make_unique<VictoryState>(state_manager, level - 1));
         }
         return;
     }

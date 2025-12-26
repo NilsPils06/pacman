@@ -16,7 +16,7 @@ void subjects::Ghost::tick() {
 
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
     speed = facing == UP || facing == DOWN ? 0.3f * ASPECT_RATIO : 0.3f;
-    speed += 0.05f * static_cast<float>(level-1);
+    speed += 0.05f * static_cast<float>(level - 1);
     if (fear) {
         fearTimer += deltaTime;
         if (fearTimer >= FEAR_DUR) {
@@ -224,7 +224,7 @@ void subjects::Ghost::setEaten(const bool e) {
 }
 void subjects::Ghost::setLevel(const int i) {
     level = i;
-    FEAR_DUR -= 0.5f * static_cast<float>(level-1);
+    FEAR_DUR -= 0.5f * static_cast<float>(level - 1);
 }
 bool subjects::Ghost::inFear() const { return fear; }
 bool subjects::Ghost::isEaten() const { return eaten; }

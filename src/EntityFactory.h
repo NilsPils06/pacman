@@ -10,9 +10,7 @@ class EntityFactory final : public AbstractFactory {
     std::stack<std::pair<Color, Movement>> ghostTypes;
 
 public:
-    explicit EntityFactory(const std::shared_ptr<Score>& score) : score(score) {
-        resetStack();
-    }
+    explicit EntityFactory(const std::shared_ptr<Score>& score) : score(score) { resetStack(); }
     std::shared_ptr<subjects::Wall> createWall(Coords coords) override;
     std::shared_ptr<subjects::Pacman> createPacman(Coords coords) override;
     std::shared_ptr<subjects::Coin> createCoin(Coords coords) override;
