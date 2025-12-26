@@ -1,8 +1,7 @@
 # Maps
-Een map wordt uitgedrukt in een tekst bestand genaamd {nummer}.txt,
-waardat de layout van het level wordt beschreven.
+Maps use textual blueprints named {number}.txt, where the layout is described using the following legend.
 
-## Legende
+## Legend
 - F = fruit
 - C = coin
 - P = pacman
