@@ -13,14 +13,14 @@
 LevelState::LevelState(const std::shared_ptr<StateManager>& manager) : State(manager) {
     score = std::make_shared<Score>();
     factory = std::make_shared<EntityFactory>(score);
-    world = std::make_shared<World>(factory);
+    world = std::make_shared<World>(factory, level);
 }
 LevelState::LevelState(const std::shared_ptr<StateManager>& manager, std::string playerName,
                        const std::shared_ptr<std::map<std::string, int>>& scores)
     : State(manager), playerName(std::move(playerName)), scores(scores) {
     score = std::make_shared<Score>();
     factory = std::make_shared<EntityFactory>(score);
-    world = std::make_shared<World>(factory);
+    world = std::make_shared<World>(factory, level);
 }
 
 void LevelState::onKeyPress(sf::Event::KeyEvent event) {
@@ -62,8 +62,10 @@ void LevelState::render() {
 
     if (world->isCompleted()) {
         if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
-            // reset world/new level
-            state_manager->push(std::make_unique<VictoryState>(state_manager));
+            world.reset();
+            factory->resetStack();
+            world = std::make_shared<World>(factory, ++level);
+            state_manager->push(std::make_unique<VictoryState>(state_manager, level-1));
         }
         return;
     }

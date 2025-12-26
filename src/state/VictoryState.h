@@ -3,8 +3,9 @@
 #include "State.h"
 
 class VictoryState final : public State {
+    int level = 0;
 public:
-    explicit VictoryState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
+    explicit VictoryState(const std::shared_ptr<StateManager>& manager, int level) : State(manager), level(level) {}
     void onKeyPress(sf::Event::KeyEvent event) override;
     void render() override;
 };

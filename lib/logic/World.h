@@ -12,10 +12,9 @@ class World {
     std::vector<std::shared_ptr<subjects::Ghost>> ghosts;
     std::vector<std::shared_ptr<subjects::Collectable>> collectables;
     std::shared_ptr<PacmanCollisionHandler> pacmanHandler{};
-    std::shared_ptr<AbstractFactory> factory;
 
 public:
-    explicit World(std::shared_ptr<AbstractFactory> factory);
+    World(const std::shared_ptr<AbstractFactory>& factory, int level);
 
     void moveLeft() const;
     void moveUp() const;

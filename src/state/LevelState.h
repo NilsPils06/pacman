@@ -12,6 +12,7 @@ class LevelState final : public State {
     std::shared_ptr<Score> score;
     std::string playerName;
     std::shared_ptr<std::map<std::string, int>> scores;
+    int level = 1;
 
 public:
     explicit LevelState(const std::shared_ptr<StateManager>& manager);

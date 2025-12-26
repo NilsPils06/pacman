@@ -11,13 +11,14 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     Direction lockedIn = UP;
     bool fear = false;
     bool eaten = false;
-    const float FEAR_DUR = 5.f;
+    float FEAR_DUR = 5.f;
     float fearTimer = 0;
     Direction facing = RIGHT;
     float speed = 0.1f;
     Coords spawn;
     std::function<bool(const Coords&)> wallValidator;
     std::function<std::pair<Coords, Direction>()> pacmanLocator;
+    int level = 1;
 
 public:
     explicit Ghost(const Coords& coords) : EntityModel(coords), spawn(coords) {}
@@ -29,6 +30,7 @@ public:
     void setMovementType(Movement m);
     void setFear(bool f);
     void setEaten(bool e);
+    void setLevel(int i);
     [[nodiscard]] bool inFear() const;
     [[nodiscard]] bool isEaten() const;
 

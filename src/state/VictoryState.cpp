@@ -15,7 +15,7 @@ void VictoryState::render() {
 
     text.setFont(Game::font);
 
-    text.setString("Victory!");
+    text.setString("Victory!\nLevel " + std::to_string(level));
     text.setFillColor(sf::Color::Yellow);
     text.setCharacterSize(128);
 

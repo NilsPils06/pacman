@@ -7,8 +7,9 @@
 #include <iostream>
 #include <utility>
 
-World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
+World::World(const std::shared_ptr<AbstractFactory>& factory, int level) {
     std::ifstream file;
+    // level can later be used to select a different map
     file.open("../../assets/maps/1.txt");
     if (!file.is_open()) {
         std::cerr << "file not found" << std::endl;
@@ -67,6 +68,7 @@ World::World(std::shared_ptr<AbstractFactory> f) : factory(std::move(f)) {
         case 'G': {
             std::shared_ptr<subjects::Ghost> ghost = factory->createGhost(coords);
             ghosts.push_back(ghost);
+            ghost->setLevel(level);
             break;
         }
         default:

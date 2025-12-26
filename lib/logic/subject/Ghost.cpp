@@ -6,8 +6,6 @@
 #include <cmath>
 constexpr float ASPECT_RATIO = 16.f / 9.f;
 
-// TODO return to spawn after pacman dies
-
 void subjects::Ghost::tick() {
     float distanceToSpawn = std::abs(coords.x - spawn.x) + std::abs(coords.y - spawn.y);
     if (eaten && distanceToSpawn <= 0.1f) {
@@ -18,6 +16,7 @@ void subjects::Ghost::tick() {
 
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
     speed = facing == UP || facing == DOWN ? 0.3f * ASPECT_RATIO : 0.3f;
+    speed += 0.05f * static_cast<float>(level-1);
     if (fear) {
         fearTimer += deltaTime;
         if (fearTimer >= FEAR_DUR) {
@@ -222,6 +221,10 @@ void subjects::Ghost::setEaten(const bool e) {
     eaten = e;
     fear = false;
     fearTimer = 0.0f;
+}
+void subjects::Ghost::setLevel(const int i) {
+    level = i;
+    FEAR_DUR -= 0.5f * static_cast<float>(level-1);
 }
 bool subjects::Ghost::inFear() const { return fear; }
 bool subjects::Ghost::isEaten() const { return eaten; }
