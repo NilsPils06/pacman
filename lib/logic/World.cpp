@@ -36,11 +36,24 @@ World::World(const std::shared_ptr<AbstractFactory>& factory, int level) {
     int x = 0;
     int y = 0;
 
+    std::vector navigationMap(height, std::vector(width, false));
+
     while (file.get(token)) {
         float normalized_x = 2.0f * (static_cast<float>(x) / max_x) - 1.0f;
         float normalized_y = 2.0f * (static_cast<float>(y) / max_y) - 1.0f;
 
         Coords coords{normalized_x, normalized_y, normalized_width, normalized_height};
+
+        if (token == '\n') {
+            x = 0;
+            y++;
+            continue;
+        }
+        if (token == 'W') {
+            navigationMap[y][x] = true;
+        } else {
+            navigationMap[y][x] = false;
+        }
 
         switch (token) {
         case 'W': {
@@ -83,7 +96,7 @@ World::World(const std::shared_ptr<AbstractFactory>& factory, int level) {
     std::function walkCheck = [this](const Coords& c) { return this->isWalkable(c); };
     std::function ghostFearer = [this]() {
         for (const auto& g : ghosts)
-            g->setFear(true);
+            g->setFear(!g->isEaten());
     };
 
     pacmanHandler->setWallValidator(walkCheck);
@@ -97,6 +110,7 @@ World::World(const std::shared_ptr<AbstractFactory>& factory, int level) {
     for (const auto& gh : ghosts) {
         gh->setWallValidator(walkCheck);
         gh->setPacmanLocator(locator);
+        gh->setNavigationMap(navigationMap, width, height);
     }
 }
 void World::moveLeft() const { pacmanHandler->getPacman()->notify(std::make_shared<DirectionChangeEvent>(LEFT)); }

@@ -145,7 +145,6 @@ void subjects::Pacman::tick() {
 }
 int subjects::Pacman::getLives() const { return lives; }
 void subjects::Pacman::hurt() {
-    return;
     if (dying)
         return;
     dying = true;

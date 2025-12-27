@@ -4,6 +4,7 @@
 #include "../Stopwatch.h"
 
 #include <cmath>
+#include <queue>
 constexpr float ASPECT_RATIO = 16.f / 9.f;
 
 void subjects::Ghost::tick() {
@@ -42,14 +43,13 @@ void subjects::Ghost::tick() {
                 candidates.push_back(d);
 
         if (!candidates.empty()) {
-            Direction newFacing = facing;
-            newFacing = decideDirection(candidates, wallAhead);
-            if (newFacing != facing) {
+            if (const Direction newFacing = decideDirection(candidates, wallAhead); newFacing != facing) {
                 facing = newFacing;
-                if (facing == UP || facing == DOWN)
-                    coords.x = std::round((coords.x + 1.0f) / gridSize) * gridSize - 1.0f;
-                else
-                    coords.y = std::round((coords.y + 1.0f) / gridSize) * gridSize - 1.0f;
+                if (facing == UP || facing == DOWN) {
+                    coords.x = std::round((coords.x + 1.0f) / coords.width) * coords.width - 1.0f;
+                } else {
+                    coords.y = std::round((coords.y + 1.0f) / coords.height) * coords.height - 1.0f;
+                }
             }
         } else if (wallAhead) {
             facing = reverseDir;
@@ -93,8 +93,16 @@ void subjects::Ghost::tick() {
     else
         notify(std::make_shared<TickEvent>(getCoords(), facing, fear));
 }
+void subjects::Ghost::setNavigationMap(const std::vector<std::vector<bool>>& map, const int width, const int height) {
+    gridMap = map;
+    mapWidth = width;
+    mapHeight = height;
+}
+
 Direction subjects::Ghost::decideDirection(const std::vector<Direction>& candidates, const bool wallAhead) const {
-    if (fear || eaten)
+    if (eaten)
+        return getBFSDirection(spawn);
+    if (fear)
         return decideTargetBased(candidates);
 
     switch (movement) {
@@ -102,10 +110,95 @@ Direction subjects::Ghost::decideDirection(const std::vector<Direction>& candida
         return decideFixed(candidates, wallAhead);
     case CHASING:
     case CUTTING:
-        return decideTargetBased(candidates);
+        return getBFSDirection(getTargetPosition());
     default:
         return candidates[0];
     }
+}
+
+Direction subjects::Ghost::decideTargetBased(const std::vector<Direction>& candidates) const {
+    const Coords target = getTargetPosition();
+    const bool maximizeDistance = fear;
+    return getBestManhattanDirection(target, candidates, maximizeDistance);
+}
+
+std::pair<int, int> subjects::Ghost::toGridCoords(const Coords& c) const {
+    if (mapWidth == 0 || mapHeight == 0)
+        return {0, 0};
+
+    int x = static_cast<int>(std::round(((c.x + 1.0f) / 2.0f) * static_cast<float>(mapWidth - 1)));
+    int y = static_cast<int>(std::round(((c.y + 1.0f) / 2.0f) * static_cast<float>(mapHeight - 1)));
+
+    x = std::max(0, std::min(x, mapWidth - 1));
+    y = std::max(0, std::min(y, mapHeight - 1));
+
+    return {x, y};
+}
+
+Direction subjects::Ghost::getBFSDirection(const Coords& targetPos) const {
+    if (gridMap.empty())
+        return facing;
+
+    const std::pair<int, int> start = toGridCoords(coords);
+    const std::pair<int, int> end = toGridCoords(targetPos);
+
+    if (start == end)
+        return facing;
+
+    std::queue<std::pair<int, int>> frontier;
+    frontier.push(start);
+
+    std::vector cameFrom(mapHeight, std::vector<std::pair<int, int>>(mapWidth, {-1, -1}));
+
+    cameFrom[start.second][start.first] = start;
+
+    bool found = false;
+
+    while (!frontier.empty()) {
+        std::pair<int, int> current = frontier.front();
+        frontier.pop();
+
+        if (current == end) {
+            found = true;
+            break;
+        }
+
+        for (int i = 0; i < 4; ++i) {
+            constexpr int dy[] = {-1, 1, 0, 0};
+            constexpr int dx[] = {0, 0, -1, 1};
+            int nx = current.first + dx[i];
+            int ny = current.second + dy[i];
+
+            if (nx >= 0 && nx < mapWidth && ny >= 0 && ny < mapHeight) {
+                if (!gridMap[ny][nx] && cameFrom[ny][nx].first == -1) {
+                    frontier.emplace(nx, ny);
+                    cameFrom[ny][nx] = current;
+                }
+            }
+        }
+    }
+
+    if (!found) {
+        const std::vector candidates = {UP, DOWN, LEFT, RIGHT};
+        return getBestManhattanDirection(targetPos, candidates, false);
+    }
+    std::pair<int, int> curr = end;
+    std::pair<int, int> prev = end;
+
+    while (curr != start) {
+        prev = curr;
+        curr = cameFrom[curr.second][curr.first];
+    }
+    if (prev.first > start.first)
+        return RIGHT;
+    if (prev.first < start.first)
+        return LEFT;
+    if (prev.second > start.second)
+        return DOWN;
+    if (prev.second < start.second)
+        return UP;
+
+    return facing;
 }
 
 Direction subjects::Ghost::decideFixed(const std::vector<Direction>& candidates, const bool wallAhead) const {
@@ -114,13 +207,6 @@ Direction subjects::Ghost::decideFixed(const std::vector<Direction>& candidates,
         return candidates[index];
     }
     return facing;
-}
-
-Direction subjects::Ghost::decideTargetBased(const std::vector<Direction>& candidates) const {
-    const Coords target = getTargetPosition();
-    const bool maximizeDistance = fear;
-
-    return getBestManhattanDirection(target, candidates, maximizeDistance);
 }
 Coords subjects::Ghost::getTargetPosition() const {
     if (eaten)

@@ -4,6 +4,7 @@
 #include "EntityModel.h"
 
 #include <functional>
+#include <vector>
 
 namespace subjects {
 class Ghost final : public EntityModel, public CollisionComponent, public std::enable_shared_from_this<Ghost> {
@@ -20,6 +21,10 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     std::function<std::pair<Coords, Direction>()> pacmanLocator;
     int level = 1;
 
+    std::vector<std::vector<bool>> gridMap;
+    int mapWidth = 0;
+    int mapHeight = 0;
+
 public:
     explicit Ghost(const Coords& coords) : EntityModel(coords), spawn(coords) {}
     void tick() override;
@@ -31,6 +36,7 @@ public:
     void setFear(bool f);
     void setEaten(bool e);
     void setLevel(int i);
+    void setNavigationMap(const std::vector<std::vector<bool>>& map, int width, int height);
     [[nodiscard]] bool inFear() const;
     [[nodiscard]] bool isEaten() const;
 
@@ -39,6 +45,9 @@ public:
     Direction decideFixed(const std::vector<Direction>& candidates, bool wallAhead) const;
     Direction decideTargetBased(const std::vector<Direction>& candidates) const;
     Coords getTargetPosition() const;
+    Direction getBFSDirection(const Coords& target) const;
+    std::pair<int, int> toGridCoords(const Coords& c) const;
+
     Direction getBestManhattanDirection(const Coords& target, const std::vector<Direction>& candidates,
                                         bool maximize) const;
 };
