@@ -12,6 +12,7 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     Direction lockedIn = UP;
     bool fear = false;
     bool eaten = false;
+    bool collectable = false;
     float FEAR_DUR = 5.f;
     float fearTimer = 0;
     Direction facing = RIGHT;
@@ -35,10 +36,12 @@ public:
     void setMovementType(Movement m);
     void setFear(bool f);
     void setEaten(bool e);
+    int collect();
     void setLevel(int i);
     void setNavigationMap(const std::vector<std::vector<bool>>& map, int width, int height);
     [[nodiscard]] bool inFear() const;
     [[nodiscard]] bool isEaten() const;
+    [[nodiscard]] bool isCollectable() const;
 
     bool canMoveTo(Direction dir) const;
     Direction decideDirection(const std::vector<Direction>& candidates, bool wallAhead) const;

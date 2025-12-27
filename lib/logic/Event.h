@@ -1,7 +1,6 @@
 #ifndef PACMAN_EVENT_H
 #define PACMAN_EVENT_H
 #include "Util.h"
-#include "subject/Collectable.h"
 
 #include <memory>
 
@@ -60,13 +59,13 @@ public:
 };
 
 class CollectEvent final : public Event {
-    std::shared_ptr<subjects::Collectable> collectable;
+    int multiplier;
 
 public:
-    explicit CollectEvent(const std::shared_ptr<subjects::Collectable>& collectable) : collectable(collectable) {}
+    explicit CollectEvent(const int multiplier) : multiplier(multiplier) {}
 
     [[nodiscard]] EventType getType() const override { return COLLECT; }
-    [[nodiscard]] std::shared_ptr<subjects::Collectable> getCollectable() const { return collectable; }
+    [[nodiscard]] int getMultiplier() const { return multiplier; }
 };
 
 class DieEvent final : public Event {

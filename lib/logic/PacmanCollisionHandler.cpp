@@ -4,21 +4,24 @@
 #include "subject/Coin.h"
 #include "subject/Fruit.h"
 #include "subject/Ghost.h"
-#include "subject/Wall.h"
 std::shared_ptr<subjects::Pacman> PacmanCollisionHandler::getPacman() const { return pacman; }
 bool PacmanCollisionHandler::isDead() const { return pacman->getLives() <= 0; }
-void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Coin> e) {
-    pacman->notify(std::make_shared<CollectEvent>(e));
+void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Coin> e) {
+    pacman->notify(std::make_shared<CollectEvent>(e->getScoreMultiplier()));
     e->setExpired();
 }
-void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Fruit> e) {
-    pacman->notify(std::make_shared<CollectEvent>(e));
+void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Fruit> e) {
+    pacman->notify(std::make_shared<CollectEvent>(e->getScoreMultiplier()));
     e->setExpired();
     ghostFearer();
 }
-void PacmanCollisionHandler::visit(std::shared_ptr<subjects::Ghost> e) {
-    if (e->isEaten())
+void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Ghost> e) {
+    if (e->isEaten()) {
+        if (e->isCollectable())
+            pacman->notify(std::make_shared<CollectEvent>(e->collect()));
         return;
+    }
+
 
     if (e->inFear())
         e->setEaten(true);

@@ -4,22 +4,22 @@ Studentnumber: 20240345
 ## 📋 Project Evaluation Checklist
 
 ### 1. Core Game Requirements (40 Points)
-- [ ] **Startup screen & Scoreboard**
+- [x] **Startup screen & Scoreboard**
   - *Implementation:* 
-- [ ] **Maze & Collision Correctness**
+- [x] **Maze & Collision Correctness**
   - *Implementation:* 
-- [ ] **Smooth Continuous Movement**
+- [x] **Smooth Continuous Movement**
   - *Implementation:* 
-- [ ] **Ghost AI**
+- [x] **Ghost AI**
   - *Modes Implemented:* Fear, Fixed, Chasing, Cutting.
   - *Logic:* 
-- [ ] **Coin & Fruit Score Modifiers**
+- [x] **Coin & Fruit Score Modifiers**
   - *Implementation:*
-- [ ] **Fear Mode & Ghost Reversal**
+- [x] **Fear Mode & Ghost Reversal**
   - *Implementation:* 
-- [ ] **Level Clearing & Scaling Difficulty**
+- [x] **Level Clearing & Scaling Difficulty**
   - *Implementation:* 
-- [ ] **Life System & Game Over**
+- [x] **Life System & Game Over**
   - *Implementation:* ---
 
 ### 2. Software Design & Code Architecture (40 Points)

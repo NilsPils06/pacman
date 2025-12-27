@@ -13,13 +13,9 @@ SET(SRC
         World.cpp
         World.h
         AbstractFactory.h
-        subject/Coin.cpp
         subject/Coin.h
-        subject/Collectable.cpp
         subject/Collectable.h
-        subject/Fruit.cpp
         subject/Fruit.h
-        subject/Wall.cpp
         subject/Wall.h
         Observer.h
         Score.cpp
