@@ -23,16 +23,16 @@ Studentnumber: 20240345
   - *Implementation:* ---
 
 ### 2. Software Design & Code Architecture (40 Points)
-- [ ] **Clear MVC Separation**
+- [x] **Clear MVC Separation**
   - *Implementation:* 
-- [ ] **Design Patterns Implemented**
+- [x] **Design Patterns Implemented**
   - **MVC:** Used as the core architecture.
   - **Observer:** - **Abstract Factory:** - **Singleton:** - **State Pattern:**
-- [ ] **Logic as Standalone Library**
+- [x] **Logic as Standalone Library**
   - *Implementation:* 
-- [ ] **Camera & Normalized Coordinates**
+- [x] **Camera & Normalized Coordinates**
   - *Implementation:* 
-- [ ] **Polymorphism & Extensibility**
+- [x] **Polymorphism & Extensibility**
   - *Implementation:* ---
 
 ### 3. Documentation & Deliverables (20 Points)
@@ -51,11 +51,11 @@ Studentnumber: 20240345
   - *Details:* 
 - [ ] **Sounds / Music**
   - *Details:* 
-- [ ] **Smarter AI (BFS / A*)**
+- [x] **Smarter AI (BFS / ~~A~~ * )**
   - *Details:* 
 - [ ] **Procedural Maps**
   - *Details:* 
 - [ ] **Multithreading**
   - *Details:* 
-- [ ] **Extra Design Patterns**
-  - *Details:* ```
+- [x] **Extra Design Patterns**
+  - *Details:* Visitor pattern for Collision
