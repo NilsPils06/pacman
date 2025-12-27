@@ -22,7 +22,6 @@ void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Ghost> e) {
         return;
     }
 
-
     if (e->inFear())
         e->setEaten(true);
     else
