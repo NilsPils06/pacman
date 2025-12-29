@@ -59,13 +59,13 @@ public:
 };
 
 class CollectEvent final : public Event {
-    int multiplier;
+    int points;
 
 public:
-    explicit CollectEvent(const int multiplier) : multiplier(multiplier) {}
+    explicit CollectEvent(const int points) : points(points) {}
 
     [[nodiscard]] EventType getType() const override { return COLLECT; }
-    [[nodiscard]] int getMultiplier() const { return multiplier; }
+    [[nodiscard]] int getPoints() const { return points; }
 };
 
 class DieEvent final : public Event {

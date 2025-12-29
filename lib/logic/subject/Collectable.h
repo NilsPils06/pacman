@@ -6,12 +6,12 @@
 
 namespace subjects {
 class Collectable : public EntityModel, public CollisionComponent {
-    int multiplier;
+    int points;
 
 public:
-    explicit Collectable(const Coords& coords, const int multiplier) : EntityModel(coords), multiplier(multiplier) {}
+    explicit Collectable(const Coords& coords, const int points) : EntityModel(coords), points(points) {}
     void tick() override { notify(std::make_shared<PositonUpdateEvent>(getCoords())); }
-    [[nodiscard]] int getScoreMultiplier() const { return multiplier; }
+    [[nodiscard]] int getPoints() const { return points; }
     void accept(std::shared_ptr<CollisionVisitor> visitor) override {};
 };
 } // namespace subjects

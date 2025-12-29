@@ -7,11 +7,11 @@
 std::shared_ptr<subjects::Pacman> PacmanCollisionHandler::getPacman() const { return pacman; }
 bool PacmanCollisionHandler::isDead() const { return pacman->getLives() <= 0; }
 void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Coin> e) {
-    pacman->notify(std::make_shared<CollectEvent>(e->getScoreMultiplier()));
+    pacman->notify(std::make_shared<CollectEvent>(e->getPoints()));
     e->setExpired();
 }
 void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Fruit> e) {
-    pacman->notify(std::make_shared<CollectEvent>(e->getScoreMultiplier()));
+    pacman->notify(std::make_shared<CollectEvent>(e->getPoints()));
     e->setExpired();
     ghostFearer();
 }
