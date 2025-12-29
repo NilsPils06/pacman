@@ -321,9 +321,7 @@ void subjects::Ghost::resetPosition() {
 void subjects::Ghost::setPacmanLocator(const std::function<std::pair<Coords, Direction>()>& locator) {
     pacmanLocator = locator;
 }
-void subjects::Ghost::setMovementType(const Movement m) {
-    movement = m;
-}
+void subjects::Ghost::setMovementType(const Movement m) { movement = m; }
 void subjects::Ghost::setFear(const bool f) { fear = f; }
 void subjects::Ghost::setEaten(const bool e) {
     eaten = e;
