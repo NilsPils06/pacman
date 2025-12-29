@@ -111,11 +111,16 @@ std::vector<std::pair<std::string, int>> getSorted(const std::shared_ptr<std::ma
 void MenuState::renderScoreboard() const {
     const sf::Vector2u size = Game::window.getSize();
     float y = static_cast<float>(size.y) * 2 / 3.f;
+    const auto sortedScores = getSorted(scores);
 
-    for (auto const& [name, score] : getSorted(scores)) {
+    for (int i = 0; i < sortedScores.size(); ++i) {
+        if (i == 5) {
+            return;
+        }
+
         sf::Text t;
         t.setFont(Game::font);
-        t.setString(name + ": " + std::to_string(score));
+        t.setString(sortedScores[i].first + ": " + std::to_string(sortedScores[i].second));
         t.setCharacterSize(32);
         t.setFillColor(sf::Color::White);
 
