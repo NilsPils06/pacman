@@ -13,6 +13,9 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     bool fear = false;
     bool eaten = false;
     bool collectable = false;
+    bool chasing = false;
+    float nonChasingTime = 0.f;
+    float chaseTimer = 0.f;
     float FEAR_DUR = 5.f;
     float fearTimer = 0;
     Direction facing = RIGHT;
@@ -27,7 +30,7 @@ class Ghost final : public EntityModel, public CollisionComponent, public std::e
     int mapHeight = 0;
 
 public:
-    explicit Ghost(const Coords& coords) : EntityModel(coords), spawn(coords) {}
+    Ghost(const Coords& coords, int count);
     void tick() override;
     void accept(std::shared_ptr<CollisionVisitor> visitor) override;
     void setWallValidator(const std::function<bool(const Coords&)>& validator);

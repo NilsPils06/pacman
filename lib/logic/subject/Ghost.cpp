@@ -7,7 +7,27 @@
 #include <queue>
 constexpr float ASPECT_RATIO = 16.f / 9.f;
 
+subjects::Ghost::Ghost(const Coords& coords, const int count) : EntityModel(coords), spawn(coords) {
+    if (count == 2) {
+        nonChasingTime = 5.f;
+    }
+    if (count == 1) {
+        nonChasingTime = 10.f;
+    }
+}
 void subjects::Ghost::tick() {
+    const float deltaTime = Stopwatch::getInstance().getDeltaTime();
+    if (!chasing) {
+        chaseTimer += deltaTime;
+        if (chaseTimer >= nonChasingTime) {
+            chasing = true;
+            chaseTimer = 0.f;
+        } else {
+            notify(std::make_shared<TickEvent>(getCoords(), facing, fear));
+            return;
+        }
+    }
+
     float distanceToSpawn = std::abs(coords.x - spawn.x) + std::abs(coords.y - spawn.y);
     if (eaten && distanceToSpawn <= 0.1f) {
         eaten = false;
@@ -15,7 +35,6 @@ void subjects::Ghost::tick() {
         facing = UP;
     }
 
-    const float deltaTime = Stopwatch::getInstance().getDeltaTime();
     speed = facing == UP || facing == DOWN ? 0.3f * ASPECT_RATIO : 0.3f;
     speed += 0.05f * static_cast<float>(level - 1);
     if (fear) {
@@ -294,6 +313,7 @@ void subjects::Ghost::setWallValidator(const std::function<bool(const Coords&)>&
     wallValidator = validator;
 }
 void subjects::Ghost::resetPosition() {
+    chasing = false;
     if (coords == spawn)
         return;
     coords = spawn;
@@ -301,7 +321,9 @@ void subjects::Ghost::resetPosition() {
 void subjects::Ghost::setPacmanLocator(const std::function<std::pair<Coords, Direction>()>& locator) {
     pacmanLocator = locator;
 }
-void subjects::Ghost::setMovementType(const Movement m) { movement = m; }
+void subjects::Ghost::setMovementType(const Movement m) {
+    movement = m;
+}
 void subjects::Ghost::setFear(const bool f) { fear = f; }
 void subjects::Ghost::setEaten(const bool e) {
     eaten = e;
