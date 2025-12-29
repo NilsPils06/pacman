@@ -21,6 +21,11 @@ MenuState::MenuState(const std::shared_ptr<StateManager>& manager) : State(manag
 MenuState::~MenuState() {
     if (std::ofstream out{"../../assets/scores.json"}; out.is_open()) {
         json j;
+        if (scores->empty()) {
+            j = std::map<std::string, int>();
+            out << j;
+            return;
+        }
         for (auto& [name, score] : (*scores))
             j[name] = score;
 

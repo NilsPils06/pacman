@@ -31,27 +31,67 @@ Studentnumber: 20240345
       eaten ghosts. The eaten mode/boolean is used to change their target in BFS/Manhattan to their spawn location and
       to update their sprite. Fear mode will be discussed later.
 - [x] **Coin & Fruit Score Modifiers**
-    - *Implementation:*
+    - *Implementation:* When a collision with a Collectable and Pacman is detected, score is notified via a
+      CollectEvent, which tells the score how many points it should add. The score also calculates a bonus with the
+      following formula using base as the points from the collectable: base / (timeSinceCollection + 0.1f). We add 0.1
+      to avoid division by 0, even though it shouldn't take place in a normal game. Coins are worth 10 points, fruit is
+      100 points and ghosts are 200. Since the bonus is calculated using the points of the current collected
+      collectable, it is better to eat a lot of coins right before collecting fruit or ghosts.
 - [x] **Fear Mode & Ghost Reversal**
-    - *Implementation:*
+    - *Implementation:* Just like wall detection a ghostFearer function is given to the pacmanCollisionHandler, so that
+      when pacman collects a fruit, the handler can set the ghosts to fear mode without knowledge of the ghosts
+      themselves. When the ghosts are in fear mode they all use Manhattan distance to run away from pacman using the
+      boolean maximize. We call the same function but tell it to maximize the distance via this maximize boolean.
 - [x] **Level Clearing & Scaling Difficulty**
-    - *Implementation:*
+    - *Implementation:* A level is cleared when all collectables are collected. This is detected in World simply by
+      checking if the collectables vector is empty. Every tick we check if a collectable is marked as expired (the
+      marking of expired happens on collision with pacman), and if it is expired we remove from the vector and decouple
+      it's observers, so that the observers don't try to observe a non-existing object. When a level is cleared we
+      increment the level counter in LevelState and make a new world and give it the new level. I have a system in place
+      so that you can use different maps, but I don't use it myself. The ghosts have level as a member and use it to
+      calculate fear duration: 5 - 0.5 * (level - 1) and speed: 0.3 + 0.05 * (level - 1). You start at level 1 and there
+      is technically no limit to which level you can reach, except of course integer limit. This combined with the smart
+      movement of the ghosts make higher levels really difficult (at the time of writing this I haven't reached level 2
+      yet). After every level completion you get a quick win screen via VictoryState, which shows which level you
+      cleared.
 - [x] **Life System & Game Over**
-    - *Implementation:* ---
+    - *Implementation:* You have 3 lives and when you hit a ghost, you lose one and then pacman and ghost positions are
+      reset directly after the death animation. During the death animation only pacman, score and lives are rendered and
+      ticked. Lives reset to 3 after every level. After you lose all 3, detected by world via pacmanCollisionHandler,
+      you go to the DefeatState where you can return to menu and your score is saved to the json.
 
 ### 2. Software Design & Code Architecture (40 Points)
 
 - [x] **Clear MVC Separation**
-    - *Implementation:*
+    - *Implementation:* In src you have the EntityViews which have all sprite data and get other data from EntityModels
+      via Events and the notify function. The notification of events often happen in the tick functions of EntityModels,
+      World or a collision handler. Thus, EntityView is the view, EntityModel is the Model and World (which calls the
+      tick functions) and PacmanCollisionHandler are the controllers.
 - [x] **Design Patterns Implemented**
-    - **MVC:** Used as the core architecture.
-    - **Observer:** - **Abstract Factory:** - **Singleton:** - **State Pattern:**
+    - **MVC:** Explained above.
+    - **Observer:** Observers use the update function to handle their own logic based on events. For example: PacmanView
+      updates it's sprite according to a TickEvent which tells it where to display pacman and which way he's facing.
+    - **Abstract Factory:** Abstract Factory consists of createEntity functions which are then implemented in its
+      subclass EntityFactory.
+    - **Singleton:** I used the singleton pattern for Random and Stopwatch. I had discussed with classmates about making
+      Camera a singleton, but since my Camera doesn't have any member variables, it only contains static functions. The
+      way I implemented the Singleton pattern was by deleting the constructors and using a unique_ptr as the instance.
+      When you call getInstance a reference to the object is returned.
+    - **State Pattern:** I have a StateManager which contains a stack of States via unique_ptr's and only the manager is
+      able to call the update functions for input and rendering.
 - [x] **Logic as Standalone Library**
-    - *Implementation:*
+    - *Implementation:* My logic and library and representation (which I simply call src) have separate CMakeLists so
+      that logic and src are compiled separately. Then I have a main CMakeList which links them together.
 - [x] **Camera & Normalized Coordinates**
-    - *Implementation:*
+    - *Implementation:* Camera consists of 3 static functions: showScore (displays score), showLives (displays lives)
+      and project, which projects and entity to the screen by transforming the normalized coordinates to pixel
+      coordinates. I do this by first calculating cell dimensions (Coords keep normalized width and height of the
+      entity), we then calculate the center of the screen and an offset which we use to calculate the pixel x and y
+      coordinates as follows: center_x + (coords.x * offset_x). To kind of translate this formula, the coordinates of a
+      entity are always its center coordinates, so to project them to the screen we start at the center of the screen
+      and calculate how much to the right/left and up/down we have to go to find its relative pixel coordinates.
 - [x] **Polymorphism & Extensibility**
-    - *Implementation:* ---
+    - *Implementation:* 
 
 ### 3. Documentation & Deliverables (20 Points)
 
@@ -68,14 +108,9 @@ Studentnumber: 20240345
 ### 4. Bonus Features (Up to 10 Points)
 
 - [ ] **Extra Gameplay / Visuals**
-    - *Details:*
 - [ ] **Sounds / Music**
-    - *Details:*
 - [x] **Smarter AI (BFS / ~~A~~ * )**
-    - *Details:*
 - [ ] **Procedural Maps**
-    - *Details:*
 - [ ] **Multithreading**
-    - *Details:*
 - [x] **Extra Design Patterns**
     - *Details:* Visitor pattern for Collision

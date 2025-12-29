@@ -10,9 +10,13 @@
 World::World(const std::shared_ptr<AbstractFactory>& factory, int level) {
     std::ifstream file;
     // level can later be used to select a different map
-    file.open("../../assets/maps/1.txt");
+    std::string mapName = "../../assets/maps/" + std::to_string(level) + ".txt";
+    file.open(mapName);
     if (!file.is_open()) {
-        std::cerr << "file not found" << std::endl;
+        mapName = "../../assets/maps/1.txt";
+        file.open(mapName);
+        if (!file.is_open())
+            throw std::runtime_error("Map file not found: " + mapName);
     }
 
     std::string line;
