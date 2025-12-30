@@ -2,9 +2,7 @@ SET(SRC
         Stopwatch.cpp
         Random.cpp
         Random.h
-        subject/Subject.cpp
         subject/Subject.h
-        subject/EntityModel.cpp
         subject/EntityModel.h
         subject/Ghost.cpp
         subject/Ghost.h

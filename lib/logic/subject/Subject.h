@@ -13,13 +13,19 @@ protected:
 public:
     virtual ~Subject() = default;
 
-    virtual void attach(const std::shared_ptr<Observer>& observer);
+    virtual void attach(const std::shared_ptr<Observer>& observer) { observers.push_back(observer); }
 
-    virtual void detach(const std::shared_ptr<Observer>& observer);
+    virtual void detach(const std::shared_ptr<Observer>& observer) { observers.remove(observer); }
 
-    virtual void detachAll();
+    virtual void detachAll() { observers.clear(); }
 
-    virtual void notify(std::shared_ptr<Event> e) = 0;
+    virtual void notify(const std::shared_ptr<Event>& e) = 0;
+    virtual void notify(const std::shared_ptr<TickEvent>& e) = 0;
+    virtual void notify(const std::shared_ptr<EatenEvent>& e) = 0;
+    virtual void notify(const std::shared_ptr<RenderStaticEvent>& e) = 0;
+    virtual void notify(const std::shared_ptr<DirectionChangeEvent>& e) = 0;
+    virtual void notify(const std::shared_ptr<CollectEvent>& e) = 0;
+    virtual void notify(const std::shared_ptr<DieEvent>& e) = 0;
 };
 } // namespace subjects
 

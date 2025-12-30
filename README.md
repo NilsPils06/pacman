@@ -19,7 +19,12 @@ Studentnumber: 20240345
       via std::function) so that they are aware of where the walls are. Using this system I don't need to check for
       intersecting rectangles with walls.
 - [x] **Smooth Continuous Movement**
-    - *Implementation:* The movement of Pacman is handled by the tick function, where its speed is dynamically adapted based on direction and deltaTime. A wallValidator ensures that Pacman cannot move into walls, and queued directions are processed to enable seamless turns. The alignToCenter helper function keeps Pacman centered within  grid cells, while a correction speed prevents abrupt stops when movement constraints are met. This implementation achieves smooth and continuous movement across varying directions while avoiding jittery behavior during transitions between tiles.
+    - *Implementation:* The movement of Pacman is handled by the tick function, where its speed is dynamically adapted
+      based on direction and deltaTime. A wallValidator ensures that Pacman cannot move into walls, and queued
+      directions are processed to enable seamless turns. The alignToCenter helper function keeps Pacman centered within
+      grid cells, while a correction speed prevents abrupt stops when movement constraints are met. This implementation
+      achieves smooth and continuous movement across varying directions while avoiding jittery behavior during
+      transitions between tiles.
 - [x] **Ghost AI**
     - *Modes Implemented:* Fear, Eaten, Chasing, Collectable.
     - *Logic:* Ghosts use BFS and manhattan distance to determine which direction they should go to, depending on the
@@ -33,10 +38,11 @@ Studentnumber: 20240345
 - [x] **Coin & Fruit Score Modifiers**
     - *Implementation:* When a collision with a Collectable and Pacman is detected, score is notified via a
       CollectEvent, which tells the score how many points it should add. The score also calculates a bonus with the
-      following formula using base as the points from the collectable: base / (timeSinceCollection + 0.1f). We add 0.1
-      to avoid division by 0, even though it shouldn't take place in a normal game. Coins are worth 10 points, fruit is
-      100 points and ghosts are 200. Since the bonus is calculated using the points of the current collected
-      collectable, it is better to eat a lot of coins right before collecting fruit or ghosts.
+      following formula using base as the points from the collectable: min(base / (timeSinceCollection + 0.1f), base).
+      We add 0.1 to avoid division by 0, even though it shouldn't take place in a normal game. The bonus is capped at
+      base, so you can maximally reach a 100% bonus. Coins are worth 10 points, fruit is 100 points and ghosts are 200.
+      Since the bonus is calculated using the points of the current collected collectable, it is better to eat a lot of
+      coins right before collecting fruit or ghosts.
 - [x] **Fear Mode & Ghost Reversal**
     - *Implementation:* Just like wall detection a ghostFearer function is given to the pacmanCollisionHandler, so that
       when pacman collects a fruit, the handler can set the ghosts to fear mode without knowledge of the ghosts
@@ -91,7 +97,7 @@ Studentnumber: 20240345
       entity are always its center coordinates, so to project them to the screen we start at the center of the screen
       and calculate how much to the right/left and up/down we have to go to find its relative pixel coordinates.
 - [x] **Polymorphism & Extensibility**
-    - *Implementation:* 
+    - *Implementation:*
 
 ### 3. Documentation & Deliverables (20 Points)
 

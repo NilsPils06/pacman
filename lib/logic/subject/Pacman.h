@@ -18,7 +18,7 @@ class Pacman final : public EntityModel {
 
 public:
     explicit Pacman(const Coords& coords) : EntityModel(coords), spawn(coords) {}
-    void notify(std::shared_ptr<Event> e) override;
+    void notify(const std::shared_ptr<DirectionChangeEvent>& e) override;
     void tick() override;
     [[nodiscard]] int getLives() const;
     void hurt();

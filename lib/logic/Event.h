@@ -2,15 +2,9 @@
 #define PACMAN_EVENT_H
 #include "Util.h"
 
-#include <memory>
-
-enum EventType { POSITION_UPDATE, DIRECTION_UPDATE, COLLECT, TICK, DIE, EATEN };
-
 class Event {
 public:
     virtual ~Event() = default;
-
-    [[nodiscard]] virtual EventType getType() const = 0;
 };
 
 class TickEvent final : public Event {
@@ -19,10 +13,9 @@ class TickEvent final : public Event {
     bool variable; // used for fear in Ghosts and blocked in Pacman
 
 public:
-    TickEvent(const Coords& pos, const Direction& facing, bool b) : pos(pos), facing(facing), variable(b) {}
+    TickEvent(const Coords& pos, const Direction& facing, const bool b) : pos(pos), facing(facing), variable(b) {}
     [[nodiscard]] Coords getPosition() const { return pos; }
     [[nodiscard]] Direction getFacing() const { return facing; }
-    [[nodiscard]] EventType getType() const override { return TICK; }
     [[nodiscard]] bool getVariable() const { return variable; }
 };
 
@@ -34,18 +27,15 @@ public:
     EatenEvent(const Coords& pos, const Direction& facing) : pos(pos), facing(facing) {}
     [[nodiscard]] Coords getPosition() const { return pos; }
     [[nodiscard]] Direction getFacing() const { return facing; }
-    [[nodiscard]] EventType getType() const override { return EATEN; }
 };
 
-class PositonUpdateEvent final : public Event {
+class RenderStaticEvent final : public Event {
     Coords position;
 
 public:
-    explicit PositonUpdateEvent(const Coords& position) : position(position) {}
+    explicit RenderStaticEvent(const Coords& position) : position(position) {}
 
     [[nodiscard]] Coords getPosition() const { return position; }
-
-    [[nodiscard]] EventType getType() const override { return POSITION_UPDATE; }
 };
 
 class DirectionChangeEvent final : public Event {
@@ -55,7 +45,6 @@ public:
     explicit DirectionChangeEvent(const Direction& direction) : direction(direction) {}
 
     [[nodiscard]] Direction getDirection() const { return direction; }
-    [[nodiscard]] EventType getType() const override { return DIRECTION_UPDATE; }
 };
 
 class CollectEvent final : public Event {
@@ -63,8 +52,6 @@ class CollectEvent final : public Event {
 
 public:
     explicit CollectEvent(const int points) : points(points) {}
-
-    [[nodiscard]] EventType getType() const override { return COLLECT; }
     [[nodiscard]] int getPoints() const { return points; }
 };
 
@@ -76,7 +63,6 @@ class DieEvent final : public Event {
 public:
     DieEvent(const Coords& position, const float time_elapsed, const float duration)
         : position(position), timeElapsed(time_elapsed), duration(duration) {}
-    [[nodiscard]] EventType getType() const override { return DIE; }
     [[nodiscard]] Coords getPosition() const { return position; }
     [[nodiscard]] float getTimeElapsed() const { return timeElapsed; }
     [[nodiscard]] float getDuration() const { return duration; }

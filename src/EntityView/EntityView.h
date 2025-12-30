@@ -15,8 +15,12 @@ public:
     void setSprite(const sf::IntRect& spriteRect);
 
     const sf::Sprite& getSprite() const;
-
-    void update(std::shared_ptr<Event> e) override;
+    void update(const std::shared_ptr<TickEvent>& e) override {}
+    void update(const std::shared_ptr<EatenEvent>& e) override {}
+    void update(const std::shared_ptr<RenderStaticEvent>& e) override;
+    void update(const std::shared_ptr<DirectionChangeEvent>& e) override {}
+    void update(const std::shared_ptr<CollectEvent>& e) override {}
+    void update(const std::shared_ptr<DieEvent>& e) override {}
 };
 } // namespace view
 
@@ -67,7 +71,13 @@ const sf::IntRect GHOST_EATEN_UP(293, 396, 50, 50);
 
 const sf::IntRect COIN(393, 246, 50, 50);
 
-const sf::IntRect FRUIT(593, -4, 50, 50);
+const sf::IntRect FRUIT_1(593, -4, 50, 50);
+const sf::IntRect FRUIT_2(593, 46, 50, 50);
+const sf::IntRect FRUIT_3(593, 96, 50, 50);
+const sf::IntRect FRUIT_4(593, 146, 50, 50);
+const sf::IntRect FRUIT_5(593, 196, 50, 50);
+const sf::IntRect FRUIT_6(593, 246, 50, 50);
+const sf::IntRect FRUIT_7(593, 296, 50, 50);
 
 const sf::IntRect PACMAN_DEATH_1(343, -4, 50, 50);
 const sf::IntRect PACMAN_DEATH_2(343, 46, 50, 50);

@@ -118,7 +118,7 @@ void MenuState::renderScoreboard() const {
     float y = static_cast<float>(size.y) * 2 / 3.f;
     const auto sortedScores = getSorted(scores);
 
-    for (int i = 0; i < sortedScores.size(); ++i) {
+    for (size_t i = 0; i < sortedScores.size(); ++i) {
         if (i == 5) {
             return;
         }

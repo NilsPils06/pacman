@@ -10,7 +10,7 @@ class Collectable : public EntityModel, public CollisionComponent {
 
 public:
     explicit Collectable(const Coords& coords, const int points) : EntityModel(coords), points(points) {}
-    void tick() override { notify(std::make_shared<PositonUpdateEvent>(getCoords())); }
+    void tick() override { notify(std::make_shared<RenderStaticEvent>(getCoords())); }
     [[nodiscard]] int getPoints() const { return points; }
     void accept(std::shared_ptr<CollisionVisitor> visitor) override {};
 };

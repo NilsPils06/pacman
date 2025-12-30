@@ -7,7 +7,6 @@ struct Coords {
     float y;
 
     // normalized width and height for calculation of cellsize for the camera
-    // TODO try to remove this
     float width;
     float height;
 
@@ -41,13 +40,6 @@ struct Coords {
         return true;
     }
     bool operator==(const Coords& other) const { return x == other.x && y == other.y; }
-};
-
-struct Hitbox {
-    float width;
-    float height;
-
-    Hitbox(const float& w, const float& h) : width(w), height(h) {}
 };
 
 enum Movement { FIXED, CHASING, CUTTING };

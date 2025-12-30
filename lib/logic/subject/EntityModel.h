@@ -15,19 +15,46 @@ protected:
 public:
     EntityModel() : coords(0, 0, 0, 0) {};
 
-    explicit EntityModel(const Coords& coords);
+    explicit EntityModel(const Coords& coords) : coords(coords) {}
 
-    void setCoords(Coords c);
+    void setCoords(const Coords c) { coords = c; }
 
-    [[nodiscard]] Coords getCoords() const;
+    [[nodiscard]] Coords getCoords() const { return coords; }
 
     virtual void tick() = 0;
 
-    void notify(std::shared_ptr<Event> e) override;
+    void notify(const std::shared_ptr<Event>& e) override {
+        for (const auto& observer : observers)
+            observer->update(e);
+    }
 
-    [[nodiscard]] bool isExpired() const;
+    [[nodiscard]] bool isExpired() const { return expired; }
 
-    void setExpired();
+    void setExpired() { expired = true; }
+    void notify(const std::shared_ptr<TickEvent>& e) override {
+        for (const auto& observer : observers)
+            observer->update(e);
+    }
+    void notify(const std::shared_ptr<EatenEvent>& e) override {
+        for (const auto& observer : observers)
+            observer->update(e);
+    }
+    void notify(const std::shared_ptr<RenderStaticEvent>& e) override {
+        for (const auto& observer : observers)
+            observer->update(e);
+    }
+    void notify(const std::shared_ptr<DirectionChangeEvent>& e) override {
+        for (const auto& observer : observers)
+            observer->update(e);
+    }
+    void notify(const std::shared_ptr<CollectEvent>& e) override {
+        for (const auto& observer : observers)
+            observer->update(e);
+    }
+    void notify(const std::shared_ptr<DieEvent>& e) override {
+        for (const auto& observer : observers)
+            observer->update(e);
+    }
 };
 } // namespace subjects
 

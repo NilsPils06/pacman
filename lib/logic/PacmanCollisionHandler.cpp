@@ -7,18 +7,18 @@
 std::shared_ptr<subjects::Pacman> PacmanCollisionHandler::getPacman() const { return pacman; }
 bool PacmanCollisionHandler::isDead() const { return pacman->getLives() <= 0; }
 void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Coin> e) {
-    pacman->notify(std::make_shared<CollectEvent>(e->getPoints()));
+    pacman->EntityModel::notify(std::make_shared<CollectEvent>(e->getPoints()));
     e->setExpired();
 }
 void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Fruit> e) {
-    pacman->notify(std::make_shared<CollectEvent>(e->getPoints()));
+    pacman->EntityModel::notify(std::make_shared<CollectEvent>(e->getPoints()));
     e->setExpired();
     ghostFearer();
 }
 void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Ghost> e) {
     if (e->isEaten()) {
         if (e->isCollectable())
-            pacman->notify(std::make_shared<CollectEvent>(e->collect()));
+            pacman->EntityModel::notify(std::make_shared<CollectEvent>(e->collect()));
         return;
     }
 

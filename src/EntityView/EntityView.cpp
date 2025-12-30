@@ -12,11 +12,4 @@ void view::EntityView::setSprite(const sf::IntRect& spriteRect) {
 }
 
 const sf::Sprite& view::EntityView::getSprite() const { return sprite; }
-
-void view::EntityView::update(std::shared_ptr<Event> e) {
-    if (e->getType() == POSITION_UPDATE) {
-        const std::shared_ptr<PositonUpdateEvent> event = std::static_pointer_cast<PositonUpdateEvent>(e);
-
-        Camera::project(sprite, event->getPosition());
-    }
-}
+void view::EntityView::update(const std::shared_ptr<RenderStaticEvent>& e) { Camera::project(sprite, e->getPosition()); }

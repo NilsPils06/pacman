@@ -10,12 +10,6 @@ SET(SRC main.cpp Game.cpp
         EntityView/Pacman.h
         EntityView/Ghost.cpp
         EntityView/Ghost.h
-        EntityView/Coin.cpp
-        EntityView/Coin.h
-        EntityView/Fruit.cpp
-        EntityView/Fruit.h
-        EntityView/Wall.cpp
-        EntityView/Wall.h
         state/LevelState.cpp
         state/LevelState.h
         state/PausedState.cpp
@@ -28,7 +22,8 @@ SET(SRC main.cpp Game.cpp
         state/DefeatState.h
         state/VictoryState.cpp
         state/VictoryState.h
-        EntityView/AnimatedView.h)
+        EntityView/AnimatedView.h
+        EntityView/AnimatedView.cpp)
 ADD_EXECUTABLE(game ${SRC})
 
 FIND_PACKAGE(SFML COMPONENTS system window graphics)

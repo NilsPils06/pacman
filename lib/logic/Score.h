@@ -10,9 +10,14 @@ class Score final : public Observer {
 public:
     Score() = default;
     explicit Score(const std::shared_ptr<subjects::Subject>& subject) : Observer(subject) {}
-    void update(std::shared_ptr<Event> e) override;
     void tick();
     [[nodiscard]] int getScore() const;
+    void update(const std::shared_ptr<TickEvent>& e) override {}
+    void update(const std::shared_ptr<EatenEvent>& e) override {}
+    void update(const std::shared_ptr<RenderStaticEvent>& e) override {}
+    void update(const std::shared_ptr<DirectionChangeEvent>& e) override {}
+    void update(const std::shared_ptr<CollectEvent>& e) override;
+    void update(const std::shared_ptr<DieEvent>& e) override {}
 };
 
 #endif // PACMAN_SCORE_H

@@ -18,21 +18,14 @@ bool isOpposite(const Direction a, const Direction b) {
         return true;
     return false;
 }
-
-void subjects::Pacman::notify(const std::shared_ptr<Event> e) {
-    if (e->getType() == DIRECTION_UPDATE) {
-        const std::shared_ptr<DirectionChangeEvent> event = std::static_pointer_cast<DirectionChangeEvent>(e);
-        queuedDirection = event->getDirection();
-    }
-    EntityModel::notify(e);
-}
+void subjects::Pacman::notify(const std::shared_ptr<DirectionChangeEvent>& e) { queuedDirection = e->getDirection(); }
 
 void subjects::Pacman::tick() {
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
 
     if (dying) {
         deathTimer += Stopwatch::getInstance().getDeltaTime();
-        notify(std::make_shared<DieEvent>(getCoords(), deathTimer, DEATH_DURATION));
+        EntityModel::notify(std::make_shared<DieEvent>(getCoords(), deathTimer, DEATH_DURATION));
 
         if (deathTimer >= DEATH_DURATION) {
             lives--;
@@ -141,7 +134,7 @@ void subjects::Pacman::tick() {
         }
     }
 
-    notify(std::make_shared<TickEvent>(getCoords(), facing, !canMoveTo(facing)));
+    EntityModel::notify(std::make_shared<TickEvent>(getCoords(), facing, !canMoveTo(facing)));
 }
 int subjects::Pacman::getLives() const { return lives; }
 void subjects::Pacman::hurt() {

@@ -7,7 +7,8 @@ namespace view {
 class Pacman final : public AnimatedView {
 public:
     explicit Pacman(const std::shared_ptr<subjects::Subject>& subject);
-    void update(std::shared_ptr<Event> e) override;
+    void update(const std::shared_ptr<DieEvent>& e) override;
+    void update(const std::shared_ptr<TickEvent>& e) override;
 };
 } // namespace view
 
