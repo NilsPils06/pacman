@@ -31,8 +31,9 @@ std::shared_ptr<subjects::Fruit> EntityFactory::createFruit(Coords coords) {
     auto model = std::make_shared<subjects::Fruit>(coords);
     const auto view = std::make_shared<view::EntityView>(model);
     model->attach(view);
-    static std::vector fruitSprites = {sprites::FRUIT_1, sprites::FRUIT_2, sprites::FRUIT_3, sprites::FRUIT_4, sprites::FRUIT_5, sprites::FRUIT_6, sprites::FRUIT_7};
-    view->setSprite(fruitSprites[Random::getInstance().getInt(static_cast<int>(fruitSprites.size()-1))]);
+    static std::vector fruitSprites = {sprites::FRUIT_1, sprites::FRUIT_2, sprites::FRUIT_3, sprites::FRUIT_4,
+                                       sprites::FRUIT_5, sprites::FRUIT_6, sprites::FRUIT_7};
+    view->setSprite(fruitSprites[Random::getInstance().getInt(static_cast<int>(fruitSprites.size() - 1))]);
     return model;
 }
 std::shared_ptr<subjects::Ghost> EntityFactory::createGhost(Coords coords) {
