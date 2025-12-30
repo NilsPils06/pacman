@@ -19,7 +19,7 @@ Studentnumber: 20240345
       via std::function) so that they are aware of where the walls are. Using this system I don't need to check for
       intersecting rectangles with walls.
 - [x] **Smooth Continuous Movement**
-    - *Implementation:*
+    - *Implementation:* The movement of Pacman is handled by the tick function, where its speed is dynamically adapted based on direction and deltaTime. A wallValidator ensures that Pacman cannot move into walls, and queued directions are processed to enable seamless turns. The alignToCenter helper function keeps Pacman centered within  grid cells, while a correction speed prevents abrupt stops when movement constraints are met. This implementation achieves smooth and continuous movement across varying directions while avoiding jittery behavior during transitions between tiles.
 - [x] **Ghost AI**
     - *Modes Implemented:* Fear, Eaten, Chasing, Collectable.
     - *Logic:* Ghosts use BFS and manhattan distance to determine which direction they should go to, depending on the
