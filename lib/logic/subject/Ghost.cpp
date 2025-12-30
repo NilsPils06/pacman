@@ -18,6 +18,13 @@ subjects::Ghost::Ghost(const Coords& coords, const int count) : EntityModel(coor
 void subjects::Ghost::tick() {
     const float deltaTime = Stopwatch::getInstance().getDeltaTime();
     if (!chasing) {
+        if (fear) {
+            fearTimer += deltaTime;
+            if (fearTimer >= FEAR_DUR) {
+                fear = false;
+                fearTimer = 0.0f;
+            }
+        }
         chaseTimer += deltaTime;
         if (chaseTimer >= nonChasingTime) {
             chasing = true;
