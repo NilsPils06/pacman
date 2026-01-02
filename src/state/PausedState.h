@@ -4,12 +4,22 @@
 
 class PausedState final : public State {
 public:
+    /**
+     * @brief Constructs a PausedState object.
+     * @param manager the StateManager to manage this State.
+     */
     explicit PausedState(const std::shared_ptr<StateManager>& manager) : State(manager) {}
 
+    /**
+     * @brief Handles key presses.
+     * @param event a SFML KeyEvent.
+     */
     void onKeyPress(sf::Event::KeyEvent event) override;
 
+    /**
+     * @brief Renders this State to the screen.
+     */
     void render() override;
-    void onTextEntered(sf::Event::TextEvent event) override {};
 };
 
 #endif // PACMAN_PAUSEDSTATE_H

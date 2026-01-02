@@ -14,8 +14,14 @@ public:
     static inline sf::Font fontFront;
     static inline sf::Texture texture;
 
+    /**
+     * @brief Sets up the game members and creates the game object.
+     */
     Game();
 
+    /**
+     * @brief Starts the game loop and renders the game window.
+     */
     void render() const;
 };
 
