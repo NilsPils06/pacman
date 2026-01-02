@@ -1,7 +1,7 @@
 #ifndef PACMAN_OBSERVER_H
 #define PACMAN_OBSERVER_H
-#include <memory>
 #include "Event.h"
+#include <memory>
 
 namespace subjects {
 class Subject;

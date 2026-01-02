@@ -30,6 +30,4 @@ void AnimatedView::setAnimSprite(const Direction facing) {
         break;
     }
 }
-int AnimatedView::getSpriteIndex() const {
-    return frameSequence[currentFrame];
-}
+int AnimatedView::getSpriteIndex() const { return frameSequence[currentFrame]; }
