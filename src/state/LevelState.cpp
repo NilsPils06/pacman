@@ -10,11 +10,6 @@
 #include <SFML/Graphics/Text.hpp>
 #include <fstream>
 #include <utility>
-LevelState::LevelState(const std::shared_ptr<StateManager>& manager) : State(manager) {
-    score = std::make_shared<Score>();
-    factory = std::make_shared<EntityFactory>(score);
-    world = std::make_shared<World>(factory, level);
-}
 LevelState::LevelState(const std::shared_ptr<StateManager>& manager, std::string playerName,
                        const std::shared_ptr<std::map<std::string, int>>& scores)
     : State(manager), playerName(std::move(playerName)), scores(scores) {
@@ -70,7 +65,7 @@ void LevelState::render() {
         return;
     }
 
-    world->render();
+    world->tick();
     score->tick();
     Camera::showScore(score->getScore());
     Camera::showLives(world->getLives());

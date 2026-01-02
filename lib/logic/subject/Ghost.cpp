@@ -330,14 +330,10 @@ void subjects::Ghost::setPacmanLocator(const std::function<std::pair<Coords, Dir
 }
 void subjects::Ghost::setMovementType(const Movement m) { movement = m; }
 void subjects::Ghost::setFear(const bool f) { fear = f; }
-void subjects::Ghost::setEaten(const bool e) {
-    eaten = e;
-    collectable = e;
+int subjects::Ghost::collect() {
+    eaten = true;
     fear = false;
     fearTimer = 0.0f;
-}
-int subjects::Ghost::collect() {
-    collectable = false;
     return 200;
 }
 void subjects::Ghost::setLevel(const int i) {
@@ -346,4 +342,3 @@ void subjects::Ghost::setLevel(const int i) {
 }
 bool subjects::Ghost::inFear() const { return fear; }
 bool subjects::Ghost::isEaten() const { return eaten; }
-bool subjects::Ghost::isCollectable() const { return collectable; }

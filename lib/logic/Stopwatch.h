@@ -12,12 +12,27 @@ class Stopwatch {
     Stopwatch() = default;
 
 public:
+    /**
+     *
+     * @return the Stopwatch instance.
+     */
     static Stopwatch& getInstance();
 
+    /**
+     * @brief Updates lastTime and deltaTime.
+     * @return deltaTime
+     */
     float tick();
 
+    /**
+     *
+     * @return deltaTime.
+     */
     [[nodiscard]] float getDeltaTime() const;
 
+    /**
+     * @brief Resets the Stopwatch.
+     */
     void reset();
 
     Stopwatch(const Stopwatch&) = delete;

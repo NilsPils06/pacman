@@ -5,11 +5,19 @@
 #include "EntityModel.h"
 
 namespace subjects {
-class Wall final : public EntityModel, public CollisionComponent, public std::enable_shared_from_this<Wall> {
+class Wall final : public EntityModel {
 public:
+    /**
+     * @brief Constructs a Wall model object.
+     * @param coords the location of the object.
+     */
     explicit Wall(const Coords& coords) : EntityModel(coords) {}
+
+    /**
+     * @brief Notifies the View observer of our coordinates via RenderStaticEvent
+     * @note Function is called every tick.
+     */
     void tick() override { notify(std::make_shared<RenderStaticEvent>(getCoords())); }
-    void accept(const std::shared_ptr<CollisionVisitor> visitor) override { visitor->visit(shared_from_this()); }
 };
 } // namespace subjects
 

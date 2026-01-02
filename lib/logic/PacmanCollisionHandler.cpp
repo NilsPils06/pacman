@@ -17,13 +17,11 @@ void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Fruit> e) {
 }
 void PacmanCollisionHandler::visit(const std::shared_ptr<subjects::Ghost> e) {
     if (e->isEaten()) {
-        if (e->isCollectable())
-            pacman->EntityModel::notify(std::make_shared<CollectEvent>(e->collect()));
         return;
     }
 
     if (e->inFear())
-        e->setEaten(true);
+        pacman->EntityModel::notify(std::make_shared<CollectEvent>(e->collect()));
     else
         pacman->hurt();
 }

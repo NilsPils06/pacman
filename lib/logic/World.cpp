@@ -153,7 +153,7 @@ void World::checkCollisions() const {
     }
 }
 
-void World::render() {
+void World::tick() {
     std::erase_if(collectables, [](std::shared_ptr<subjects::Collectable>& e) {
         if (e->isExpired()) {
             e->detachAll();

@@ -6,13 +6,18 @@ struct Coords {
     float x;
     float y;
 
-    // normalized width and height for calculation of cellsize for the camera
+    // normalized width and height for calculation of cell size for the camera
     float width;
     float height;
 
     Coords(const float x, const float y, const float width, const float height)
         : x(x), y(y), width(width), height(height) {}
 
+    /**
+     *
+     * @param a other coordinate.
+     * @return if both rectangles are intersecting.
+     */
     [[nodiscard]] bool overlaps(const Coords& a) const {
         const float x1 = a.x - (a.width / 2);
         const float y1 = a.y - (a.height / 2);
@@ -39,6 +44,12 @@ struct Coords {
         }
         return true;
     }
+
+    /**
+     *
+     * @param other
+     * @return if this coordinate and the other coordinate are equal (x, y).
+     */
     bool operator==(const Coords& other) const { return x == other.x && y == other.y; }
 };
 

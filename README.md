@@ -26,14 +26,13 @@ Studentnumber: 20240345
       achieves smooth and continuous movement across varying directions while avoiding jittery behavior during
       transitions between tiles.
 - [x] **Ghost AI**
-    - *Modes Implemented:* Fear, Eaten, Chasing, Collectable.
+    - *Modes Implemented:* Fear, Eaten, Chasing, Waiting.
     - *Logic:* Ghosts use BFS and manhattan distance to determine which direction they should go to, depending on the
       movement type. You have 2 Cutting type ghosts, which look 4 tiles ahead of pacman and then uses BFS to determine
       the best direction to go to, if this fails we use Manhattan distance as a fallback. The remaining 2 ghosts are the
       Fixed and Chasing ghosts. The Chasing ghost uses the same system as the Cutting ones, without the lookahead and
       the Fixed ghost chooses a random index from a vector of candidates. The chasing mode/boolean is only used for the
-      delay of the ghosts. The collectable mode/boolean is used to prevent infinite score additions when colliding with
-      eaten ghosts. The eaten mode/boolean is used to change their target in BFS/Manhattan to their spawn location and
+      delay of the ghosts. The eaten mode/boolean is used to change their target in BFS/Manhattan to their spawn location and
       to update their sprite. Fear mode will be discussed later.
 - [x] **Coin & Fruit Score Modifiers**
     - *Implementation:* When a collision with a Collectable and Pacman is detected, score is notified via a
@@ -107,9 +106,7 @@ Studentnumber: 20240345
 
 - [ ] **Written Documentation**
     - [ ] 2-Page Report & Design Rationale
-    - [ ] Doxygen/API Documentation (Comments in code)
-
----
+    - [x] Doxygen/API Documentation (Comments in code)
 
 ### 4. Bonus Features (Up to 10 Points)
 
