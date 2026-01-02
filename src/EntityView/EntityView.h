@@ -10,16 +10,55 @@ protected:
     sf::Sprite sprite;
 
 public:
+    /**
+     * @brief Constructs an EntityView object.
+     * @param subject the model to observe.
+     */
     explicit EntityView(const std::shared_ptr<subjects::Subject>& subject) : Observer(subject) {}
 
+    /**
+     * @brief Updates the sprite used to display.
+     * @note Use predefined sprites found in EntityView.h
+     * @param spriteRect an IntRect with the correct coordinates of the sprite on the spritemap.
+     */
     void setSprite(const sf::IntRect& spriteRect);
 
-    const sf::Sprite& getSprite() const;
+    /**
+     * @brief Handles a TickEvent.
+     * @param e the TickEvent to handle.
+     */
     void update(const std::shared_ptr<TickEvent>& e) override {}
+
+    /**
+     * @brief Handles a EatenEvent.
+     * @param e the EatenEvent to handle.
+     */
     void update(const std::shared_ptr<EatenEvent>& e) override {}
+
+    /**
+     * @brief Displays a static entity to the screen.
+     * @param e the RenderStaticEvent to handle.
+     */
     void update(const std::shared_ptr<RenderStaticEvent>& e) override;
+
+    /**
+     * @brief Handles a DirectionChangeEvent.
+     * @note Not used for View.
+     * @param e the DirectionChangeEvent to handle.
+     */
     void update(const std::shared_ptr<DirectionChangeEvent>& e) override {}
+
+    /**
+     * @brief Handles a CollectEvent.
+     * @note not used for View.
+     * @param e the CollectEvent to handle.
+     */
     void update(const std::shared_ptr<CollectEvent>& e) override {}
+
+    /**
+     * @brief Handles a DieEvent.
+     * @param e the DieEvent to handle.
+     */
     void update(const std::shared_ptr<DieEvent>& e) override {}
 };
 } // namespace view

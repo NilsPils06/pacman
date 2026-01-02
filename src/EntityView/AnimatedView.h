@@ -16,9 +16,28 @@ protected:
     std::vector<int> frameSequence;
 
 public:
+    /**
+     * @brief Constructs an AnimatedView object.
+     * @param subject the model to observe.
+     */
     explicit AnimatedView(const std::shared_ptr<subjects::Subject>& subject) : EntityView(subject) {}
+
+    /**
+     * @brief Updates the sprite to the correct animation frame of the correct animation.
+     * @param e the TickEvent to handle.
+     */
     void update(const std::shared_ptr<TickEvent>& e) override;
+
+    /**
+     * @brief Sets the sprite based on direction.
+     * @param facing the direction the model is facing.
+     */
     void setAnimSprite(Direction facing);
+
+    /**
+     *
+     * @return the index of the current animation frame.
+     */
     [[nodiscard]] int getSpriteIndex() const;
 };
 
