@@ -1,6 +1,4 @@
 #include "Game.h"
-
-#include "Camera.h"
 #include "Stopwatch.h"
 #include "state/MenuState.h"
 
