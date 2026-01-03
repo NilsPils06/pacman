@@ -21,7 +21,7 @@
 
                                 # Use the specific SFML 2.6.2 package
                                 sfml_2 = pkgs.sfml_2;
-                                sfml-pkgs = with pkgs; [ compiler cmake gdb sfml_2 valgrind];
+                                sfml-pkgs = with pkgs; [ compiler cmake gdb sfml_2 valgrind doxygen];
 
                                 cpp-env = pkgs.mkShell {
                                         buildInputs = sfml-pkgs;

@@ -1,0 +1,46 @@
+var annotated_dup =
+[
+    [ "subjects", null, [
+      [ "Coin", "classsubjects_1_1Coin.html", "classsubjects_1_1Coin" ],
+      [ "Collectable", "classsubjects_1_1Collectable.html", "classsubjects_1_1Collectable" ],
+      [ "EntityModel", "classsubjects_1_1EntityModel.html", "classsubjects_1_1EntityModel" ],
+      [ "Fruit", "classsubjects_1_1Fruit.html", "classsubjects_1_1Fruit" ],
+      [ "Ghost", "classsubjects_1_1Ghost.html", "classsubjects_1_1Ghost" ],
+      [ "Pacman", "classsubjects_1_1Pacman.html", "classsubjects_1_1Pacman" ],
+      [ "Subject", "classsubjects_1_1Subject.html", "classsubjects_1_1Subject" ],
+      [ "Wall", "classsubjects_1_1Wall.html", "classsubjects_1_1Wall" ]
+    ] ],
+    [ "view", null, [
+      [ "EntityView", "classview_1_1EntityView.html", "classview_1_1EntityView" ],
+      [ "Ghost", "classview_1_1Ghost.html", "classview_1_1Ghost" ],
+      [ "Pacman", "classview_1_1Pacman.html", "classview_1_1Pacman" ]
+    ] ],
+    [ "AbstractFactory", "classAbstractFactory.html", "classAbstractFactory" ],
+    [ "AnimatedView", "classAnimatedView.html", "classAnimatedView" ],
+    [ "Camera", "classCamera.html", null ],
+    [ "CollectEvent", "classCollectEvent.html", "classCollectEvent" ],
+    [ "CollisionComponent", "classCollisionComponent.html", "classCollisionComponent" ],
+    [ "CollisionVisitor", "classCollisionVisitor.html", "classCollisionVisitor" ],
+    [ "Coords", "structCoords.html", "structCoords" ],
+    [ "DefeatState", "classDefeatState.html", "classDefeatState" ],
+    [ "DieEvent", "classDieEvent.html", "classDieEvent" ],
+    [ "DirectionChangeEvent", "classDirectionChangeEvent.html", "classDirectionChangeEvent" ],
+    [ "EatenEvent", "classEatenEvent.html", "classEatenEvent" ],
+    [ "EntityFactory", "classEntityFactory.html", "classEntityFactory" ],
+    [ "Event", "classEvent.html", "classEvent" ],
+    [ "Game", "classGame.html", "classGame" ],
+    [ "LevelState", "classLevelState.html", "classLevelState" ],
+    [ "MenuState", "classMenuState.html", "classMenuState" ],
+    [ "Observer", "classObserver.html", "classObserver" ],
+    [ "PacmanCollisionHandler", "classPacmanCollisionHandler.html", "classPacmanCollisionHandler" ],
+    [ "PausedState", "classPausedState.html", "classPausedState" ],
+    [ "Random", "classRandom.html", "classRandom" ],
+    [ "RenderStaticEvent", "classRenderStaticEvent.html", "classRenderStaticEvent" ],
+    [ "Score", "classScore.html", "classScore" ],
+    [ "State", "classState.html", "classState" ],
+    [ "StateManager", "classStateManager.html", "classStateManager" ],
+    [ "Stopwatch", "classStopwatch.html", "classStopwatch" ],
+    [ "TickEvent", "classTickEvent.html", "classTickEvent" ],
+    [ "VictoryState", "classVictoryState.html", "classVictoryState" ],
+    [ "World", "classWorld.html", "classWorld" ]
+];

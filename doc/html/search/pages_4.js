@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['architecture_2040_20points_0',['2. Software Design &amp;amp; Code Architecture (40 Points)',['../md_README.html#autotoc_md4',1,'']]]
+];
