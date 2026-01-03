@@ -104,8 +104,8 @@ Studentnumber: 20240345
     - [Gameplay Demo (3 min)](LINK_HERE)
     - [Technical Explanation (7 min)](LINK_HERE)
 
-- [ ] **Written Documentation**
-    - [ ] 2-Page Report & Design Rationale
+- [x] **Written Documentation**
+    - [x] 2-Page Report & Design Rationale
     - [x] Doxygen/API Documentation (Comments in code)
 
 ### 4. Bonus Features (Up to 10 Points)
