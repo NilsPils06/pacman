@@ -11,7 +11,8 @@ public:
      * @param manager the StateManager to manage this State.
      * @param level the level you beat.
      */
-    explicit VictoryState(const std::shared_ptr<StateManager>& manager, const int level) : State(manager), level(level) {}
+    explicit VictoryState(const std::shared_ptr<StateManager>& manager, const int level)
+        : State(manager), level(level) {}
 
     /**
      * @brief Handles key presses.
