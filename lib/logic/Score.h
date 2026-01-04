@@ -32,6 +32,12 @@ public:
     [[nodiscard]] int getScore() const;
 
     /**
+     * @brief Add bonus score for completing a level.
+     * @param level the level that has been completed.
+     */
+    void completeLevel(int level);
+
+    /**
      * @brief Handles event e.
      * @param e
      */

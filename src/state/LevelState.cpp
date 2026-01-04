@@ -59,6 +59,7 @@ void LevelState::render() {
         if (std::shared_ptr<StateManager> state_manager = manager.lock()) {
             world.reset();
             factory->resetStack();
+            score->completeLevel(level);
             world = std::make_shared<World>(factory, ++level);
             state_manager->push(std::make_unique<VictoryState>(state_manager, level - 1));
         }
