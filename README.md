@@ -100,7 +100,7 @@ Studentnumber: 20240345
 
 ### 3. Documentation & Deliverables (20 Points)
 
-- [ ] **Project Defence Video**
+- [x] **Project Defence Video**
     - [Gameplay Demo (3 min)](https://youtu.be/V1pQ9D90kqM)
     - [Technical Explanation (7 min)](https://youtu.be/V1pQ9D90kqM)
 
