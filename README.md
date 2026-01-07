@@ -2,6 +2,23 @@ Name: Nils Van de Velde
 
 Studentnumber: 20240345
 
+## How to use this project
+
+Make a build folder inside the root of the repo then run ```cmake ...``` and after that ```make```.
+Now that the project has been built you can run it by going inside the src folder and running game.
+Or you can paste this command:
+```bash
+git clone https://github.com/NilsPils06/pacman.git
+cd pacman
+mkdir build
+cd build
+cmake ..
+make
+cd src
+./game
+```
+!!! Make sure to have cmake and SFML !!!
+
 ## 📋 Project Evaluation Checklist
 
 ### 1. Core Game Requirements (40 Points)
